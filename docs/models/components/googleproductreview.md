@@ -1,0 +1,23 @@
+# GoogleProductReview
+
+## Example Usage
+
+```typescript
+import { GoogleProductReview } from "exfunc/models/components";
+
+let value: GoogleProductReview = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `reviewId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The unique identifier for the review                                                          |
+| `title`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The title of the review                                                                       |
+| `author`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | The author of the review                                                                      |
+| `source`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | The source where the review was published                                                     |
+| `sourceUrl`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The URL link to the review source                                                             |
+| `text`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | The text content of the review                                                                |
+| `rating`                                                                                      | *number*                                                                                      | :heavy_minus_sign:                                                                            | The rating given in the review                                                                |
+| `datetimeUtc`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The date and time when the review was published in UTC                                        |
+| `photos`                                                                                      | *string*[]                                                                                    | :heavy_minus_sign:                                                                            | An array of URLs for photos included in the review                                            |

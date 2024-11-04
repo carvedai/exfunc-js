@@ -1,0 +1,2816 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "# Authentication\n\nExfunc offers one form of authentication:\n  - API Key\n\n<SecurityDefinitions />\n",
+    "version": "1.0.0",
+    "title": "Exfunc APIs",
+    "termsOfService": "https://nunchi.app/terms/",
+    "contact": {
+      "name": "CarvedAI Support",
+      "email": "hello@carvedai.com",
+      "url": "https://carvedai.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.exfunc.com",
+      "description": "Exfunc API endpoint"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Google",
+      "description": "Google APIs"
+    },
+    {
+      "name": "LinkedIn",
+      "description": "LinkedIn APIs"
+    },
+    {
+      "name": "Navigator",
+      "description": "Navigator APIs"
+    },
+    {
+      "name": "Twitter",
+      "description": "Twitter APIs"
+    },
+    {
+      "name": "Yelp",
+      "description": "Yelp APIs"
+    },
+    {
+      "name": "Zillow",
+      "description": "Zillow APIs"
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "General",
+      "tags": [
+        "Google",
+        "LinkedIn",
+        "Navigator",
+        "Twitter",
+        "Yelp",
+        "Zillow"
+      ]
+    }
+  ],
+  "paths": {
+    "/google/get-product": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Get product details from Google",
+        "description": "Get product details (title, description, rating, etc.) from Google given product ID",
+        "operationId": "get-product",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "description": "The ID of the product to retrieve"
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "description": "The country code for the product"
+                  }
+                },
+                "required": [
+                  "product_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetProduct API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "$ref": "#/components/schemas/GoogleProduct"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/google/get-product-reviews": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Get product reviews from Google",
+        "description": "Get product reviews (title, author, source, rating, etc.) from Google given product ID",
+        "operationId": "get-product-reviews",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "description": "The ID of the product for which to retrieve reviews"
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "description": "The country code for the reviews"
+                  },
+                  "per_page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Number of reviews to return per page (default is 10)"
+                  }
+                },
+                "required": [
+                  "product_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetProductReviews API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reviews": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GoogleProductReview"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/google/search-news": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Search news articles on Google",
+        "description": "Search news articles on Google for a given query",
+        "operationId": "search-news",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query for news articles"
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "description": "The country code for filtering news"
+                  },
+                  "per_page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Number of news articles to return per page (default is 10)"
+                  },
+                  "time_published": {
+                    "type": "string",
+                    "enum": [
+                      "anytime",
+                      "1h",
+                      "1d",
+                      "7d",
+                      "1y"
+                    ],
+                    "description": "Filter news articles published after this date"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchNews API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "news": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GoogleNews"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/google/search-products": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Search products on Google",
+        "description": "Search products on Google for a given query",
+        "operationId": "search-products",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query for products"
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "description": "The country code for filtering products"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Page number for pagination (default is 1)"
+                  },
+                  "per_page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Number of products to return per page (default is 10)"
+                  },
+                  "sort_by": {
+                    "type": "string",
+                    "enum": [
+                      "best_match",
+                      "lowest_price",
+                      "highest_price"
+                    ],
+                    "description": "Sort the results by a specific field"
+                  },
+                  "product_condition": {
+                    "type": "string",
+                    "enum": [
+                      "any",
+                      "new",
+                      "used",
+                      "refurbished"
+                    ],
+                    "description": "Filter products by condition"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchProducts API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GoogleProduct"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/google/search-web": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Search web on Google",
+        "description": "Search web on Google for a given query",
+        "operationId": "search-web",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Number of news articles to return per page (default is 10)"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchWeb API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "The title of the search result"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "The url of the search result"
+                          },
+                          "domain": {
+                            "type": "string",
+                            "description": "The domain of the search result"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/linkedin/get-company": {
+      "post": {
+        "tags": [
+          "LinkedIn"
+        ],
+        "x-speakeasy-group": "linkedin",
+        "summary": "Get LinkedIn company info",
+        "description": "Get LinkedIn company info from a LinkedIn company url",
+        "operationId": "get-company",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "company_url": {
+                    "type": "string",
+                    "description": "The LinkedIn URL of the company to enrich"
+                  }
+                },
+                "required": [
+                  "company_url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetCompany API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "company": {
+                      "$ref": "#/components/schemas/LinkedInCompany"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/linkedin/get-job-posting": {
+      "post": {
+        "tags": [
+          "LinkedIn"
+        ],
+        "x-speakeasy-group": "linkedin",
+        "summary": "Get LinkedIn job posting info",
+        "description": "Get LinkedIn job posting info from a LinkedIn job posting url",
+        "operationId": "get-job-posting",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_posting_url": {
+                    "type": "string",
+                    "description": "The LinkedIn URL of the job posting to enrich"
+                  }
+                },
+                "required": [
+                  "job_posting_url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetJobPosting API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_posting": {
+                      "$ref": "#/components/schemas/LinkedInJobPosting"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/linkedin/get-person": {
+      "post": {
+        "tags": [
+          "LinkedIn"
+        ],
+        "x-speakeasy-group": "linkedin",
+        "summary": "Get LinkedIn person profile info",
+        "description": "Get LinkedIn person profile info from a LinkedIn person profile url",
+        "operationId": "get-person",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "person_url": {
+                    "type": "string",
+                    "description": "The URL of the person to enrich"
+                  }
+                },
+                "required": [
+                  "person_url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetPerson API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "person": {
+                      "$ref": "#/components/schemas/LinkedInPerson"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/linkedin/search-companies": {
+      "post": {
+        "tags": [
+          "LinkedIn"
+        ],
+        "x-speakeasy-group": "linkedin",
+        "summary": "Search for LinkedIn companies",
+        "description": "Search for companies on LinkedIn for a given name, locations, and other criteria",
+        "operationId": "search-companies",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the company to search for"
+                  },
+                  "locations": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of locations to filter the search"
+                    }
+                  },
+                  "sizes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of company sizes to filter the search"
+                    }
+                  },
+                  "industries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of industry tags to filter the search"
+                    }
+                  },
+                  "page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Page number for pagination (default is 1)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchCompanies API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "companies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the company's profile"
+                          },
+                          "uid": {
+                            "type": "string",
+                            "description": "LinkedIn uid"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the company"
+                          },
+                          "website_url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Company's website URL"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/linkedin/search-job-postings": {
+      "post": {
+        "tags": [
+          "LinkedIn"
+        ],
+        "x-speakeasy-group": "linkedin",
+        "summary": "Search for LinkedIn job postings",
+        "description": "Search for job postings on LinkedIn for a given keywords, location, and other criteria",
+        "operationId": "search-job-postings",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keywords": {
+                    "type": "string",
+                    "description": "Keywords to search for in job postings"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Location to filter job postings"
+                  },
+                  "date_posted": {
+                    "type": "string",
+                    "description": "Filter for job postings based on when they were posted",
+                    "enum": [
+                      "Past 24 hours",
+                      "Past Week",
+                      "Past Month"
+                    ]
+                  },
+                  "salary": {
+                    "type": "string",
+                    "description": "Salary range to filter job postings",
+                    "enum": [
+                      "$40,000+",
+                      "$60,000+",
+                      "$80,000+",
+                      "$100,000+",
+                      "$120,000+"
+                    ]
+                  },
+                  "job_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "Job types to filter (e.g., Full-time, Part-time)",
+                      "enum": [
+                        "Contract",
+                        "Full-time",
+                        "Part-time",
+                        "Temporary",
+                        "Volunteer"
+                      ]
+                    }
+                  },
+                  "work_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "Work types to filter (e.g., Remote, On-site)",
+                      "enum": [
+                        "On-site",
+                        "Remote",
+                        "Hybrid"
+                      ]
+                    }
+                  },
+                  "company_uids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of company unique identifiers to filter"
+                    }
+                  },
+                  "page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Page number for pagination (default is 1)"
+                  }
+                },
+                "required": [
+                  "keywords",
+                  "location"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchJobPostings API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_postings": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the job posting"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Title of the job"
+                          },
+                          "location": {
+                            "type": "string",
+                            "description": "Job location"
+                          },
+                          "date_posted": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Date when the job was posted"
+                          },
+                          "company_name": {
+                            "type": "string",
+                            "description": "Name of the company offering the job"
+                          },
+                          "company_url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the company's profile"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/linkedin/search-people": {
+      "post": {
+        "tags": [
+          "LinkedIn"
+        ],
+        "x-speakeasy-group": "linkedin",
+        "summary": "Search for LinkedIn people",
+        "description": "Search for people on LinkedIn for a given keywords, locations, and other criteria",
+        "operationId": "search-people",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keywords": {
+                    "type": "string",
+                    "description": "Keywords to search for in people profiles"
+                  },
+                  "locations": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of locations to filter the search"
+                    }
+                  },
+                  "titles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of job titles to filter the search"
+                    }
+                  },
+                  "seniorities": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of seniority levels to filter the search"
+                    }
+                  },
+                  "company_sizes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of company size ranges to filter the search"
+                    }
+                  },
+                  "company_industries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of industry tags to filter the search"
+                    }
+                  },
+                  "company_domains": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "List of company domains to filter the search"
+                    }
+                  },
+                  "page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Page number for pagination (default is 1)"
+                  }
+                },
+                "required": [
+                  "keywords"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchPeople API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "people": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/LinkedInPerson"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/navigator/get-task": {
+      "post": {
+        "summary": "Get web navigator task results",
+        "description": "Get web navigator task results for a given task ID",
+        "operationId": "get-task",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Navigator"
+        ],
+        "x-speakeasy-group": "navigator",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task_id": {
+                    "type": "string",
+                    "description": "The ID of the task to retrieve"
+                  }
+                },
+                "required": [
+                  "task_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetTask API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "task": {
+                      "$ref": "#/components/schemas/NavigatorTask"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/navigator/start-task": {
+      "post": {
+        "summary": "Start a web navigator task",
+        "description": "Start a web navigator task for a given url and objective",
+        "operationId": "start-task",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Navigator"
+        ],
+        "x-speakeasy-group": "navigator",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The URL to start navigating from"
+                  },
+                  "objective": {
+                    "type": "string",
+                    "description": "The natural language objective of the navigation"
+                  }
+                },
+                "required": [
+                  "url",
+                  "objective"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "StartTask API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "task_id": {
+                      "type": "string",
+                      "description": "The ID of the navigator task"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/navigator/scrape": {
+      "post": {
+        "summary": "Scrape a web page",
+        "description": "Scrape a web page for a given url",
+        "operationId": "scrape",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Navigator"
+        ],
+        "x-speakeasy-group": "navigator",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The URL to start navigating from"
+                  }
+                },
+                "required": [
+                  "url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scrape API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page_html": {
+                      "type": "string",
+                      "description": "The page html of the website"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/get-tweet": {
+      "post": {
+        "summary": "Get a tweet by ID",
+        "description": "Get tweet details given a tweet ID",
+        "operationId": "get-tweet",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tweet_id": {
+                    "type": "string",
+                    "description": "The ID of the tweet to retrieve"
+                  }
+                },
+                "required": [
+                  "tweet_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetTweet API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tweet": {
+                      "$ref": "#/components/schemas/Tweet"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/get-user": {
+      "post": {
+        "summary": "Get a Twitter user by either user ID or username",
+        "description": "Get user details given a Twitter user ID or username (handle)",
+        "operationId": "get-user",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "string",
+                    "description": "The ID of the Twitter user to retrieve"
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "The username of the Twitter user to retrieve"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetUser API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "$ref": "#/components/schemas/TwitterUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/get-user-followers": {
+      "post": {
+        "summary": "Get a Twitter user's followers by username",
+        "description": "Get a list of followers given a Twitter username (handle)",
+        "operationId": "get-user-followers",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The username of the Twitter user whose followers to retrieve"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "The number of followers to retrieve"
+                  }
+                },
+                "required": [
+                  "username"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetUserFollowers API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "followers": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TwitterUser"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/get-user-followings": {
+      "post": {
+        "summary": "Get a Twitter user's followings by username",
+        "description": "Get a list of followings given a Twitter username (handle)",
+        "operationId": "getUserFollowings",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The username of the Twitter user whose followings to retrieve"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "The number of followings to retrieve"
+                  }
+                },
+                "required": [
+                  "username"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetUserFollowings API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tweets": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TwitterUser"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/get-user-tweets": {
+      "post": {
+        "summary": "Get a Twitter user's tweets by username",
+        "description": "Get a list of tweets given a Twitter username (handle)",
+        "operationId": "get-user-tweets",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The username of the Twitter user whose tweets to retrieve"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "The number of tweets to retrieve"
+                  }
+                },
+                "required": [
+                  "username"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetUserTweets API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tweets": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Tweet"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/search-tweets": {
+      "post": {
+        "summary": "Search Twitter for tweets",
+        "description": "Search tweets on Twitter for a given query",
+        "operationId": "search-tweets",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "top",
+                      "photos",
+                      "videos",
+                      "latest"
+                    ],
+                    "description": "The type of search"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "The number of results to retrieve"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchTweets API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Tweet"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/twitter/search-users": {
+      "post": {
+        "summary": "Search Twitter for users",
+        "description": "Search users on Twitter for a given query",
+        "operationId": "search-users",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Twitter"
+        ],
+        "x-speakeasy-group": "twitter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query string"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "The number of results to retrieve"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchUsers API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TwitterUser"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/yelp/get-business": {
+      "post": {
+        "summary": "Get business details from Yelp",
+        "description": "Get business details from Yelp for a given business ID",
+        "operationId": "get-business",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Yelp"
+        ],
+        "x-speakeasy-group": "yelp",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "business_id": {
+                    "type": "string",
+                    "description": "The ID of the business to retrieve reviews for"
+                  }
+                },
+                "required": [
+                  "business_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetBusiness API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "business": {
+                      "$ref": "#/components/schemas/YelpBusiness"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/yelp/get-business-reviews": {
+      "post": {
+        "summary": "Get Yelp reviews for a business",
+        "description": "Get a list of reviews on Yelp for a given business ID",
+        "operationId": "get-business-reviews",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Yelp"
+        ],
+        "x-speakeasy-group": "yelp",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "business_id": {
+                    "type": "string",
+                    "description": "The ID of the business to retrieve reviews for"
+                  },
+                  "sort_by": {
+                    "type": "string",
+                    "enum": [
+                      "best_match",
+                      "newest",
+                      "oldest",
+                      "highest_rated",
+                      "lowest_rated",
+                      "elites"
+                    ],
+                    "description": "The criteria to sort reviews (e.g., \"best_match\", \"newest\", etc.)"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "The page number of results to retrieve (default is 1)"
+                  },
+                  "per_page": {
+                    "type": "integer",
+                    "description": "The number of reviews to retrieve per page (default is 10)"
+                  }
+                },
+                "required": [
+                  "business_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetBusinessReviews API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reviews": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/YelpReview"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/yelp/search-businesses": {
+      "post": {
+        "summary": "Search for businesses on Yelp",
+        "description": "Search for businesses on Yelp given a query, location, and other criteria",
+        "operationId": "search-businesses",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Yelp"
+        ],
+        "x-speakeasy-group": "yelp",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search term to find businesses"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "The location to search for businesses"
+                  },
+                  "sort_by": {
+                    "type": "string",
+                    "enum": [
+                      "recommended",
+                      "highest_rated",
+                      "review_count"
+                    ],
+                    "description": "The criteria to sort the results (e.g., \"recommended\", \"highest_rated\", etc.)"
+                  },
+                  "start": {
+                    "type": "integer",
+                    "description": "The starting index for pagination (default is 0)"
+                  }
+                },
+                "required": [
+                  "query",
+                  "location"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchBusinesses API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "businesses": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/YelpBusiness"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/zillow/get-property": {
+      "post": {
+        "summary": "Get property details from Zillow",
+        "description": "Get property details on Zillow for a given property ID",
+        "operationId": "get-property",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Zillow"
+        ],
+        "x-speakeasy-group": "zillow",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "property_id": {
+                    "type": "string",
+                    "description": "The ID of the property"
+                  }
+                },
+                "required": [
+                  "property_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetProperty API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "$ref": "#/components/schemas/ZillowProperty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/zillow/search-properties": {
+      "post": {
+        "summary": "Search for properties on Zillow",
+        "description": "Search for properties on Zillow for a given location, listing status, and other criteria",
+        "operationId": "search-properties",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Zillow"
+        ],
+        "x-speakeasy-group": "zillow",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string",
+                    "description": "The location to search for properties"
+                  },
+                  "listing_status": {
+                    "type": "string",
+                    "enum": [
+                      "for_sale",
+                      "for_rent",
+                      "sold"
+                    ],
+                    "description": "The status of the listings (e.g., \"for_sale\", \"for_rent\")"
+                  },
+                  "sort_by": {
+                    "type": "string",
+                    "enum": [
+                      "homes_for_you",
+                      "rental_priority_score",
+                      "price_high_to_low",
+                      "price_low_to_high",
+                      "newest",
+                      "bedrooms",
+                      "bathrooms",
+                      "square_feet",
+                      "lot_size",
+                      "year_built"
+                    ],
+                    "description": "The criteria to sort the results (e.g., \"newest\", \"lot_size\")"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "The page number of results to retrieve"
+                  },
+                  "min_listing_price": {
+                    "type": "number",
+                    "description": "The minimum listing price for the properties"
+                  },
+                  "max_listing_price": {
+                    "type": "number",
+                    "description": "The maximum listing price for the properties"
+                  },
+                  "min_num_bedrooms": {
+                    "type": "string",
+                    "enum": [
+                      "any",
+                      "studio",
+                      "1",
+                      "2",
+                      "3",
+                      "4",
+                      "5"
+                    ],
+                    "description": "The minimum number of bedrooms"
+                  },
+                  "max_num_bedrooms": {
+                    "type": "string",
+                    "enum": [
+                      "any",
+                      "studio",
+                      "1",
+                      "2",
+                      "3",
+                      "4",
+                      "5"
+                    ],
+                    "description": "The maximum number of bedrooms"
+                  }
+                },
+                "required": [
+                  "location",
+                  "listing_status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchProperties API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ZillowProperty"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "UserError": {
+        "description": "User error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Server error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Error message string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "GoogleNews": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the news article"
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL link to the news article"
+          },
+          "snippet": {
+            "type": "string",
+            "description": "A brief snippet or summary of the news article"
+          },
+          "photo_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the photo associated with the news article"
+          },
+          "published_datetime_utc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The publication date and time in UTC"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the source website"
+          },
+          "source_name": {
+            "type": "string",
+            "description": "The name of the news source"
+          }
+        }
+      },
+      "GoogleProduct": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "The unique identifier for the product"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the product"
+          },
+          "description": {
+            "type": "string",
+            "description": "A detailed description of the product"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "An array of URLs for the product photos"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A set of attributes for the product, represented as key-value pairs"
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "description": "The average rating of the product"
+          },
+          "page_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL link to the product page"
+          },
+          "num_reviews": {
+            "type": "integer",
+            "description": "The total number of reviews for the product"
+          },
+          "reviews_per_rating": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "The number of reviews for each rating level"
+          },
+          "product_details": {
+            "type": "object",
+            "description": "Detailed information about the product",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "product_specs": {
+            "type": "object",
+            "description": "Technical specifications of the product",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "GoogleProductReview": {
+        "type": "object",
+        "properties": {
+          "review_id": {
+            "type": "string",
+            "description": "The unique identifier for the review"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the review"
+          },
+          "author": {
+            "type": "string",
+            "description": "The author of the review"
+          },
+          "source": {
+            "type": "string",
+            "description": "The source where the review was published"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL link to the review source"
+          },
+          "text": {
+            "type": "string",
+            "description": "The text content of the review"
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "description": "The rating given in the review"
+          },
+          "datetime_utc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the review was published in UTC"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "An array of URLs for photos included in the review"
+          }
+        }
+      },
+      "LinkedInCompany": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company's profile"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the company"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location of the company"
+          },
+          "industry": {
+            "type": "string",
+            "description": "Industry in which the company operates"
+          },
+          "overview": {
+            "type": "string",
+            "description": "Overview or description of the company"
+          },
+          "size": {
+            "type": "string",
+            "description": "Size of the company (e.g., number of employees)"
+          },
+          "specialties": {
+            "type": "string",
+            "description": "Commma separated string of specialties or areas of expertise for the company"
+          },
+          "website_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Company's website URL"
+          },
+          "funding": {
+            "type": "object",
+            "description": "Funding information for the company",
+            "properties": {
+              "total_rounds": {
+                "type": "object",
+                "description": "Total rounds of funding information"
+              },
+              "last_round": {
+                "type": "object",
+                "description": "Last round of funding information"
+              },
+              "investors": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "List of investors"
+              }
+            }
+          }
+        }
+      },
+      "LinkedInJobPosting": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the job posting"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the job"
+          },
+          "location": {
+            "type": "string",
+            "description": "Job location"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the job"
+          },
+          "job_type": {
+            "type": "string",
+            "description": "Type of job (e.g., full-time, part-time)"
+          },
+          "job_function": {
+            "type": "string",
+            "description": "Job function or category"
+          },
+          "industries": {
+            "type": "string",
+            "description": "List of industries relevant to the job"
+          },
+          "seniority_level": {
+            "type": "string",
+            "description": "Seniority level of the job (e.g., junior, senior)"
+          },
+          "applicants": {
+            "type": "string",
+            "description": "Number of applicants for the job"
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the job was posted"
+          },
+          "job_poster_name": {
+            "type": "string",
+            "description": "Name of the person who posted the job"
+          },
+          "job_poster_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the job poster's profile"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Name of the company offering the job"
+          },
+          "company_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company's profile"
+          }
+        }
+      },
+      "LinkedInPerson": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the person's profile"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the person"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location of the person"
+          },
+          "title": {
+            "type": "string",
+            "description": "Job title of the person"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Name of the company the person works for"
+          },
+          "company_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company profile"
+          },
+          "experiences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "company_name": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "List of experiences or previous job roles of the person"
+          }
+        }
+      },
+      "NavigatorTask": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "The ID of the navigator task"
+          },
+          "request": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The URL to start navigating from"
+              },
+              "objective": {
+                "type": "string",
+                "description": "The natural language objective of the navigation"
+              }
+            }
+          },
+          "response": {
+            "type": "object",
+            "properties": {
+              "page_img": {
+                "type": "string",
+                "description": "The base64-encoded string for screenshot of the page that the navigator reached"
+              },
+              "page_html": {
+                "type": "string",
+                "description": "The HTML string of the page that the navigator reached"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "IN_PROGRESS",
+              "SUCCEEDED",
+              "FAILED",
+              "TIMED_OUT"
+            ],
+            "description": "The status of the navigator task"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The start time of the navigator task"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The end time of the navigator task"
+          },
+          "last_updated_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The last updated time of the navigator task"
+          }
+        }
+      },
+      "TwitterUser": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "description": "Unique identifier for the user"
+          },
+          "username": {
+            "type": "string",
+            "description": "The user's username"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the user"
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description of the user"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The attached URL on the user's profile page"
+          },
+          "following_count": {
+            "type": "integer",
+            "description": "Number of users the user is following"
+          },
+          "follower_count": {
+            "type": "integer",
+            "description": "Number of followers the user has"
+          }
+        }
+      },
+      "Tweet": {
+        "type": "object",
+        "properties": {
+          "tweet_id": {
+            "type": "string",
+            "description": "Unique identifier for the tweet"
+          },
+          "full_text": {
+            "type": "string",
+            "description": "The full text of the tweet"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The timestamp when the tweet was created"
+          },
+          "author_user_id": {
+            "type": "string",
+            "description": "The ID of the user who authored the tweet"
+          },
+          "bookmark_count": {
+            "type": "integer",
+            "description": "Number of times the tweet has been bookmarked"
+          },
+          "reply_count": {
+            "type": "integer",
+            "description": "Number of replies to the tweet"
+          },
+          "retweet_count": {
+            "type": "integer",
+            "description": "Number of times the tweet has been retweeted"
+          },
+          "retweeted": {
+            "type": "boolean",
+            "description": "Indicates if the tweet is a retweet"
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "List of URLs included in the tweet"
+          }
+        }
+      },
+      "YelpBusiness": {
+        "type": "object",
+        "properties": {
+          "business_id": {
+            "type": "string",
+            "description": "Unique identifier for the business"
+          },
+          "alias": {
+            "type": "string",
+            "description": "A unique identifier used in the URL for the business"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the business"
+          },
+          "address": {
+            "type": "string",
+            "description": "The physical address of the business"
+          },
+          "website": {
+            "type": "string",
+            "format": "uri",
+            "description": "The website URL of the business"
+          },
+          "business_page_link": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the business's page on the platform"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "List of categories that the business falls under"
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "description": "Average rating of the business"
+          },
+          "review_count": {
+            "type": "integer",
+            "description": "Total number of reviews for the business"
+          },
+          "highlights": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Highlights or features of the business"
+          },
+          "service_area": {
+            "type": "string",
+            "description": "The area where the business provides services"
+          },
+          "neighborhoods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of neighborhoods where the business is located"
+          }
+        }
+      },
+      "YelpReview": {
+        "type": "object",
+        "properties": {
+          "review_id": {
+            "type": "string",
+            "description": "Unique identifier for the review"
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "description": "Rating given in the review"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "List of photo URLs associated with the review"
+          },
+          "is_updated": {
+            "type": "boolean",
+            "description": "Indicates if the review has been updated"
+          },
+          "feedback_counts": {
+            "type": "object",
+            "properties": {
+              "useful": {
+                "type": "integer",
+                "description": "Number of users who found the review useful"
+              },
+              "funny": {
+                "type": "integer",
+                "description": "Number of users who found the review funny"
+              },
+              "cool": {
+                "type": "integer",
+                "description": "Number of users who found the review cool"
+              }
+            }
+          },
+          "created_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the review was created"
+          },
+          "text": {
+            "type": "string",
+            "description": "The content of the review"
+          },
+          "author_id": {
+            "type": "string",
+            "description": "Unique identifier for the review author"
+          },
+          "author_name": {
+            "type": "string",
+            "description": "Name of the review author"
+          },
+          "author_location": {
+            "type": "string",
+            "description": "Location of the review author"
+          },
+          "author_link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Link to the author's profile"
+          },
+          "author_review_count": {
+            "type": "integer",
+            "description": "Total number of reviews written by the author"
+          }
+        }
+      },
+      "ZillowProperty": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "type": "integer",
+            "description": "Unique identifier for the property"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "streetAddress": {
+                "type": "string",
+                "description": "The street address of the building"
+              },
+              "zipcode": {
+                "type": "string",
+                "description": "The zipcode of the building"
+              },
+              "city": {
+                "type": "string",
+                "description": "The city of the building"
+              },
+              "state": {
+                "type": "string",
+                "description": "The state of the building"
+              },
+              "buildingId": {
+                "type": "integer",
+                "description": "The ID of the building"
+              }
+            },
+            "description": "The physical address of the property"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "List of photo URLs for the property"
+          },
+          "bathrooms": {
+            "type": "number",
+            "format": "float",
+            "description": "Number of bathrooms in the property"
+          },
+          "bedrooms": {
+            "type": "integer",
+            "description": "Number of bedrooms in the property"
+          },
+          "living_area": {
+            "type": "number",
+            "format": "float",
+            "description": "The living area of the property in square feet"
+          },
+          "year_built": {
+            "type": "integer",
+            "description": "The year the property was built"
+          },
+          "property_type": {
+            "type": "string",
+            "description": "Type of the property (e.g. house, condo)"
+          },
+          "listing_status": {
+            "type": "string",
+            "description": "Status of the listing (e.g. forSale, sold)"
+          },
+          "days_on_zillow": {
+            "type": "integer",
+            "description": "Number of days the property has been listed on Zillow"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Listing price of the property"
+          },
+          "zestimate": {
+            "type": "number",
+            "format": "float",
+            "description": "Zillow's estimated value of the property"
+          },
+          "rent_zestimate": {
+            "type": "number",
+            "format": "float",
+            "description": "Zillow's estimated value of the rent for the property"
+          },
+          "price_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZillowPriceHistoryEvent"
+            }
+          }
+        }
+      },
+      "ZillowPriceHistoryEvent": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "The date of the price change"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "The price of the property at the given date"
+          },
+          "time_epoch": {
+            "type": "integer",
+            "description": "Time of the price change in epoch format"
+          },
+          "price_per_square_foot": {
+            "type": "number",
+            "format": "float",
+            "description": "Price per square foot at the given date"
+          },
+          "price_change_rate": {
+            "type": "number",
+            "format": "float",
+            "description": "Rate of change in price over time"
+          },
+          "event": {
+            "type": "string",
+            "description": "Description of the event (e.g., price increase, price decrease)"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source of the price history data"
+          },
+          "is_rental": {
+            "type": "boolean",
+            "description": "Indicates if the property is a rental"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "description": "Exfunc API key",
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+speakeasyVersion: 1.424.0
+sources:
+    exfunc-OAS:
+        sourceNamespace: exfunc-oas
+        sourceRevisionDigest: sha256:32999b5880027e72c3c8ba15783f68a9fd58ded9ee8fb48bc0fd8eab855debb0
+        sourceBlobDigest: sha256:aa19109a77e3b3b92849b9fdba3e97c742de1bf31cbad0c2bbe1cb4c83f00b6a
+        tags:
+            - latest
+targets:
+    exfunc:
+        source: exfunc-OAS
+        sourceNamespace: exfunc-oas
+        sourceRevisionDigest: sha256:32999b5880027e72c3c8ba15783f68a9fd58ded9ee8fb48bc0fd8eab855debb0
+        sourceBlobDigest: sha256:aa19109a77e3b3b92849b9fdba3e97c742de1bf31cbad0c2bbe1cb4c83f00b6a
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        exfunc-OAS:
+            inputs:
+                - location: ./spec/exfunc_v1_openapi_spec.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/nunchi-4op/nunchi/exfunc-oas
+    targets:
+        exfunc:
+            target: typescript
+            source: exfunc-OAS
+            publish:
+                npm:
+                    token: $npm_token

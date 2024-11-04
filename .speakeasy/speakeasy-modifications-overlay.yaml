@@ -1,0 +1,201 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.1
+  x-speakeasy-metadata:
+    type: speakeasy-modifications
+    before: ""
+    after: ""
+actions:
+  - target: $["paths"]["/zillow/search-properties"]["post"]
+    update:
+      x-speakeasy-name-override: searchProperties
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Zillow.search-properties()
+      after: sdk.zillow.searchProperties()
+      created_at: 1730710359777
+  - target: $["paths"]["/twitter/get-tweet"]["post"]
+    update:
+      x-speakeasy-name-override: getTweet
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Twitter.get-tweet()
+      after: sdk.twitter.getTweet()
+      created_at: 1730710359777
+  - target: $["paths"]["/google/get-product-reviews"]["post"]
+    update:
+      x-speakeasy-name-override: getProductReviews
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Google.get-product-reviews()
+      after: sdk.google.getProductReviews()
+      created_at: 1730710359777
+  - target: $["paths"]["/google/search-web"]["post"]
+    update:
+      x-speakeasy-name-override: searchWeb
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Google.search-web()
+      after: sdk.google.searchWeb()
+      created_at: 1730710359777
+  - target: $["paths"]["/yelp/get-business-reviews"]["post"]
+    update:
+      x-speakeasy-name-override: getReviews
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Yelp.get-business-reviews()
+      after: sdk.yelp.getReviews()
+      created_at: 1730710359778
+  - target: $["paths"]["/linkedin/search-job-postings"]["post"]
+    update:
+      x-speakeasy-name-override: searchJobPostings
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.linkedin.search-job-postings()
+      after: sdk.linkedin.searchJobPostings()
+      created_at: 1730710359777
+  - target: $["paths"]["/linkedin/get-company"]["post"]
+    update:
+      x-speakeasy-name-override: getCompany
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.linkedin.get-company()
+      after: sdk.linkedin.getCompany()
+      created_at: 1730710359777
+  - target: $["paths"]["/google/search-products"]["post"]
+    update:
+      x-speakeasy-name-override: searchProducts
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Google.search-products()
+      after: sdk.google.searchProducts()
+      created_at: 1730710359777
+  - target: $["paths"]["/twitter/search-users"]["post"]
+    update:
+      x-speakeasy-name-override: searchUsers
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Twitter.search-users()
+      after: sdk.twitter.searchUsers()
+      created_at: 1730710359777
+  - target: $["paths"]["/linkedin/search-companies"]["post"]
+    update:
+      x-speakeasy-name-override: searchCompanies
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.linkedin.search-companies()
+      after: sdk.linkedin.searchCompanies()
+      created_at: 1730710359778
+  - target: $["paths"]["/zillow/get-property"]["post"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Zillow.get-property()
+      after: sdk.zillow.get()
+      created_at: 1730710359778
+  - target: $["paths"]["/linkedin/get-person"]["post"]
+    update:
+      x-speakeasy-name-override: getPerson
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.linkedin.get-person()
+      after: sdk.linkedin.getPerson()
+      created_at: 1730710359777
+  - target: $["paths"]["/google/search-news"]["post"]
+    update:
+      x-speakeasy-name-override: searchNews
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Google.search-news()
+      after: sdk.google.searchNews()
+      created_at: 1730710359777
+  - target: $["paths"]["/twitter/get-user-followers"]["post"]
+    update:
+      x-speakeasy-name-override: getFollowers
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Twitter.get-user-followers()
+      after: sdk.twitter.getFollowers()
+      created_at: 1730710359777
+  - target: $["paths"]["/google/get-product"]["post"]
+    update:
+      x-speakeasy-name-override: getProduct
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Google.get-product()
+      after: sdk.google.getProduct()
+      created_at: 1730710359777
+  - target: $["paths"]["/twitter/get-user-tweets"]["post"]
+    update:
+      x-speakeasy-name-override: getUserTweets
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Twitter.get-user-tweets()
+      after: sdk.twitter.getUserTweets()
+      created_at: 1730710359778
+  - target: $["paths"]["/linkedin/get-job-posting"]["post"]
+    update:
+      x-speakeasy-name-override: getJobPosting
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.linkedin.get-job-posting()
+      after: sdk.linkedin.getJobPosting()
+      created_at: 1730710359778
+  - target: $["paths"]["/linkedin/search-people"]["post"]
+    update:
+      x-speakeasy-name-override: searchPeople
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.linkedin.search-people()
+      after: sdk.linkedin.searchPeople()
+      created_at: 1730710359778
+  - target: $["paths"]["/yelp/get-business"]["post"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Yelp.get-business()
+      after: sdk.yelp.get()
+      created_at: 1730710359777
+  - target: $["paths"]["/twitter/get-user"]["post"]
+    update:
+      x-speakeasy-name-override: getUser
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Twitter.get-user()
+      after: sdk.twitter.getUser()
+      created_at: 1730710359777
+  - target: $["paths"]["/navigator/get-task"]["post"]
+    update:
+      x-speakeasy-name-override: getTask
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Navigator.get-task()
+      after: sdk.navigator.getTask()
+      created_at: 1730710359777
+  - target: $["paths"]["/twitter/search-tweets"]["post"]
+    update:
+      x-speakeasy-name-override: searchTweets
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Twitter.search-tweets()
+      after: sdk.twitter.searchTweets()
+      created_at: 1730710359778
+  - target: $["paths"]["/navigator/start-task"]["post"]
+    update:
+      x-speakeasy-name-override: startTask
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Navigator.start-task()
+      after: sdk.navigator.startTask()
+      created_at: 1730710359777
+  - target: $["paths"]["/yelp/search-businesses"]["post"]
+    update:
+      x-speakeasy-name-override: searchBusinesses
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Yelp.search-businesses()
+      after: sdk.yelp.searchBusinesses()
+      created_at: 1730710359777

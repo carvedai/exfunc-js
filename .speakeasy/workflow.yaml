@@ -1,0 +1,17 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    exfunc-OAS:
+        inputs:
+            - location: ./spec/exfunc_v1_openapi_spec.json
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/nunchi-4op/nunchi/exfunc-oas
+targets:
+    exfunc:
+        target: typescript
+        source: exfunc-OAS
+        publish:
+            npm:
+                token: $npm_token

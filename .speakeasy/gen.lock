@@ -1,0 +1,356 @@
+lockVersion: 2.0.0
+id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
+management:
+  docChecksum: 20f7424f63ab5de117dac9229cda8b49
+  docVersion: 1.0.0
+  speakeasyVersion: 1.424.0
+  generationVersion: 2.445.1
+  releaseVersion: 0.2.0
+  configChecksum: 8f140bae6d06d78cb9917cc14ed6368f
+  published: true
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    core: 3.18.2
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.1
+    globalSecurity: 2.82.11
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.4
+    groups: 2.81.2
+    nameOverrides: 2.81.2
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.1.0
+    tests: 0.7.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .eslintrc.cjs
+  - .gitattributes
+  - .npmignore
+  - CONTRIBUTING.md
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/address.md
+  - docs/models/components/categories.md
+  - docs/models/components/experiences.md
+  - docs/models/components/feedbackcounts.md
+  - docs/models/components/funding.md
+  - docs/models/components/googlenews.md
+  - docs/models/components/googleproduct.md
+  - docs/models/components/googleproductreview.md
+  - docs/models/components/investors.md
+  - docs/models/components/lastround.md
+  - docs/models/components/linkedincompany.md
+  - docs/models/components/linkedinjobposting.md
+  - docs/models/components/linkedinperson.md
+  - docs/models/components/navigatortask.md
+  - docs/models/components/request.md
+  - docs/models/components/response.md
+  - docs/models/components/security.md
+  - docs/models/components/status.md
+  - docs/models/components/totalrounds.md
+  - docs/models/components/tweet.md
+  - docs/models/components/twitteruser.md
+  - docs/models/components/yelpbusiness.md
+  - docs/models/components/yelpreview.md
+  - docs/models/components/zillowpricehistoryevent.md
+  - docs/models/components/zillowproperty.md
+  - docs/models/errors/servererror.md
+  - docs/models/errors/usererror.md
+  - docs/models/operations/companies.md
+  - docs/models/operations/dateposted.md
+  - docs/models/operations/getbusinessrequestbody.md
+  - docs/models/operations/getbusinessresponsebody.md
+  - docs/models/operations/getbusinessreviewsrequestbody.md
+  - docs/models/operations/getbusinessreviewsresponsebody.md
+  - docs/models/operations/getbusinessreviewssortby.md
+  - docs/models/operations/getcompanyrequestbody.md
+  - docs/models/operations/getcompanyresponsebody.md
+  - docs/models/operations/getjobpostingrequestbody.md
+  - docs/models/operations/getjobpostingresponsebody.md
+  - docs/models/operations/getpersonrequestbody.md
+  - docs/models/operations/getpersonresponsebody.md
+  - docs/models/operations/getproductrequestbody.md
+  - docs/models/operations/getproductresponsebody.md
+  - docs/models/operations/getproductreviewsrequestbody.md
+  - docs/models/operations/getproductreviewsresponsebody.md
+  - docs/models/operations/getpropertyrequestbody.md
+  - docs/models/operations/getpropertyresponsebody.md
+  - docs/models/operations/gettaskrequestbody.md
+  - docs/models/operations/gettaskresponsebody.md
+  - docs/models/operations/gettweetrequestbody.md
+  - docs/models/operations/gettweetresponsebody.md
+  - docs/models/operations/getuserfollowersrequestbody.md
+  - docs/models/operations/getuserfollowersresponsebody.md
+  - docs/models/operations/getuserfollowingsrequestbody.md
+  - docs/models/operations/getuserfollowingsresponsebody.md
+  - docs/models/operations/getuserrequestbody.md
+  - docs/models/operations/getuserresponsebody.md
+  - docs/models/operations/getusertweetsrequestbody.md
+  - docs/models/operations/getusertweetsresponsebody.md
+  - docs/models/operations/jobpostings.md
+  - docs/models/operations/jobtypes.md
+  - docs/models/operations/listingstatus.md
+  - docs/models/operations/maxnumbedrooms.md
+  - docs/models/operations/minnumbedrooms.md
+  - docs/models/operations/productcondition.md
+  - docs/models/operations/results.md
+  - docs/models/operations/salary.md
+  - docs/models/operations/scraperequestbody.md
+  - docs/models/operations/scraperesponsebody.md
+  - docs/models/operations/searchbusinessesrequestbody.md
+  - docs/models/operations/searchbusinessesresponsebody.md
+  - docs/models/operations/searchbusinessessortby.md
+  - docs/models/operations/searchcompaniesrequestbody.md
+  - docs/models/operations/searchcompaniesresponsebody.md
+  - docs/models/operations/searchjobpostingsrequestbody.md
+  - docs/models/operations/searchjobpostingsresponsebody.md
+  - docs/models/operations/searchnewsrequestbody.md
+  - docs/models/operations/searchnewsresponsebody.md
+  - docs/models/operations/searchpeoplerequestbody.md
+  - docs/models/operations/searchpeopleresponsebody.md
+  - docs/models/operations/searchproductsrequestbody.md
+  - docs/models/operations/searchproductsresponsebody.md
+  - docs/models/operations/searchpropertiesrequestbody.md
+  - docs/models/operations/searchpropertiesresponsebody.md
+  - docs/models/operations/searchpropertiessortby.md
+  - docs/models/operations/searchtweetsrequestbody.md
+  - docs/models/operations/searchtweetsresponsebody.md
+  - docs/models/operations/searchusersrequestbody.md
+  - docs/models/operations/searchusersresponsebody.md
+  - docs/models/operations/searchwebrequestbody.md
+  - docs/models/operations/searchwebresponsebody.md
+  - docs/models/operations/sortby.md
+  - docs/models/operations/starttaskrequestbody.md
+  - docs/models/operations/starttaskresponsebody.md
+  - docs/models/operations/timepublished.md
+  - docs/models/operations/type.md
+  - docs/models/operations/worktypes.md
+  - docs/sdks/exfunc/README.md
+  - docs/sdks/google/README.md
+  - docs/sdks/linkedin/README.md
+  - docs/sdks/navigator/README.md
+  - docs/sdks/twitter/README.md
+  - docs/sdks/yelp/README.md
+  - docs/sdks/zillow/README.md
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/googleGetProduct.ts
+  - src/funcs/googleGetProductReviews.ts
+  - src/funcs/googleSearchNews.ts
+  - src/funcs/googleSearchProducts.ts
+  - src/funcs/googleSearchWeb.ts
+  - src/funcs/linkedinGetCompany.ts
+  - src/funcs/linkedinGetJobPosting.ts
+  - src/funcs/linkedinGetPerson.ts
+  - src/funcs/linkedinSearchCompanies.ts
+  - src/funcs/linkedinSearchJobPostings.ts
+  - src/funcs/linkedinSearchPeople.ts
+  - src/funcs/navigatorGetTask.ts
+  - src/funcs/navigatorScrape.ts
+  - src/funcs/navigatorStartTask.ts
+  - src/funcs/twitterGetFollowers.ts
+  - src/funcs/twitterGetTweet.ts
+  - src/funcs/twitterGetUser.ts
+  - src/funcs/twitterGetUserFollowings.ts
+  - src/funcs/twitterGetUserTweets.ts
+  - src/funcs/twitterSearchTweets.ts
+  - src/funcs/twitterSearchUsers.ts
+  - src/funcs/yelpGet.ts
+  - src/funcs/yelpGetReviews.ts
+  - src/funcs/yelpSearchBusinesses.ts
+  - src/funcs/zillowGet.ts
+  - src/funcs/zillowSearchProperties.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/components/googlenews.ts
+  - src/models/components/googleproduct.ts
+  - src/models/components/googleproductreview.ts
+  - src/models/components/index.ts
+  - src/models/components/linkedincompany.ts
+  - src/models/components/linkedinjobposting.ts
+  - src/models/components/linkedinperson.ts
+  - src/models/components/navigatortask.ts
+  - src/models/components/security.ts
+  - src/models/components/tweet.ts
+  - src/models/components/twitteruser.ts
+  - src/models/components/yelpbusiness.ts
+  - src/models/components/yelpreview.ts
+  - src/models/components/zillowpricehistoryevent.ts
+  - src/models/components/zillowproperty.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/sdkerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/servererror.ts
+  - src/models/errors/usererror.ts
+  - src/models/operations/getbusiness.ts
+  - src/models/operations/getbusinessreviews.ts
+  - src/models/operations/getcompany.ts
+  - src/models/operations/getjobposting.ts
+  - src/models/operations/getperson.ts
+  - src/models/operations/getproduct.ts
+  - src/models/operations/getproductreviews.ts
+  - src/models/operations/getproperty.ts
+  - src/models/operations/gettask.ts
+  - src/models/operations/gettweet.ts
+  - src/models/operations/getuser.ts
+  - src/models/operations/getuserfollowers.ts
+  - src/models/operations/getuserfollowings.ts
+  - src/models/operations/getusertweets.ts
+  - src/models/operations/index.ts
+  - src/models/operations/scrape.ts
+  - src/models/operations/searchbusinesses.ts
+  - src/models/operations/searchcompanies.ts
+  - src/models/operations/searchjobpostings.ts
+  - src/models/operations/searchnews.ts
+  - src/models/operations/searchpeople.ts
+  - src/models/operations/searchproducts.ts
+  - src/models/operations/searchproperties.ts
+  - src/models/operations/searchtweets.ts
+  - src/models/operations/searchusers.ts
+  - src/models/operations/searchweb.ts
+  - src/models/operations/starttask.ts
+  - src/sdk/google.ts
+  - src/sdk/index.ts
+  - src/sdk/linkedin.ts
+  - src/sdk/navigator.ts
+  - src/sdk/sdk.ts
+  - src/sdk/twitter.ts
+  - src/sdk/yelp.ts
+  - src/sdk/zillow.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  get-product:
+    speakeasy-default-get-product:
+      requestBody:
+        application/json: {"product_id": "<id>"}
+  get-product-reviews:
+    speakeasy-default-get-product-reviews:
+      requestBody:
+        application/json: {"product_id": "<id>"}
+  search-news:
+    speakeasy-default-search-news:
+      requestBody:
+        application/json: {"query": "<value>"}
+  search-products:
+    speakeasy-default-search-products:
+      requestBody:
+        application/json: {"query": "<value>"}
+  search-web:
+    speakeasy-default-search-web:
+      requestBody:
+        application/json: {"query": "<value>"}
+  get-company:
+    speakeasy-default-get-company:
+      requestBody:
+        application/json: {"company_url": "https://minty-adaptation.biz/"}
+  get-job-posting:
+    speakeasy-default-get-job-posting:
+      requestBody:
+        application/json: {"job_posting_url": "https://exalted-comestible.info"}
+  get-person:
+    speakeasy-default-get-person:
+      requestBody:
+        application/json: {"person_url": "https://silky-spring.biz/"}
+  search-companies: {}
+  search-job-postings:
+    speakeasy-default-search-job-postings:
+      requestBody:
+        application/json: {"keywords": "<value>", "location": "<value>"}
+  search-people:
+    speakeasy-default-search-people:
+      requestBody:
+        application/json: {"keywords": "<value>"}
+  get-task:
+    speakeasy-default-get-task:
+      requestBody:
+        application/json: {"task_id": "<id>"}
+  start-task:
+    speakeasy-default-start-task:
+      requestBody:
+        application/json: {"url": "https://narrow-jump.net", "objective": "<value>"}
+  scrape:
+    speakeasy-default-scrape:
+      requestBody:
+        application/json: {"url": "https://hasty-promise.com"}
+  get-tweet:
+    speakeasy-default-get-tweet:
+      requestBody:
+        application/json: {"tweet_id": "<id>"}
+  get-user: {}
+  get-user-followers:
+    speakeasy-default-get-user-followers:
+      requestBody:
+        application/json: {"username": "Timmy_Bogan"}
+  getUserFollowings:
+    speakeasy-default-get-user-followings:
+      requestBody:
+        application/json: {"username": "Nathaniel84"}
+  get-user-tweets:
+    speakeasy-default-get-user-tweets:
+      requestBody:
+        application/json: {"username": "Fatima_Mosciski"}
+  search-tweets:
+    speakeasy-default-search-tweets:
+      requestBody:
+        application/json: {"query": "<value>"}
+  search-users:
+    speakeasy-default-search-users:
+      requestBody:
+        application/json: {"query": "<value>"}
+  get-business:
+    speakeasy-default-get-business:
+      requestBody:
+        application/json: {"business_id": "<id>"}
+  get-business-reviews:
+    speakeasy-default-get-business-reviews:
+      requestBody:
+        application/json: {"business_id": "<id>"}
+  search-businesses:
+    speakeasy-default-search-businesses:
+      requestBody:
+        application/json: {"query": "<value>", "location": "<value>"}
+  get-property:
+    speakeasy-default-get-property:
+      requestBody:
+        application/json: {"property_id": "<id>"}
+  search-properties:
+    speakeasy-default-search-properties:
+      requestBody:
+        application/json: {"location": "<value>", "listing_status": "for_rent"}
