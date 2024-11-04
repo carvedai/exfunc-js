@@ -140,7 +140,7 @@ run();
 
 * [getTweet](docs/sdks/twitter/README.md#gettweet) - Get a tweet by ID
 * [getUser](docs/sdks/twitter/README.md#getuser) - Get a Twitter user by either user ID or username
-* [getFollowers](docs/sdks/twitter/README.md#getfollowers) - Get a Twitter user's followers by username
+* [getUserFollowers](docs/sdks/twitter/README.md#getuserfollowers) - Get a Twitter user's followers by username
 * [getUserFollowings](docs/sdks/twitter/README.md#getuserfollowings) - Get a Twitter user's followings by username
 * [getUserTweets](docs/sdks/twitter/README.md#getusertweets) - Get a Twitter user's tweets by username
 * [searchTweets](docs/sdks/twitter/README.md#searchtweets) - Search Twitter for tweets
@@ -149,7 +149,7 @@ run();
 ### [yelp](docs/sdks/yelp/README.md)
 
 * [getBusiness](docs/sdks/yelp/README.md#getbusiness) - Get business details from Yelp
-* [getReviews](docs/sdks/yelp/README.md#getreviews) - Get Yelp reviews for a business
+* [getBusinessReviews](docs/sdks/yelp/README.md#getbusinessreviews) - Get Yelp reviews for a business
 * [searchBusinesses](docs/sdks/yelp/README.md#searchbusinesses) - Search for businesses on Yelp
 
 ### [zillow](docs/sdks/zillow/README.md)
@@ -189,17 +189,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`navigatorGetTask`](docs/sdks/navigator/README.md#gettask) - Get web navigator task results
 - [`navigatorScrape`](docs/sdks/navigator/README.md#scrape) - Scrape a web page
 - [`navigatorStartTask`](docs/sdks/navigator/README.md#starttask) - Start a web navigator task
-- [`twitterGetFollowers`](docs/sdks/twitter/README.md#getfollowers) - Get a Twitter user's followers by username
 - [`twitterGetTweet`](docs/sdks/twitter/README.md#gettweet) - Get a tweet by ID
 - [`twitterGetUser`](docs/sdks/twitter/README.md#getuser) - Get a Twitter user by either user ID or username
+- [`twitterGetUserFollowers`](docs/sdks/twitter/README.md#getuserfollowers) - Get a Twitter user's followers by username
 - [`twitterGetUserFollowings`](docs/sdks/twitter/README.md#getuserfollowings) - Get a Twitter user's followings by username
 - [`twitterGetUserTweets`](docs/sdks/twitter/README.md#getusertweets) - Get a Twitter user's tweets by username
 - [`twitterSearchTweets`](docs/sdks/twitter/README.md#searchtweets) - Search Twitter for tweets
 - [`twitterSearchUsers`](docs/sdks/twitter/README.md#searchusers) - Search Twitter for users
-- [`yelpGet`](docs/sdks/yelp/README.md#get) - Get business details from Yelp
-- [`yelpGetReviews`](docs/sdks/yelp/README.md#getreviews) - Get Yelp reviews for a business
+- [`yelpGetBusiness`](docs/sdks/yelp/README.md#getbusiness) - Get business details from Yelp
+- [`yelpGetBusinessReviews`](docs/sdks/yelp/README.md#getbusinessreviews) - Get Yelp reviews for a business
 - [`yelpSearchBusinesses`](docs/sdks/yelp/README.md#searchbusinesses) - Search for businesses on Yelp
-- [`zillowGet`](docs/sdks/zillow/README.md#get) - Get property details from Zillow
+- [`zillowGetProperty`](docs/sdks/zillow/README.md#getproperty) - Get property details from Zillow
 - [`zillowSearchProperties`](docs/sdks/zillow/README.md#searchproperties) - Search for properties on Zillow
 
 </details>

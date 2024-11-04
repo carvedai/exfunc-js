@@ -3,7 +3,7 @@
  */
 
 import { yelpGetBusiness } from "../funcs/yelpGetBusiness.js";
-import { yelpGetReviews } from "../funcs/yelpGetReviews.js";
+import { yelpGetBusinessReviews } from "../funcs/yelpGetBusinessReviews.js";
 import { yelpSearchBusinesses } from "../funcs/yelpSearchBusinesses.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -33,11 +33,11 @@ export class Yelp extends ClientSDK {
    * @remarks
    * Get a list of reviews on Yelp for a given business ID
    */
-  async getReviews(
+  async getBusinessReviews(
     request: operations.GetBusinessReviewsRequestBody,
     options?: RequestOptions,
   ): Promise<operations.GetBusinessReviewsResponseBody> {
-    return unwrapAsync(yelpGetReviews(
+    return unwrapAsync(yelpGetBusinessReviews(
       this,
       request,
       options,

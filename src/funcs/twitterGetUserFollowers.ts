@@ -23,18 +23,18 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get Yelp reviews for a business
+ * Get a Twitter user's followers by username
  *
  * @remarks
- * Get a list of reviews on Yelp for a given business ID
+ * Get a list of followers given a Twitter username (handle)
  */
-export async function yelpGetReviews(
+export async function twitterGetUserFollowers(
   client: ExfuncCore,
-  request: operations.GetBusinessReviewsRequestBody,
+  request: operations.GetUserFollowersRequestBody,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.GetBusinessReviewsResponseBody,
+    operations.GetUserFollowersResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -49,7 +49,7 @@ export async function yelpGetReviews(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetBusinessReviewsRequestBody$outboundSchema.parse(value),
+      operations.GetUserFollowersRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -58,7 +58,7 @@ export async function yelpGetReviews(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/yelp/get-business-reviews")();
+  const path = pathToFunc("/twitter/get-user-followers")();
 
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function yelpGetReviews(
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
   const context = {
-    operationID: "get-business-reviews",
+    operationID: "get-user-followers",
     oAuth2Scopes: [],
     securitySource: client._options.apiKey,
   };
@@ -104,7 +104,7 @@ export async function yelpGetReviews(
   };
 
   const [result] = await M.match<
-    operations.GetBusinessReviewsResponseBody,
+    operations.GetUserFollowersResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -115,7 +115,7 @@ export async function yelpGetReviews(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetBusinessReviewsResponseBody$inboundSchema),
+    M.json(200, operations.GetUserFollowersResponseBody$inboundSchema),
     M.jsonErr(400, errors.UserError$inboundSchema),
     M.jsonErr(500, errors.ServerError$inboundSchema),
     M.fail(["4XX", "5XX"]),

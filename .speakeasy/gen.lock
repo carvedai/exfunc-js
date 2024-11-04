@@ -1,21 +1,21 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 2a6979164d70f0244caf1c443370dceb
+  docChecksum: bc51ada3c1bc84946f47ba713371062e
   docVersion: 1.0.0
-  speakeasyVersion: 1.424.0
-  generationVersion: 2.445.1
-  releaseVersion: 0.2.2
-  configChecksum: 1e3a78ca0d060b53b5cad5217384545e
+  speakeasyVersion: 1.425.0
+  generationVersion: 2.446.3
+  releaseVersion: 0.2.11
+  configChecksum: 0d09f20863ac788e2206d80349bd4a59
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.18.2
+    core: 3.18.3
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
-    envVarSecurityUsage: 0.1.1
+    envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
@@ -158,17 +158,17 @@ generatedFiles:
   - src/funcs/navigatorGetTask.ts
   - src/funcs/navigatorScrape.ts
   - src/funcs/navigatorStartTask.ts
-  - src/funcs/twitterGetFollowers.ts
   - src/funcs/twitterGetTweet.ts
   - src/funcs/twitterGetUser.ts
+  - src/funcs/twitterGetUserFollowers.ts
   - src/funcs/twitterGetUserFollowings.ts
   - src/funcs/twitterGetUserTweets.ts
   - src/funcs/twitterSearchTweets.ts
   - src/funcs/twitterSearchUsers.ts
-  - src/funcs/yelpGet.ts
-  - src/funcs/yelpGetReviews.ts
+  - src/funcs/yelpGetBusiness.ts
+  - src/funcs/yelpGetBusinessReviews.ts
   - src/funcs/yelpSearchBusinesses.ts
-  - src/funcs/zillowGet.ts
+  - src/funcs/zillowGetProperty.ts
   - src/funcs/zillowSearchProperties.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts

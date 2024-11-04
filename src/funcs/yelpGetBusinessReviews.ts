@@ -23,18 +23,18 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get a Twitter user's followers by username
+ * Get Yelp reviews for a business
  *
  * @remarks
- * Get a list of followers given a Twitter username (handle)
+ * Get a list of reviews on Yelp for a given business ID
  */
-export async function twitterGetFollowers(
+export async function yelpGetBusinessReviews(
   client: ExfuncCore,
-  request: operations.GetUserFollowersRequestBody,
+  request: operations.GetBusinessReviewsRequestBody,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.GetUserFollowersResponseBody,
+    operations.GetBusinessReviewsResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -49,7 +49,7 @@ export async function twitterGetFollowers(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetUserFollowersRequestBody$outboundSchema.parse(value),
+      operations.GetBusinessReviewsRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -58,7 +58,7 @@ export async function twitterGetFollowers(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/twitter/get-user-followers")();
+  const path = pathToFunc("/yelp/get-business-reviews")();
 
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function twitterGetFollowers(
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
   const context = {
-    operationID: "get-user-followers",
+    operationID: "get-business-reviews",
     oAuth2Scopes: [],
     securitySource: client._options.apiKey,
   };
@@ -104,7 +104,7 @@ export async function twitterGetFollowers(
   };
 
   const [result] = await M.match<
-    operations.GetUserFollowersResponseBody,
+    operations.GetBusinessReviewsResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -115,7 +115,7 @@ export async function twitterGetFollowers(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetUserFollowersResponseBody$inboundSchema),
+    M.json(200, operations.GetBusinessReviewsResponseBody$inboundSchema),
     M.jsonErr(400, errors.UserError$inboundSchema),
     M.jsonErr(500, errors.ServerError$inboundSchema),
     M.fail(["4XX", "5XX"]),

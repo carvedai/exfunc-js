@@ -6,10 +6,10 @@
 ### Available Operations
 
 * [getBusiness](#getbusiness) - Get business details from Yelp
-* [getReviews](#getreviews) - Get Yelp reviews for a business
+* [getBusinessReviews](#getbusinessreviews) - Get Yelp reviews for a business
 * [searchBusinesses](#searchbusinesses) - Search for businesses on Yelp
 
-## get
+## getBusiness
 
 Get business details from Yelp for a given business ID
 
@@ -40,7 +40,7 @@ The standalone function version of this method:
 
 ```typescript
 import { ExfuncCore } from "exfunc/core.js";
-import { yelpGet } from "exfunc/funcs/yelpGet.js";
+import { yelpGetBusiness } from "exfunc/funcs/yelpGetBusiness.js";
 
 // Use `ExfuncCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -87,7 +87,7 @@ run();
 | errors.ServerError | 500                | application/json   |
 | errors.SDKError    | 4XX, 5XX           | \*/\*              |
 
-## getReviews
+## getBusinessReviews
 
 Get a list of reviews on Yelp for a given business ID
 
@@ -101,7 +101,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.yelp.getReviews({
+  const result = await exfunc.yelp.getBusinessReviews({
     businessId: "<id>",
   });
 
@@ -118,7 +118,7 @@ The standalone function version of this method:
 
 ```typescript
 import { ExfuncCore } from "exfunc/core.js";
-import { yelpGetReviews } from "exfunc/funcs/yelpGetReviews.js";
+import { yelpGetBusinessReviews } from "exfunc/funcs/yelpGetBusinessReviews.js";
 
 // Use `ExfuncCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -127,7 +127,7 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await yelpGetReviews(exfunc, {
+  const res = await yelpGetBusinessReviews(exfunc, {
     businessId: "<id>",
   });
 

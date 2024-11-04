@@ -7,7 +7,7 @@
 
 * [getTweet](#gettweet) - Get a tweet by ID
 * [getUser](#getuser) - Get a Twitter user by either user ID or username
-* [getFollowers](#getfollowers) - Get a Twitter user's followers by username
+* [getUserFollowers](#getuserfollowers) - Get a Twitter user's followers by username
 * [getUserFollowings](#getuserfollowings) - Get a Twitter user's followings by username
 * [getUserTweets](#getusertweets) - Get a Twitter user's tweets by username
 * [searchTweets](#searchtweets) - Search Twitter for tweets
@@ -165,7 +165,7 @@ run();
 | errors.ServerError | 500                | application/json   |
 | errors.SDKError    | 4XX, 5XX           | \*/\*              |
 
-## getFollowers
+## getUserFollowers
 
 Get a list of followers given a Twitter username (handle)
 
@@ -179,7 +179,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.twitter.getFollowers({
+  const result = await exfunc.twitter.getUserFollowers({
     username: "Timmy_Bogan",
   });
 
@@ -196,7 +196,7 @@ The standalone function version of this method:
 
 ```typescript
 import { ExfuncCore } from "exfunc/core.js";
-import { twitterGetFollowers } from "exfunc/funcs/twitterGetFollowers.js";
+import { twitterGetUserFollowers } from "exfunc/funcs/twitterGetUserFollowers.js";
 
 // Use `ExfuncCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -205,7 +205,7 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await twitterGetFollowers(exfunc, {
+  const res = await twitterGetUserFollowers(exfunc, {
     username: "Timmy_Bogan",
   });
 

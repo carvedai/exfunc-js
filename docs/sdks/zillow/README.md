@@ -8,7 +8,7 @@
 * [getProperty](#getproperty) - Get property details from Zillow
 * [searchProperties](#searchproperties) - Search for properties on Zillow
 
-## get
+## getProperty
 
 Get property details on Zillow for a given property ID
 
@@ -39,7 +39,7 @@ The standalone function version of this method:
 
 ```typescript
 import { ExfuncCore } from "exfunc/core.js";
-import { zillowGet } from "exfunc/funcs/zillowGet.js";
+import { zillowGetProperty } from "exfunc/funcs/zillowGetProperty.js";
 
 // Use `ExfuncCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
