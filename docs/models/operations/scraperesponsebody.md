@@ -12,6 +12,7 @@ let value: ScrapeResponseBody = {};
 
 ## Fields
 
-| Field                        | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `pageHtml`                   | *string*                     | :heavy_minus_sign:           | The page html of the website |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `html`                          | *string*                        | :heavy_minus_sign:              | The page html of the website    |
+| `markdown`                      | *string*                        | :heavy_minus_sign:              | The markdown string of the page |

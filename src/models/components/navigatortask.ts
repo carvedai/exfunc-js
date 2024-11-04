@@ -19,13 +19,17 @@ export type Request = {
 
 export type Response = {
   /**
-   * The base64-encoded string for screenshot of the page that the navigator reached
-   */
-  pageImg?: string | undefined;
-  /**
    * The HTML string of the page that the navigator reached
    */
-  pageHtml?: string | undefined;
+  html?: string | undefined;
+  /**
+   * The base64-encoded string for screenshot of the page that the navigator reached
+   */
+  img?: string | undefined;
+  /**
+   * The markdown string of the page that the navigator reached
+   */
+  markdown?: string | undefined;
 };
 
 /**
@@ -110,19 +114,16 @@ export const Response$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  page_img: z.string().optional(),
-  page_html: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_img": "pageImg",
-    "page_html": "pageHtml",
-  });
+  html: z.string().optional(),
+  img: z.string().optional(),
+  markdown: z.string().optional(),
 });
 
 /** @internal */
 export type Response$Outbound = {
-  page_img?: string | undefined;
-  page_html?: string | undefined;
+  html?: string | undefined;
+  img?: string | undefined;
+  markdown?: string | undefined;
 };
 
 /** @internal */
@@ -131,13 +132,9 @@ export const Response$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Response
 > = z.object({
-  pageImg: z.string().optional(),
-  pageHtml: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageImg: "page_img",
-    pageHtml: "page_html",
-  });
+  html: z.string().optional(),
+  img: z.string().optional(),
+  markdown: z.string().optional(),
 });
 
 /**

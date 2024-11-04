@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod";
-import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ScrapeRequestBody = {
   /**
@@ -19,7 +18,11 @@ export type ScrapeResponseBody = {
   /**
    * The page html of the website
    */
-  pageHtml?: string | undefined;
+  html?: string | undefined;
+  /**
+   * The markdown string of the page
+   */
+  markdown?: string | undefined;
 };
 
 /** @internal */
@@ -64,16 +67,14 @@ export const ScrapeResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  page_html: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_html": "pageHtml",
-  });
+  html: z.string().optional(),
+  markdown: z.string().optional(),
 });
 
 /** @internal */
 export type ScrapeResponseBody$Outbound = {
-  page_html?: string | undefined;
+  html?: string | undefined;
+  markdown?: string | undefined;
 };
 
 /** @internal */
@@ -82,11 +83,8 @@ export const ScrapeResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ScrapeResponseBody
 > = z.object({
-  pageHtml: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageHtml: "page_html",
-  });
+  html: z.string().optional(),
+  markdown: z.string().optional(),
 });
 
 /**

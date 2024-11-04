@@ -1,17 +1,17 @@
-speakeasyVersion: 1.425.0
+speakeasyVersion: 1.425.1
 sources:
     exfunc-OAS:
         sourceNamespace: exfunc-oas
-        sourceRevisionDigest: sha256:b814bfc5a93c98e2c50a72cb6ab731b4afcd35e835ece76e77f66f88f4135a5a
-        sourceBlobDigest: sha256:c044f127057b3b5d040cb52d8d2541a390dcc2bacd27fdbb5eeb43e6ea17d72f
+        sourceRevisionDigest: sha256:8de2011d4ecfa9c385a83ead520988094ed7bb057fcec70ebab05e6d46b5fd6d
+        sourceBlobDigest: sha256:faa5da26ef150aca953aa6d973e119092419542080bd82f8eade29af64b2f331
         tags:
             - latest
 targets:
     exfunc:
         source: exfunc-OAS
         sourceNamespace: exfunc-oas
-        sourceRevisionDigest: sha256:b814bfc5a93c98e2c50a72cb6ab731b4afcd35e835ece76e77f66f88f4135a5a
-        sourceBlobDigest: sha256:c044f127057b3b5d040cb52d8d2541a390dcc2bacd27fdbb5eeb43e6ea17d72f
+        sourceRevisionDigest: sha256:8de2011d4ecfa9c385a83ead520988094ed7bb057fcec70ebab05e6d46b5fd6d
+        sourceBlobDigest: sha256:faa5da26ef150aca953aa6d973e119092419542080bd82f8eade29af64b2f331
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
