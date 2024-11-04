@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [get](#get) - Get business details from Yelp
+* [getBusiness](#getbusiness) - Get business details from Yelp
 * [getReviews](#getreviews) - Get Yelp reviews for a business
 * [searchBusinesses](#searchbusinesses) - Search for businesses on Yelp
 
@@ -23,7 +23,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.yelp.get({
+  const result = await exfunc.yelp.getBusiness({
     businessId: "<id>",
   });
 
@@ -49,7 +49,7 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await yelpGet(exfunc, {
+  const res = await yelpGetBusiness(exfunc, {
     businessId: "<id>",
   });
 

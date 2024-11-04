@@ -1630,6 +1630,7 @@
           "Yelp"
         ],
         "x-speakeasy-group": "yelp",
+        "x-speakeasy-name-override": "getBusiness",
         "requestBody": {
           "required": true,
           "content": {
@@ -1848,6 +1849,7 @@
           "Zillow"
         ],
         "x-speakeasy-group": "zillow",
+        "x-speakeasy-name-override": "getProperty",
         "requestBody": {
           "required": true,
           "content": {

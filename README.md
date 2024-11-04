@@ -148,13 +148,13 @@ run();
 
 ### [yelp](docs/sdks/yelp/README.md)
 
-* [get](docs/sdks/yelp/README.md#get) - Get business details from Yelp
+* [getBusiness](docs/sdks/yelp/README.md#getbusiness) - Get business details from Yelp
 * [getReviews](docs/sdks/yelp/README.md#getreviews) - Get Yelp reviews for a business
 * [searchBusinesses](docs/sdks/yelp/README.md#searchbusinesses) - Search for businesses on Yelp
 
 ### [zillow](docs/sdks/zillow/README.md)
 
-* [get](docs/sdks/zillow/README.md#get) - Get property details from Zillow
+* [getProperty](docs/sdks/zillow/README.md#getproperty) - Get property details from Zillow
 * [searchProperties](docs/sdks/zillow/README.md#searchproperties) - Search for properties on Zillow
 
 </details>

@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [get](#get) - Get property details from Zillow
+* [getProperty](#getproperty) - Get property details from Zillow
 * [searchProperties](#searchproperties) - Search for properties on Zillow
 
 ## get
@@ -22,7 +22,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.zillow.get({
+  const result = await exfunc.zillow.getProperty({
     propertyId: "<id>",
   });
 
@@ -48,7 +48,7 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await zillowGet(exfunc, {
+  const res = await zillowGetProperty(exfunc, {
     propertyId: "<id>",
   });
 

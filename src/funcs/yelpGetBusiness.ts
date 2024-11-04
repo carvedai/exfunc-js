@@ -23,18 +23,18 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get property details from Zillow
+ * Get business details from Yelp
  *
  * @remarks
- * Get property details on Zillow for a given property ID
+ * Get business details from Yelp for a given business ID
  */
-export async function zillowGet(
+export async function yelpGetBusiness(
   client: ExfuncCore,
-  request: operations.GetPropertyRequestBody,
+  request: operations.GetBusinessRequestBody,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.GetPropertyResponseBody,
+    operations.GetBusinessResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -48,7 +48,7 @@ export async function zillowGet(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetPropertyRequestBody$outboundSchema.parse(value),
+    (value) => operations.GetBusinessRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -57,7 +57,7 @@ export async function zillowGet(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/zillow/get-property")();
+  const path = pathToFunc("/yelp/get-business")();
 
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export async function zillowGet(
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
   const context = {
-    operationID: "get-property",
+    operationID: "get-business",
     oAuth2Scopes: [],
     securitySource: client._options.apiKey,
   };
@@ -103,7 +103,7 @@ export async function zillowGet(
   };
 
   const [result] = await M.match<
-    operations.GetPropertyResponseBody,
+    operations.GetBusinessResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -114,7 +114,7 @@ export async function zillowGet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetPropertyResponseBody$inboundSchema),
+    M.json(200, operations.GetBusinessResponseBody$inboundSchema),
     M.jsonErr(400, errors.UserError$inboundSchema),
     M.jsonErr(500, errors.ServerError$inboundSchema),
     M.fail(["4XX", "5XX"]),
