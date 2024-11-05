@@ -1,4 +1,4 @@
-# exfunc
+# Exfunc Typescript SDK
 
 Developer-friendly & type-safe Typescript SDK specifically catered to leverage *exfunc* API.
 
@@ -9,20 +9,11 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
     </a>
 </div>
 
-
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/nunchi-4op/nunchi). Delete this section before > publishing to a package manager.
-
 <!-- Start Summary [summary] -->
 ## Summary
 
-Exfunc APIs: # Authentication
+Exfunc Typescript SDK is a library that allows you to easily take web actions on websites from your Typescript codebase.
 
-Exfunc offers one form of authentication:
-  - API Key
-
-<SecurityDefinitions />
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -350,65 +341,6 @@ run();
 
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 <!-- End Error Handling [errors] -->
-
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Select Server by Index
-
-You can override the default server globally by passing a server index to the `serverIdx` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://api.exfunc.com` | None |
-
-```typescript
-import { Exfunc } from "exfunc";
-
-const exfunc = new Exfunc({
-  serverIdx: 0,
-  apiKey: process.env["EXFUNC_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-
-
-### Override Server URL Per-Client
-
-The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
-
-```typescript
-import { Exfunc } from "exfunc";
-
-const exfunc = new Exfunc({
-  serverURL: "https://api.exfunc.com",
-  apiKey: process.env["EXFUNC_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
