@@ -2731,11 +2731,13 @@
           },
           "living_area": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "The living area of the property in square feet"
           },
           "year_built": {
             "type": "integer",
+            "nullable": true,
             "description": "The year the property was built"
           },
           "property_type": {
@@ -2748,6 +2750,7 @@
           },
           "days_on_zillow": {
             "type": "integer",
+            "nullable": true,
             "description": "Number of days the property has been listed on Zillow"
           },
           "price": {
@@ -2757,11 +2760,13 @@
           },
           "zestimate": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "Zillow's estimated value of the property"
           },
           "rent_zestimate": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "Zillow's estimated value of the rent for the property"
           },

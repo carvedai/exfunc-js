@@ -61,11 +61,11 @@ export type ZillowProperty = {
   /**
    * The living area of the property in square feet
    */
-  livingArea?: number | undefined;
+  livingArea?: number | null | undefined;
   /**
    * The year the property was built
    */
-  yearBuilt?: number | undefined;
+  yearBuilt?: number | null | undefined;
   /**
    * Type of the property (e.g. house, condo)
    */
@@ -77,7 +77,7 @@ export type ZillowProperty = {
   /**
    * Number of days the property has been listed on Zillow
    */
-  daysOnZillow?: number | undefined;
+  daysOnZillow?: number | null | undefined;
   /**
    * Listing price of the property
    */
@@ -85,11 +85,11 @@ export type ZillowProperty = {
   /**
    * Zillow's estimated value of the property
    */
-  zestimate?: number | undefined;
+  zestimate?: number | null | undefined;
   /**
    * Zillow's estimated value of the rent for the property
    */
-  rentZestimate?: number | undefined;
+  rentZestimate?: number | null | undefined;
   priceHistory?: Array<ZillowPriceHistoryEvent> | undefined;
 };
 
@@ -149,14 +149,14 @@ export const ZillowProperty$inboundSchema: z.ZodType<
   photos: z.array(z.string()).optional(),
   bathrooms: z.number().optional(),
   bedrooms: z.number().int().optional(),
-  living_area: z.number().optional(),
-  year_built: z.number().int().optional(),
+  living_area: z.nullable(z.number()).optional(),
+  year_built: z.nullable(z.number().int()).optional(),
   property_type: z.string().optional(),
   listing_status: z.string().optional(),
-  days_on_zillow: z.number().int().optional(),
+  days_on_zillow: z.nullable(z.number().int()).optional(),
   price: z.number().optional(),
-  zestimate: z.number().optional(),
-  rent_zestimate: z.number().optional(),
+  zestimate: z.nullable(z.number()).optional(),
+  rent_zestimate: z.nullable(z.number()).optional(),
   price_history: z.array(ZillowPriceHistoryEvent$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -178,14 +178,14 @@ export type ZillowProperty$Outbound = {
   photos?: Array<string> | undefined;
   bathrooms?: number | undefined;
   bedrooms?: number | undefined;
-  living_area?: number | undefined;
-  year_built?: number | undefined;
+  living_area?: number | null | undefined;
+  year_built?: number | null | undefined;
   property_type?: string | undefined;
   listing_status?: string | undefined;
-  days_on_zillow?: number | undefined;
+  days_on_zillow?: number | null | undefined;
   price?: number | undefined;
-  zestimate?: number | undefined;
-  rent_zestimate?: number | undefined;
+  zestimate?: number | null | undefined;
+  rent_zestimate?: number | null | undefined;
   price_history?: Array<ZillowPriceHistoryEvent$Outbound> | undefined;
 };
 
@@ -200,14 +200,14 @@ export const ZillowProperty$outboundSchema: z.ZodType<
   photos: z.array(z.string()).optional(),
   bathrooms: z.number().optional(),
   bedrooms: z.number().int().optional(),
-  livingArea: z.number().optional(),
-  yearBuilt: z.number().int().optional(),
+  livingArea: z.nullable(z.number()).optional(),
+  yearBuilt: z.nullable(z.number().int()).optional(),
   propertyType: z.string().optional(),
   listingStatus: z.string().optional(),
-  daysOnZillow: z.number().int().optional(),
+  daysOnZillow: z.nullable(z.number().int()).optional(),
   price: z.number().optional(),
-  zestimate: z.number().optional(),
-  rentZestimate: z.number().optional(),
+  zestimate: z.nullable(z.number()).optional(),
+  rentZestimate: z.nullable(z.number()).optional(),
   priceHistory: z.array(ZillowPriceHistoryEvent$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
