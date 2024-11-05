@@ -23,11 +23,11 @@ export type Companies = {
   /**
    * URL to the company's profile
    */
-  url?: string | undefined;
+  url?: string | null | undefined;
   /**
    * LinkedIn uid
    */
-  uid?: string | undefined;
+  uid?: string | null | undefined;
   /**
    * Name of the company
    */
@@ -99,8 +99,8 @@ export const Companies$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  url: z.string().optional(),
-  uid: z.string().optional(),
+  url: z.nullable(z.string()).optional(),
+  uid: z.nullable(z.string()).optional(),
   name: z.string().optional(),
   website_url: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -111,8 +111,8 @@ export const Companies$inboundSchema: z.ZodType<
 
 /** @internal */
 export type Companies$Outbound = {
-  url?: string | undefined;
-  uid?: string | undefined;
+  url?: string | null | undefined;
+  uid?: string | null | undefined;
   name?: string | undefined;
   website_url?: string | null | undefined;
 };
@@ -123,8 +123,8 @@ export const Companies$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Companies
 > = z.object({
-  url: z.string().optional(),
-  uid: z.string().optional(),
+  url: z.nullable(z.string()).optional(),
+  uid: z.nullable(z.string()).optional(),
   name: z.string().optional(),
   websiteUrl: z.nullable(z.string()).optional(),
 }).transform((v) => {

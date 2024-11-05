@@ -13,7 +13,7 @@ export type ZillowPriceHistoryEvent = {
   /**
    * The price of the property at the given date
    */
-  price?: number | undefined;
+  price?: number | null | undefined;
   /**
    * Time of the price change in epoch format
    */
@@ -21,7 +21,7 @@ export type ZillowPriceHistoryEvent = {
   /**
    * Price per square foot at the given date
    */
-  pricePerSquareFoot?: number | undefined;
+  pricePerSquareFoot?: number | null | undefined;
   /**
    * Rate of change in price over time
    */
@@ -47,9 +47,9 @@ export const ZillowPriceHistoryEvent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   date: z.string().optional(),
-  price: z.number().optional(),
+  price: z.nullable(z.number()).optional(),
   time_epoch: z.number().int().optional(),
-  price_per_square_foot: z.number().optional(),
+  price_per_square_foot: z.nullable(z.number()).optional(),
   price_change_rate: z.number().optional(),
   event: z.string().optional(),
   source: z.string().optional(),
@@ -66,9 +66,9 @@ export const ZillowPriceHistoryEvent$inboundSchema: z.ZodType<
 /** @internal */
 export type ZillowPriceHistoryEvent$Outbound = {
   date?: string | undefined;
-  price?: number | undefined;
+  price?: number | null | undefined;
   time_epoch?: number | undefined;
-  price_per_square_foot?: number | undefined;
+  price_per_square_foot?: number | null | undefined;
   price_change_rate?: number | undefined;
   event?: string | undefined;
   source?: string | undefined;
@@ -82,9 +82,9 @@ export const ZillowPriceHistoryEvent$outboundSchema: z.ZodType<
   ZillowPriceHistoryEvent
 > = z.object({
   date: z.string().optional(),
-  price: z.number().optional(),
+  price: z.nullable(z.number()).optional(),
   timeEpoch: z.number().int().optional(),
-  pricePerSquareFoot: z.number().optional(),
+  pricePerSquareFoot: z.nullable(z.number()).optional(),
   priceChangeRate: z.number().optional(),
   event: z.string().optional(),
   source: z.string().optional(),

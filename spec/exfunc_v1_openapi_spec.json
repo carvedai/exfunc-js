@@ -689,11 +689,13 @@
                         "properties": {
                           "url": {
                             "type": "string",
+                            "nullable": true,
                             "format": "uri",
                             "description": "URL to the company's profile"
                           },
                           "uid": {
                             "type": "string",
+                            "nullable": true,
                             "description": "LinkedIn uid"
                           },
                           "name": {
@@ -2780,6 +2782,7 @@
           },
           "price": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "The price of the property at the given date"
           },
@@ -2789,6 +2792,7 @@
           },
           "price_per_square_foot": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "Price per square foot at the given date"
           },
