@@ -20,7 +20,7 @@ export type SearchUsersRequestBody = {
  * SearchUsers API successful response
  */
 export type SearchUsersResponseBody = {
-  results?: Array<components.TwitterUser> | undefined;
+  users?: Array<components.TwitterUser> | undefined;
 };
 
 /** @internal */
@@ -68,12 +68,12 @@ export const SearchUsersResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  results: z.array(components.TwitterUser$inboundSchema).optional(),
+  users: z.array(components.TwitterUser$inboundSchema).optional(),
 });
 
 /** @internal */
 export type SearchUsersResponseBody$Outbound = {
-  results?: Array<components.TwitterUser$Outbound> | undefined;
+  users?: Array<components.TwitterUser$Outbound> | undefined;
 };
 
 /** @internal */
@@ -82,7 +82,7 @@ export const SearchUsersResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchUsersResponseBody
 > = z.object({
-  results: z.array(components.TwitterUser$outboundSchema).optional(),
+  users: z.array(components.TwitterUser$outboundSchema).optional(),
 });
 
 /**

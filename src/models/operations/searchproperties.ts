@@ -113,7 +113,7 @@ export type SearchPropertiesRequestBody = {
  * SearchProperties API successful response
  */
 export type SearchPropertiesResponseBody = {
-  results?: Array<components.ZillowProperty> | undefined;
+  properties?: Array<components.ZillowProperty> | undefined;
 };
 
 /** @internal */
@@ -281,12 +281,12 @@ export const SearchPropertiesResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  results: z.array(components.ZillowProperty$inboundSchema).optional(),
+  properties: z.array(components.ZillowProperty$inboundSchema).optional(),
 });
 
 /** @internal */
 export type SearchPropertiesResponseBody$Outbound = {
-  results?: Array<components.ZillowProperty$Outbound> | undefined;
+  properties?: Array<components.ZillowProperty$Outbound> | undefined;
 };
 
 /** @internal */
@@ -295,7 +295,7 @@ export const SearchPropertiesResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchPropertiesResponseBody
 > = z.object({
-  results: z.array(components.ZillowProperty$outboundSchema).optional(),
+  properties: z.array(components.ZillowProperty$outboundSchema).optional(),
 });
 
 /**

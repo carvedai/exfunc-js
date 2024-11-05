@@ -35,7 +35,7 @@ export type Companies = {
   /**
    * Company's website URL
    */
-  websiteUrl?: string | undefined;
+  websiteUrl?: string | null | undefined;
 };
 
 /**
@@ -102,7 +102,7 @@ export const Companies$inboundSchema: z.ZodType<
   url: z.string().optional(),
   uid: z.string().optional(),
   name: z.string().optional(),
-  website_url: z.string().optional(),
+  website_url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "website_url": "websiteUrl",
@@ -114,7 +114,7 @@ export type Companies$Outbound = {
   url?: string | undefined;
   uid?: string | undefined;
   name?: string | undefined;
-  website_url?: string | undefined;
+  website_url?: string | null | undefined;
 };
 
 /** @internal */
@@ -126,7 +126,7 @@ export const Companies$outboundSchema: z.ZodType<
   url: z.string().optional(),
   uid: z.string().optional(),
   name: z.string().optional(),
-  websiteUrl: z.string().optional(),
+  websiteUrl: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     websiteUrl: "website_url",

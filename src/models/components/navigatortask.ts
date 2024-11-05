@@ -61,15 +61,15 @@ export type NavigatorTask = {
   /**
    * The start time of the navigator task
    */
-  startTime?: Date | undefined;
+  startTime?: string | undefined;
   /**
    * The end time of the navigator task
    */
-  endTime?: Date | undefined;
+  endTime?: string | undefined;
   /**
    * The last updated time of the navigator task
    */
-  lastUpdatedTime?: Date | undefined;
+  lastUpdatedTime?: string | undefined;
 };
 
 /** @internal */
@@ -179,13 +179,9 @@ export const NavigatorTask$inboundSchema: z.ZodType<
   request: z.lazy(() => Request$inboundSchema).optional(),
   response: z.lazy(() => Response$inboundSchema).optional(),
   status: Status$inboundSchema.optional(),
-  start_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  end_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  last_updated_time: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
+  start_time: z.string().optional(),
+  end_time: z.string().optional(),
+  last_updated_time: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "task_id": "taskId",
@@ -216,9 +212,9 @@ export const NavigatorTask$outboundSchema: z.ZodType<
   request: z.lazy(() => Request$outboundSchema).optional(),
   response: z.lazy(() => Response$outboundSchema).optional(),
   status: Status$outboundSchema.optional(),
-  startTime: z.date().transform(v => v.toISOString()).optional(),
-  endTime: z.date().transform(v => v.toISOString()).optional(),
-  lastUpdatedTime: z.date().transform(v => v.toISOString()).optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  lastUpdatedTime: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",

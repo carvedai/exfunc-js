@@ -8,8 +8,8 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type Experiences = {
   title?: string | undefined;
   companyName?: string | undefined;
-  startDate?: string | undefined;
-  endDate?: string | undefined;
+  startDate?: string | null | undefined;
+  endDate?: string | null | undefined;
 };
 
 export type LinkedInPerson = {
@@ -51,8 +51,8 @@ export const Experiences$inboundSchema: z.ZodType<
 > = z.object({
   title: z.string().optional(),
   company_name: z.string().optional(),
-  start_date: z.string().optional(),
-  end_date: z.string().optional(),
+  start_date: z.nullable(z.string()).optional(),
+  end_date: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_name": "companyName",
@@ -65,8 +65,8 @@ export const Experiences$inboundSchema: z.ZodType<
 export type Experiences$Outbound = {
   title?: string | undefined;
   company_name?: string | undefined;
-  start_date?: string | undefined;
-  end_date?: string | undefined;
+  start_date?: string | null | undefined;
+  end_date?: string | null | undefined;
 };
 
 /** @internal */
@@ -77,8 +77,8 @@ export const Experiences$outboundSchema: z.ZodType<
 > = z.object({
   title: z.string().optional(),
   companyName: z.string().optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
+  startDate: z.nullable(z.string()).optional(),
+  endDate: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyName: "company_name",

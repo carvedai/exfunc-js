@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: d8a0c6a64ecf80cd6bfd03f9d2877585
+  docChecksum: 47dfbe4b1b879289478080a3abf651c5
   docVersion: 1.0.0
-  speakeasyVersion: 1.425.1
+  speakeasyVersion: 1.426.0
   generationVersion: 2.446.5
-  releaseVersion: 0.2.12
-  configChecksum: 1d080a28d70abb74c62980334299eab7
+  releaseVersion: 0.3.0
+  configChecksum: c337d5708ffad552cbbfe9e761101637
   published: true
 features:
   typescript:
@@ -22,6 +22,7 @@ features:
     globalServerURLs: 2.82.4
     groups: 2.81.2
     nameOverrides: 2.81.2
+    nullables: 0.1.0
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.1.0

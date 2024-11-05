@@ -14,4 +14,4 @@ let value: SearchUsersResponseBody = {};
 
 | Field                                                              | Type                                                               | Required                                                           | Description                                                        |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `results`                                                          | [components.TwitterUser](../../models/components/twitteruser.md)[] | :heavy_minus_sign:                                                 | N/A                                                                |
+| `users`                                                            | [components.TwitterUser](../../models/components/twitteruser.md)[] | :heavy_minus_sign:                                                 | N/A                                                                |

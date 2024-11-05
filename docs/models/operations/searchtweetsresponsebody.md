@@ -14,4 +14,4 @@ let value: SearchTweetsResponseBody = {};
 
 | Field                                                  | Type                                                   | Required                                               | Description                                            |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `results`                                              | [components.Tweet](../../models/components/tweet.md)[] | :heavy_minus_sign:                                     | N/A                                                    |
+| `tweets`                                               | [components.Tweet](../../models/components/tweet.md)[] | :heavy_minus_sign:                                     | N/A                                                    |

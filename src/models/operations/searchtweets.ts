@@ -39,7 +39,7 @@ export type SearchTweetsRequestBody = {
  * SearchTweets API successful response
  */
 export type SearchTweetsResponseBody = {
-  results?: Array<components.Tweet> | undefined;
+  tweets?: Array<components.Tweet> | undefined;
 };
 
 /** @internal */
@@ -110,12 +110,12 @@ export const SearchTweetsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  results: z.array(components.Tweet$inboundSchema).optional(),
+  tweets: z.array(components.Tweet$inboundSchema).optional(),
 });
 
 /** @internal */
 export type SearchTweetsResponseBody$Outbound = {
-  results?: Array<components.Tweet$Outbound> | undefined;
+  tweets?: Array<components.Tweet$Outbound> | undefined;
 };
 
 /** @internal */
@@ -124,7 +124,7 @@ export const SearchTweetsResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchTweetsResponseBody
 > = z.object({
-  results: z.array(components.Tweet$outboundSchema).optional(),
+  tweets: z.array(components.Tweet$outboundSchema).optional(),
 });
 
 /**

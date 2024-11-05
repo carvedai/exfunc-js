@@ -14,4 +14,4 @@ let value: GetUserFollowingsResponseBody = {};
 
 | Field                                                              | Type                                                               | Required                                                           | Description                                                        |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `tweets`                                                           | [components.TwitterUser](../../models/components/twitteruser.md)[] | :heavy_minus_sign:                                                 | N/A                                                                |
+| `followings`                                                       | [components.TwitterUser](../../models/components/twitteruser.md)[] | :heavy_minus_sign:                                                 | N/A                                                                |

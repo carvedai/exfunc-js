@@ -20,7 +20,7 @@ export type GetUserFollowingsRequestBody = {
  * GetUserFollowings API successful response
  */
 export type GetUserFollowingsResponseBody = {
-  tweets?: Array<components.TwitterUser> | undefined;
+  followings?: Array<components.TwitterUser> | undefined;
 };
 
 /** @internal */
@@ -68,12 +68,12 @@ export const GetUserFollowingsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tweets: z.array(components.TwitterUser$inboundSchema).optional(),
+  followings: z.array(components.TwitterUser$inboundSchema).optional(),
 });
 
 /** @internal */
 export type GetUserFollowingsResponseBody$Outbound = {
-  tweets?: Array<components.TwitterUser$Outbound> | undefined;
+  followings?: Array<components.TwitterUser$Outbound> | undefined;
 };
 
 /** @internal */
@@ -82,7 +82,7 @@ export const GetUserFollowingsResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetUserFollowingsResponseBody
 > = z.object({
-  tweets: z.array(components.TwitterUser$outboundSchema).optional(),
+  followings: z.array(components.TwitterUser$outboundSchema).optional(),
 });
 
 /**
