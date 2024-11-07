@@ -4,10 +4,10 @@
     "description": "# Authentication\n\nExfunc offers one form of authentication:\n  - API Key\n\n<SecurityDefinitions />\n",
     "version": "1.0.0",
     "title": "Exfunc APIs",
-    "termsOfService": "https://nunchi.app/terms/",
+    "termsOfService": "https://exfunc.com/terms/",
     "contact": {
       "name": "CarvedAI Support",
-      "email": "hello@carvedai.com",
+      "email": "founders@carvedai.com",
       "url": "https://carvedai.com"
     }
   },
@@ -46,22 +46,13 @@
   "x-tagGroups": [
     {
       "name": "General",
-      "tags": [
-        "Google",
-        "LinkedIn",
-        "Navigator",
-        "Twitter",
-        "Yelp",
-        "Zillow"
-      ]
+      "tags": ["Google", "LinkedIn", "Navigator", "Twitter", "Yelp", "Zillow"]
     }
   ],
   "paths": {
     "/google/get-product": {
       "post": {
-        "tags": [
-          "Google"
-        ],
+        "tags": ["Google"],
         "x-speakeasy-group": "google",
         "summary": "Get product details from Google",
         "description": "Get product details (title, description, rating, etc.) from Google given product ID",
@@ -87,9 +78,7 @@
                     "description": "The country code for the product"
                   }
                 },
-                "required": [
-                  "product_id"
-                ]
+                "required": ["product_id"]
               }
             }
           }
@@ -121,9 +110,7 @@
     },
     "/google/get-product-reviews": {
       "post": {
-        "tags": [
-          "Google"
-        ],
+        "tags": ["Google"],
         "x-speakeasy-group": "google",
         "summary": "Get product reviews from Google",
         "description": "Get product reviews (title, author, source, rating, etc.) from Google given product ID",
@@ -154,9 +141,7 @@
                     "description": "Number of reviews to return per page (default is 10)"
                   }
                 },
-                "required": [
-                  "product_id"
-                ]
+                "required": ["product_id"]
               }
             }
           }
@@ -191,9 +176,7 @@
     },
     "/google/search-news": {
       "post": {
-        "tags": [
-          "Google"
-        ],
+        "tags": ["Google"],
         "x-speakeasy-group": "google",
         "summary": "Search news articles on Google",
         "description": "Search news articles on Google for a given query",
@@ -225,19 +208,11 @@
                   },
                   "time_published": {
                     "type": "string",
-                    "enum": [
-                      "anytime",
-                      "1h",
-                      "1d",
-                      "7d",
-                      "1y"
-                    ],
+                    "enum": ["anytime", "1h", "1d", "7d", "1y"],
                     "description": "Filter news articles published after this date"
                   }
                 },
-                "required": [
-                  "query"
-                ]
+                "required": ["query"]
               }
             }
           }
@@ -272,9 +247,7 @@
     },
     "/google/search-products": {
       "post": {
-        "tags": [
-          "Google"
-        ],
+        "tags": ["Google"],
         "x-speakeasy-group": "google",
         "summary": "Search products on Google",
         "description": "Search products on Google for a given query",
@@ -311,27 +284,16 @@
                   },
                   "sort_by": {
                     "type": "string",
-                    "enum": [
-                      "best_match",
-                      "lowest_price",
-                      "highest_price"
-                    ],
+                    "enum": ["best_match", "lowest_price", "highest_price"],
                     "description": "Sort the results by a specific field"
                   },
                   "product_condition": {
                     "type": "string",
-                    "enum": [
-                      "any",
-                      "new",
-                      "used",
-                      "refurbished"
-                    ],
+                    "enum": ["any", "new", "used", "refurbished"],
                     "description": "Filter products by condition"
                   }
                 },
-                "required": [
-                  "query"
-                ]
+                "required": ["query"]
               }
             }
           }
@@ -366,9 +328,7 @@
     },
     "/google/search-web": {
       "post": {
-        "tags": [
-          "Google"
-        ],
+        "tags": ["Google"],
         "x-speakeasy-group": "google",
         "summary": "Search web on Google",
         "description": "Search web on Google for a given query",
@@ -395,9 +355,7 @@
                     "description": "Number of news articles to return per page (default is 10)"
                   }
                 },
-                "required": [
-                  "query"
-                ]
+                "required": ["query"]
               }
             }
           }
@@ -446,9 +404,7 @@
     },
     "/linkedin/get-company": {
       "post": {
-        "tags": [
-          "LinkedIn"
-        ],
+        "tags": ["LinkedIn"],
         "x-speakeasy-group": "linkedin",
         "summary": "Get LinkedIn company info",
         "description": "Get LinkedIn company info from a LinkedIn company url",
@@ -470,9 +426,7 @@
                     "description": "The LinkedIn URL of the company to enrich"
                   }
                 },
-                "required": [
-                  "company_url"
-                ]
+                "required": ["company_url"]
               }
             }
           }
@@ -504,9 +458,7 @@
     },
     "/linkedin/get-job-posting": {
       "post": {
-        "tags": [
-          "LinkedIn"
-        ],
+        "tags": ["LinkedIn"],
         "x-speakeasy-group": "linkedin",
         "summary": "Get LinkedIn job posting info",
         "description": "Get LinkedIn job posting info from a LinkedIn job posting url",
@@ -528,9 +480,7 @@
                     "description": "The LinkedIn URL of the job posting to enrich"
                   }
                 },
-                "required": [
-                  "job_posting_url"
-                ]
+                "required": ["job_posting_url"]
               }
             }
           }
@@ -562,9 +512,7 @@
     },
     "/linkedin/get-person": {
       "post": {
-        "tags": [
-          "LinkedIn"
-        ],
+        "tags": ["LinkedIn"],
         "x-speakeasy-group": "linkedin",
         "summary": "Get LinkedIn person profile info",
         "description": "Get LinkedIn person profile info from a LinkedIn person profile url",
@@ -586,9 +534,7 @@
                     "description": "The URL of the person to enrich"
                   }
                 },
-                "required": [
-                  "person_url"
-                ]
+                "required": ["person_url"]
               }
             }
           }
@@ -620,9 +566,7 @@
     },
     "/linkedin/search-companies": {
       "post": {
-        "tags": [
-          "LinkedIn"
-        ],
+        "tags": ["LinkedIn"],
         "x-speakeasy-group": "linkedin",
         "summary": "Search for LinkedIn companies",
         "description": "Search for companies on LinkedIn for a given name, locations, and other criteria",
@@ -727,9 +671,7 @@
     },
     "/linkedin/search-job-postings": {
       "post": {
-        "tags": [
-          "LinkedIn"
-        ],
+        "tags": ["LinkedIn"],
         "x-speakeasy-group": "linkedin",
         "summary": "Search for LinkedIn job postings",
         "description": "Search for job postings on LinkedIn for a given keywords, location, and other criteria",
@@ -757,11 +699,7 @@
                   "date_posted": {
                     "type": "string",
                     "description": "Filter for job postings based on when they were posted",
-                    "enum": [
-                      "Past 24 hours",
-                      "Past Week",
-                      "Past Month"
-                    ]
+                    "enum": ["Past 24 hours", "Past Week", "Past Month"]
                   },
                   "salary": {
                     "type": "string",
@@ -793,11 +731,7 @@
                     "items": {
                       "type": "string",
                       "description": "Work types to filter (e.g., Remote, On-site)",
-                      "enum": [
-                        "On-site",
-                        "Remote",
-                        "Hybrid"
-                      ]
+                      "enum": ["On-site", "Remote", "Hybrid"]
                     }
                   },
                   "company_uids": {
@@ -813,10 +747,7 @@
                     "description": "Page number for pagination (default is 1)"
                   }
                 },
-                "required": [
-                  "keywords",
-                  "location"
-                ]
+                "required": ["keywords", "location"]
               }
             }
           }
@@ -880,9 +811,7 @@
     },
     "/linkedin/search-people": {
       "post": {
-        "tags": [
-          "LinkedIn"
-        ],
+        "tags": ["LinkedIn"],
         "x-speakeasy-group": "linkedin",
         "summary": "Search for LinkedIn people",
         "description": "Search for people on LinkedIn for a given keywords, locations, and other criteria",
@@ -951,9 +880,7 @@
                     "description": "Page number for pagination (default is 1)"
                   }
                 },
-                "required": [
-                  "keywords"
-                ]
+                "required": ["keywords"]
               }
             }
           }
@@ -996,9 +923,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Navigator"
-        ],
+        "tags": ["Navigator"],
         "x-speakeasy-group": "navigator",
         "requestBody": {
           "required": true,
@@ -1012,9 +937,7 @@
                     "description": "The ID of the task to retrieve"
                   }
                 },
-                "required": [
-                  "task_id"
-                ]
+                "required": ["task_id"]
               }
             }
           }
@@ -1054,9 +977,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Navigator"
-        ],
+        "tags": ["Navigator"],
         "x-speakeasy-group": "navigator",
         "requestBody": {
           "required": true,
@@ -1074,10 +995,7 @@
                     "description": "The natural language objective of the navigation"
                   }
                 },
-                "required": [
-                  "url",
-                  "objective"
-                ]
+                "required": ["url", "objective"]
               }
             }
           }
@@ -1118,9 +1036,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Navigator"
-        ],
+        "tags": ["Navigator"],
         "x-speakeasy-group": "navigator",
         "requestBody": {
           "required": true,
@@ -1134,9 +1050,7 @@
                     "description": "The URL to start navigating from"
                   }
                 },
-                "required": [
-                  "url"
-                ]
+                "required": ["url"]
               }
             }
           }
@@ -1181,9 +1095,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1197,9 +1109,7 @@
                     "description": "The ID of the tweet to retrieve"
                   }
                 },
-                "required": [
-                  "tweet_id"
-                ]
+                "required": ["tweet_id"]
               }
             }
           }
@@ -1239,9 +1149,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1298,9 +1206,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1318,9 +1224,7 @@
                     "description": "The number of followers to retrieve"
                   }
                 },
-                "required": [
-                  "username"
-                ]
+                "required": ["username"]
               }
             }
           }
@@ -1363,9 +1267,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1383,9 +1285,7 @@
                     "description": "The number of followings to retrieve"
                   }
                 },
-                "required": [
-                  "username"
-                ]
+                "required": ["username"]
               }
             }
           }
@@ -1428,9 +1328,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1448,9 +1346,7 @@
                     "description": "The number of tweets to retrieve"
                   }
                 },
-                "required": [
-                  "username"
-                ]
+                "required": ["username"]
               }
             }
           }
@@ -1493,9 +1389,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1510,12 +1404,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "top",
-                      "photos",
-                      "videos",
-                      "latest"
-                    ],
+                    "enum": ["top", "photos", "videos", "latest"],
                     "description": "The type of search"
                   },
                   "count": {
@@ -1523,9 +1412,7 @@
                     "description": "The number of results to retrieve"
                   }
                 },
-                "required": [
-                  "query"
-                ]
+                "required": ["query"]
               }
             }
           }
@@ -1568,9 +1455,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Twitter"
-        ],
+        "tags": ["Twitter"],
         "x-speakeasy-group": "twitter",
         "requestBody": {
           "required": true,
@@ -1588,9 +1473,7 @@
                     "description": "The number of results to retrieve"
                   }
                 },
-                "required": [
-                  "query"
-                ]
+                "required": ["query"]
               }
             }
           }
@@ -1633,9 +1516,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Yelp"
-        ],
+        "tags": ["Yelp"],
         "x-speakeasy-group": "yelp",
         "requestBody": {
           "required": true,
@@ -1649,9 +1530,7 @@
                     "description": "The ID of the business to retrieve reviews for"
                   }
                 },
-                "required": [
-                  "business_id"
-                ]
+                "required": ["business_id"]
               }
             }
           }
@@ -1691,9 +1570,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Yelp"
-        ],
+        "tags": ["Yelp"],
         "x-speakeasy-group": "yelp",
         "requestBody": {
           "required": true,
@@ -1727,9 +1604,7 @@
                     "description": "The number of reviews to retrieve per page (default is 10)"
                   }
                 },
-                "required": [
-                  "business_id"
-                ]
+                "required": ["business_id"]
               }
             }
           }
@@ -1772,9 +1647,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Yelp"
-        ],
+        "tags": ["Yelp"],
         "x-speakeasy-group": "yelp",
         "requestBody": {
           "required": true,
@@ -1793,11 +1666,7 @@
                   },
                   "sort_by": {
                     "type": "string",
-                    "enum": [
-                      "recommended",
-                      "highest_rated",
-                      "review_count"
-                    ],
+                    "enum": ["recommended", "highest_rated", "review_count"],
                     "description": "The criteria to sort the results (e.g., \"recommended\", \"highest_rated\", etc.)"
                   },
                   "start": {
@@ -1805,10 +1674,7 @@
                     "description": "The starting index for pagination (default is 0)"
                   }
                 },
-                "required": [
-                  "query",
-                  "location"
-                ]
+                "required": ["query", "location"]
               }
             }
           }
@@ -1851,9 +1717,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Zillow"
-        ],
+        "tags": ["Zillow"],
         "x-speakeasy-group": "zillow",
         "requestBody": {
           "required": true,
@@ -1867,9 +1731,7 @@
                     "description": "The ID of the property"
                   }
                 },
-                "required": [
-                  "property_id"
-                ]
+                "required": ["property_id"]
               }
             }
           }
@@ -1909,9 +1771,7 @@
             "api_key": []
           }
         ],
-        "tags": [
-          "Zillow"
-        ],
+        "tags": ["Zillow"],
         "x-speakeasy-group": "zillow",
         "requestBody": {
           "required": true,
@@ -1926,11 +1786,7 @@
                   },
                   "listing_status": {
                     "type": "string",
-                    "enum": [
-                      "for_sale",
-                      "for_rent",
-                      "sold"
-                    ],
+                    "enum": ["for_sale", "for_rent", "sold"],
                     "description": "The status of the listings (e.g., \"for_sale\", \"for_rent\")"
                   },
                   "sort_by": {
@@ -1963,35 +1819,16 @@
                   },
                   "min_num_bedrooms": {
                     "type": "string",
-                    "enum": [
-                      "any",
-                      "studio",
-                      "1",
-                      "2",
-                      "3",
-                      "4",
-                      "5"
-                    ],
+                    "enum": ["any", "studio", "1", "2", "3", "4", "5"],
                     "description": "The minimum number of bedrooms"
                   },
                   "max_num_bedrooms": {
                     "type": "string",
-                    "enum": [
-                      "any",
-                      "studio",
-                      "1",
-                      "2",
-                      "3",
-                      "4",
-                      "5"
-                    ],
+                    "enum": ["any", "studio", "1", "2", "3", "4", "5"],
                     "description": "The maximum number of bedrooms"
                   }
                 },
-                "required": [
-                  "location",
-                  "listing_status"
-                ]
+                "required": ["location", "listing_status"]
               }
             }
           }
