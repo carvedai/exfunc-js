@@ -282,11 +282,11 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 
 In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `getProduct` method may throw the following errors:
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| errors.UserError   | 400                | application/json   |
-| errors.ServerError | 500                | application/json   |
-| errors.SDKError    | 4XX, 5XX           | \*/\*              |
+| Error Type         | Status Code | Content Type     |
+| ------------------ | ----------- | ---------------- |
+| errors.UserError   | 400         | application/json |
+| errors.ServerError | 500         | application/json |
+| errors.SDKError    | 4XX, 5XX    | \*/\*            |
 
 ```typescript
 import { Exfunc } from "exfunc";
@@ -398,9 +398,9 @@ const sdk = new Exfunc({ httpClient });
 
 This SDK supports the following security scheme globally:
 
-| Name                 | Type                 | Scheme               | Environment Variable |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `apiKey`             | apiKey               | API key              | `EXFUNC_API_KEY`     |
+| Name     | Type   | Scheme  | Environment Variable |
+| -------- | ------ | ------- | -------------------- |
+| `apiKey` | apiKey | API key | `EXFUNC_API_KEY`     |
 
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript

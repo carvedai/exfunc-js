@@ -4,15 +4,25 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import * as components from "../components/index.js";
 
 export type SearchCompaniesRequestBody = {
   /**
    * The name of the company to search for
    */
   name?: string | undefined;
+  /**
+   * List of locations to filter the search
+   */
   locations?: Array<string> | undefined;
-  sizes?: Array<string> | undefined;
-  industries?: Array<string> | undefined;
+  /**
+   * List of company sizes to filter the search
+   */
+  sizes?: Array<components.LinkedInCompanySize> | undefined;
+  /**
+   * List of industry tags to filter the search
+   */
+  industries?: Array<components.LinkedInCompanyIndustry> | undefined;
   /**
    * Page number for pagination (default is 1)
    */
@@ -53,8 +63,9 @@ export const SearchCompaniesRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   locations: z.array(z.string()).optional(),
-  sizes: z.array(z.string()).optional(),
-  industries: z.array(z.string()).optional(),
+  sizes: z.array(components.LinkedInCompanySize$inboundSchema).optional(),
+  industries: z.array(components.LinkedInCompanyIndustry$inboundSchema)
+    .optional(),
   page: z.number().int().optional(),
 });
 
@@ -75,8 +86,9 @@ export const SearchCompaniesRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   locations: z.array(z.string()).optional(),
-  sizes: z.array(z.string()).optional(),
-  industries: z.array(z.string()).optional(),
+  sizes: z.array(components.LinkedInCompanySize$outboundSchema).optional(),
+  industries: z.array(components.LinkedInCompanyIndustry$outboundSchema)
+    .optional(),
   page: z.number().int().optional(),
 });
 

@@ -4,18 +4,52 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
+
+export const Seniorities = {
+  Owner: "owner",
+  Founder: "founder",
+  CSuite: "c_suite",
+  Partner: "partner",
+  Vp: "vp",
+  Head: "head",
+  Director: "director",
+  Manager: "manager",
+  Senior: "senior",
+  Entry: "entry",
+  Intern: "intern",
+} as const;
+export type Seniorities = ClosedEnum<typeof Seniorities>;
 
 export type SearchPeopleRequestBody = {
   /**
    * Keywords to search for in people profiles
    */
   keywords: string;
+  /**
+   * List of locations to filter the search
+   */
   locations?: Array<string> | undefined;
+  /**
+   * List of job titles to filter the search
+   */
   titles?: Array<string> | undefined;
-  seniorities?: Array<string> | undefined;
-  companySizes?: Array<string> | undefined;
-  companyIndustries?: Array<string> | undefined;
+  /**
+   * List of seniority levels to filter the search
+   */
+  seniorities?: Array<Seniorities> | undefined;
+  /**
+   * List of company size ranges to filter the search
+   */
+  companySizes?: Array<components.LinkedInCompanySize> | undefined;
+  /**
+   * List of company industry tags to filter the search
+   */
+  companyIndustries?: Array<components.LinkedInCompanyIndustry> | undefined;
+  /**
+   * List of company domains to filter the search
+   */
   companyDomains?: Array<string> | undefined;
   /**
    * Page number for pagination (default is 1)
@@ -31,6 +65,25 @@ export type SearchPeopleResponseBody = {
 };
 
 /** @internal */
+export const Seniorities$inboundSchema: z.ZodNativeEnum<typeof Seniorities> = z
+  .nativeEnum(Seniorities);
+
+/** @internal */
+export const Seniorities$outboundSchema: z.ZodNativeEnum<typeof Seniorities> =
+  Seniorities$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Seniorities$ {
+  /** @deprecated use `Seniorities$inboundSchema` instead. */
+  export const inboundSchema = Seniorities$inboundSchema;
+  /** @deprecated use `Seniorities$outboundSchema` instead. */
+  export const outboundSchema = Seniorities$outboundSchema;
+}
+
+/** @internal */
 export const SearchPeopleRequestBody$inboundSchema: z.ZodType<
   SearchPeopleRequestBody,
   z.ZodTypeDef,
@@ -39,9 +92,11 @@ export const SearchPeopleRequestBody$inboundSchema: z.ZodType<
   keywords: z.string(),
   locations: z.array(z.string()).optional(),
   titles: z.array(z.string()).optional(),
-  seniorities: z.array(z.string()).optional(),
-  company_sizes: z.array(z.string()).optional(),
-  company_industries: z.array(z.string()).optional(),
+  seniorities: z.array(Seniorities$inboundSchema).optional(),
+  company_sizes: z.array(components.LinkedInCompanySize$inboundSchema)
+    .optional(),
+  company_industries: z.array(components.LinkedInCompanyIndustry$inboundSchema)
+    .optional(),
   company_domains: z.array(z.string()).optional(),
   page: z.number().int().optional(),
 }).transform((v) => {
@@ -73,9 +128,11 @@ export const SearchPeopleRequestBody$outboundSchema: z.ZodType<
   keywords: z.string(),
   locations: z.array(z.string()).optional(),
   titles: z.array(z.string()).optional(),
-  seniorities: z.array(z.string()).optional(),
-  companySizes: z.array(z.string()).optional(),
-  companyIndustries: z.array(z.string()).optional(),
+  seniorities: z.array(Seniorities$outboundSchema).optional(),
+  companySizes: z.array(components.LinkedInCompanySize$outboundSchema)
+    .optional(),
+  companyIndustries: z.array(components.LinkedInCompanyIndustry$outboundSchema)
+    .optional(),
   companyDomains: z.array(z.string()).optional(),
   page: z.number().int().optional(),
 }).transform((v) => {

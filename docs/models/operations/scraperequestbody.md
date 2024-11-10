@@ -6,7 +6,7 @@
 import { ScrapeRequestBody } from "exfunc/models/operations";
 
 let value: ScrapeRequestBody = {
-  url: "https://close-paintwork.com",
+  url: "https://productive-charm.org/",
 };
 ```
 

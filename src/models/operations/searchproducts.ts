@@ -12,6 +12,7 @@ import * as components from "../components/index.js";
  */
 export const SortBy = {
   BestMatch: "best_match",
+  TopRated: "top_rated",
   LowestPrice: "lowest_price",
   HighestPrice: "highest_price",
 } as const;

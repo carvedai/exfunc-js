@@ -6,6 +6,8 @@ export * from "./googlenews.js";
 export * from "./googleproduct.js";
 export * from "./googleproductreview.js";
 export * from "./linkedincompany.js";
+export * from "./linkedincompanyindustry.js";
+export * from "./linkedincompanysize.js";
 export * from "./linkedinjobposting.js";
 export * from "./linkedinperson.js";
 export * from "./navigatortask.js";

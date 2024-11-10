@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 3c546f6eab35985c6c44b9c6b27dbca3
+  docChecksum: 37b2f94de226ea00e2f8310c4c33d520
   docVersion: 1.0.0
-  speakeasyVersion: 1.434.0
-  generationVersion: 2.452.0
-  releaseVersion: 0.4.1
-  configChecksum: bd564fc9382fcd864d88f9c789fe7abf
+  speakeasyVersion: 1.436.0
+  generationVersion: 2.455.2
+  releaseVersion: 0.4.3
+  configChecksum: 93bb8c94248ed9ee842ce10b59cba363
   published: true
 features:
   typescript:
@@ -50,6 +50,8 @@ generatedFiles:
   - docs/models/components/investors.md
   - docs/models/components/lastround.md
   - docs/models/components/linkedincompany.md
+  - docs/models/components/linkedincompanyindustry.md
+  - docs/models/components/linkedincompanysize.md
   - docs/models/components/linkedinjobposting.md
   - docs/models/components/linkedinperson.md
   - docs/models/components/navigatortask.md
@@ -129,6 +131,7 @@ generatedFiles:
   - docs/models/operations/searchusersresponsebody.md
   - docs/models/operations/searchwebrequestbody.md
   - docs/models/operations/searchwebresponsebody.md
+  - docs/models/operations/seniorities.md
   - docs/models/operations/sortby.md
   - docs/models/operations/starttaskrequestbody.md
   - docs/models/operations/starttaskresponsebody.md
@@ -196,6 +199,8 @@ generatedFiles:
   - src/models/components/googleproductreview.ts
   - src/models/components/index.ts
   - src/models/components/linkedincompany.ts
+  - src/models/components/linkedincompanyindustry.ts
+  - src/models/components/linkedincompanysize.ts
   - src/models/components/linkedinjobposting.ts
   - src/models/components/linkedinperson.ts
   - src/models/components/navigatortask.ts
