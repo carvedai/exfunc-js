@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 37b2f94de226ea00e2f8310c4c33d520
+  docChecksum: a67a8969fcaba63d134f531382411e6b
   docVersion: 1.0.0
-  speakeasyVersion: 1.436.0
-  generationVersion: 2.455.2
-  releaseVersion: 0.4.3
-  configChecksum: 93bb8c94248ed9ee842ce10b59cba363
+  speakeasyVersion: 1.438.1
+  generationVersion: 2.457.2
+  releaseVersion: 0.4.4
+  configChecksum: 5e162d78baaa522bde101577d33ccd83
   published: true
 features:
   typescript:
@@ -70,6 +70,7 @@ generatedFiles:
   - docs/models/errors/usererror.md
   - docs/models/operations/companies.md
   - docs/models/operations/dateposted.md
+  - docs/models/operations/experiencelevel.md
   - docs/models/operations/getbusinessrequestbody.md
   - docs/models/operations/getbusinessresponsebody.md
   - docs/models/operations/getbusinessreviewsrequestbody.md
@@ -100,7 +101,7 @@ generatedFiles:
   - docs/models/operations/getusertweetsrequestbody.md
   - docs/models/operations/getusertweetsresponsebody.md
   - docs/models/operations/jobpostings.md
-  - docs/models/operations/jobtypes.md
+  - docs/models/operations/jobtype.md
   - docs/models/operations/listingstatus.md
   - docs/models/operations/maxnumbedrooms.md
   - docs/models/operations/minnumbedrooms.md
@@ -116,6 +117,7 @@ generatedFiles:
   - docs/models/operations/searchcompaniesresponsebody.md
   - docs/models/operations/searchjobpostingsrequestbody.md
   - docs/models/operations/searchjobpostingsresponsebody.md
+  - docs/models/operations/searchjobpostingssortby.md
   - docs/models/operations/searchnewsrequestbody.md
   - docs/models/operations/searchnewsresponsebody.md
   - docs/models/operations/searchpeoplerequestbody.md
@@ -137,7 +139,7 @@ generatedFiles:
   - docs/models/operations/starttaskresponsebody.md
   - docs/models/operations/timepublished.md
   - docs/models/operations/type.md
-  - docs/models/operations/worktypes.md
+  - docs/models/operations/worktype.md
   - docs/sdks/exfunc/README.md
   - docs/sdks/google/README.md
   - docs/sdks/linkedin/README.md

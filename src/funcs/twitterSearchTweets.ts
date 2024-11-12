@@ -71,6 +71,9 @@ export async function twitterSearchTweets(
   const context = {
     operationID: "search-tweets",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

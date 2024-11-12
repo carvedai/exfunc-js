@@ -7,7 +7,7 @@ LinkedIn company size range used for filtering search
 ```typescript
 import { LinkedInCompanySize } from "exfunc/models/components";
 
-let value: LinkedInCompanySize = "11-50";
+let value: LinkedInCompanySize = "51-200";
 ```
 
 ## Values

@@ -72,6 +72,9 @@ export async function yelpSearchBusinesses(
   const context = {
     operationID: "search-businesses",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

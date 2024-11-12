@@ -26,7 +26,6 @@ Exfunc Typescript SDK is a library that allows you to easily take web actions on
 * [Standalone functions](#standalone-functions)
 * [Retries](#retries)
 * [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
 * [Custom HTTP Client](#custom-http-client)
 * [Authentication](#authentication)
 * [Debugging](#debugging)

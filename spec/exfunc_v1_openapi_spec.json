@@ -759,6 +759,7 @@
                     "type": "string",
                     "description": "Filter for job postings based on when they were posted",
                     "enum": [
+                      "Any time",
                       "Past 24 hours",
                       "Past Week",
                       "Past Month"
@@ -772,41 +773,58 @@
                       "$60,000+",
                       "$80,000+",
                       "$100,000+",
-                      "$120,000+"
+                      "$120,000+",
+                      "$140,000+",
+                      "$160,000+",
+                      "$180,000+",
+                      "$200,000+"
                     ]
                   },
-                  "job_types": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "description": "Job types to filter (e.g., Full-time, Part-time)",
-                      "enum": [
-                        "Contract",
-                        "Full-time",
-                        "Part-time",
-                        "Temporary",
-                        "Volunteer"
-                      ]
-                    }
+                  "job_type": {
+                    "type": "string",
+                    "description": "Job type to filter (e.g., Full-time, Part-time)",
+                    "enum": [
+                      "Contract",
+                      "Full-time",
+                      "Part-time",
+                      "Internship"
+                    ]
                   },
-                  "work_types": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "description": "Work types to filter (e.g., Remote, On-site)",
-                      "enum": [
-                        "On-site",
-                        "Remote",
-                        "Hybrid"
-                      ]
-                    }
+                  "work_type": {
+                    "type": "string",
+                    "description": "Work type to filter (e.g., Remote, On-site)",
+                    "enum": [
+                      "On-site",
+                      "Remote",
+                      "Hybrid"
+                    ]
+                  },
+                  "experience_level": {
+                    "type": "string",
+                    "description": "Experience level to filter (e.g., Associate, Executive)",
+                    "enum": [
+                      "Associate",
+                      "Director",
+                      "Entry Level",
+                      "Executive",
+                      "Internship",
+                      "Mid-Senior Level"
+                    ]
                   },
                   "company_uids": {
                     "type": "array",
+                    "description": "List of company unique identifiers to filter",
                     "items": {
-                      "type": "string",
-                      "description": "List of company unique identifiers to filter"
+                      "type": "string"
                     }
+                  },
+                  "sort_by": {
+                    "type": "string",
+                    "description": "The criteria to sort results",
+                    "enum": [
+                      "Most Recent",
+                      "Most Relevant"
+                    ]
                   },
                   "page": {
                     "type": "integer",
@@ -815,8 +833,7 @@
                   }
                 },
                 "required": [
-                  "keywords",
-                  "location"
+                  "keywords"
                 ]
               }
             }
@@ -2479,20 +2496,26 @@
             "type": "string",
             "description": "Type of job (e.g., full-time, part-time)"
           },
-          "job_function": {
-            "type": "string",
-            "description": "Job function or category"
+          "job_functions": {
+            "type": "array",
+            "description": "List of job functions or categories",
+            "items": {
+              "type": "string"
+            }
           },
           "industries": {
-            "type": "string",
-            "description": "List of industries relevant to the job"
+            "type": "array",
+            "description": "List of industries relevant to the job",
+            "items": {
+              "type": "string"
+            }
           },
           "seniority_level": {
             "type": "string",
             "description": "Seniority level of the job (e.g., junior, senior)"
           },
           "applicants": {
-            "type": "string",
+            "type": "number",
             "description": "Number of applicants for the job"
           },
           "date_posted": {

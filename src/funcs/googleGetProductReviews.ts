@@ -72,6 +72,9 @@ export async function googleGetProductReviews(
   const context = {
     operationID: "get-product-reviews",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

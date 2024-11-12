@@ -7,7 +7,7 @@ The status of the navigator task
 ```typescript
 import { Status } from "exfunc/models/components";
 
-let value: Status = "FAILED";
+let value: Status = "SUCCEEDED";
 ```
 
 ## Values

@@ -71,6 +71,9 @@ export async function navigatorGetTask(
   const context = {
     operationID: "get-task",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

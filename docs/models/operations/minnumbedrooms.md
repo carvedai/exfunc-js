@@ -7,7 +7,7 @@ The minimum number of bedrooms
 ```typescript
 import { MinNumBedrooms } from "exfunc/models/operations";
 
-let value: MinNumBedrooms = "2";
+let value: MinNumBedrooms = "any";
 ```
 
 ## Values

@@ -71,6 +71,9 @@ export async function googleGetProduct(
   const context = {
     operationID: "get-product",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

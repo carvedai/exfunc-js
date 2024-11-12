@@ -27,13 +27,13 @@ export type LinkedInJobPosting = {
    */
   jobType?: string | undefined;
   /**
-   * Job function or category
+   * List of job functions or categories
    */
-  jobFunction?: string | undefined;
+  jobFunctions?: Array<string> | undefined;
   /**
    * List of industries relevant to the job
    */
-  industries?: string | undefined;
+  industries?: Array<string> | undefined;
   /**
    * Seniority level of the job (e.g., junior, senior)
    */
@@ -41,7 +41,7 @@ export type LinkedInJobPosting = {
   /**
    * Number of applicants for the job
    */
-  applicants?: string | undefined;
+  applicants?: number | undefined;
   /**
    * Date when the job was posted
    */
@@ -75,10 +75,10 @@ export const LinkedInJobPosting$inboundSchema: z.ZodType<
   location: z.string().optional(),
   description: z.string().optional(),
   job_type: z.string().optional(),
-  job_function: z.string().optional(),
-  industries: z.string().optional(),
+  job_functions: z.array(z.string()).optional(),
+  industries: z.array(z.string()).optional(),
   seniority_level: z.string().optional(),
-  applicants: z.string().optional(),
+  applicants: z.number().optional(),
   date_posted: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   job_poster_name: z.string().optional(),
@@ -88,7 +88,7 @@ export const LinkedInJobPosting$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "job_type": "jobType",
-    "job_function": "jobFunction",
+    "job_functions": "jobFunctions",
     "seniority_level": "seniorityLevel",
     "date_posted": "datePosted",
     "job_poster_name": "jobPosterName",
@@ -105,10 +105,10 @@ export type LinkedInJobPosting$Outbound = {
   location?: string | undefined;
   description?: string | undefined;
   job_type?: string | undefined;
-  job_function?: string | undefined;
-  industries?: string | undefined;
+  job_functions?: Array<string> | undefined;
+  industries?: Array<string> | undefined;
   seniority_level?: string | undefined;
-  applicants?: string | undefined;
+  applicants?: number | undefined;
   date_posted?: string | undefined;
   job_poster_name?: string | undefined;
   job_poster_url?: string | undefined;
@@ -127,10 +127,10 @@ export const LinkedInJobPosting$outboundSchema: z.ZodType<
   location: z.string().optional(),
   description: z.string().optional(),
   jobType: z.string().optional(),
-  jobFunction: z.string().optional(),
-  industries: z.string().optional(),
+  jobFunctions: z.array(z.string()).optional(),
+  industries: z.array(z.string()).optional(),
   seniorityLevel: z.string().optional(),
-  applicants: z.string().optional(),
+  applicants: z.number().optional(),
   datePosted: z.date().transform(v => v.toISOString()).optional(),
   jobPosterName: z.string().optional(),
   jobPosterUrl: z.string().optional(),
@@ -139,7 +139,7 @@ export const LinkedInJobPosting$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     jobType: "job_type",
-    jobFunction: "job_function",
+    jobFunctions: "job_functions",
     seniorityLevel: "seniority_level",
     datePosted: "date_posted",
     jobPosterName: "job_poster_name",

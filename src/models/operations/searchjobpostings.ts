@@ -10,6 +10,7 @@ import { ClosedEnum } from "../../types/enums.js";
  * Filter for job postings based on when they were posted
  */
 export const DatePosted = {
+  AnyTime: "Any time",
   Past24Hours: "Past 24 hours",
   PastWeek: "Past Week",
   PastMonth: "Past Month",
@@ -28,6 +29,10 @@ export const Salary = {
   Dollar80000Plus: "$80,000+",
   Dollar100000Plus: "$100,000+",
   Dollar120000Plus: "$120,000+",
+  Dollar140000Plus: "$140,000+",
+  Dollar160000Plus: "$160,000+",
+  Dollar180000Plus: "$180,000+",
+  Dollar200000Plus: "$200,000+",
 } as const;
 /**
  * Salary range to filter job postings
@@ -35,32 +40,61 @@ export const Salary = {
 export type Salary = ClosedEnum<typeof Salary>;
 
 /**
- * Job types to filter (e.g., Full-time, Part-time)
+ * Job type to filter (e.g., Full-time, Part-time)
  */
-export const JobTypes = {
+export const JobType = {
   Contract: "Contract",
   FullTime: "Full-time",
   PartTime: "Part-time",
-  Temporary: "Temporary",
-  Volunteer: "Volunteer",
+  Internship: "Internship",
 } as const;
 /**
- * Job types to filter (e.g., Full-time, Part-time)
+ * Job type to filter (e.g., Full-time, Part-time)
  */
-export type JobTypes = ClosedEnum<typeof JobTypes>;
+export type JobType = ClosedEnum<typeof JobType>;
 
 /**
- * Work types to filter (e.g., Remote, On-site)
+ * Work type to filter (e.g., Remote, On-site)
  */
-export const WorkTypes = {
+export const WorkType = {
   OnSite: "On-site",
   Remote: "Remote",
   Hybrid: "Hybrid",
 } as const;
 /**
- * Work types to filter (e.g., Remote, On-site)
+ * Work type to filter (e.g., Remote, On-site)
  */
-export type WorkTypes = ClosedEnum<typeof WorkTypes>;
+export type WorkType = ClosedEnum<typeof WorkType>;
+
+/**
+ * Experience level to filter (e.g., Associate, Executive)
+ */
+export const ExperienceLevel = {
+  Associate: "Associate",
+  Director: "Director",
+  EntryLevel: "Entry Level",
+  Executive: "Executive",
+  Internship: "Internship",
+  MidSeniorLevel: "Mid-Senior Level",
+} as const;
+/**
+ * Experience level to filter (e.g., Associate, Executive)
+ */
+export type ExperienceLevel = ClosedEnum<typeof ExperienceLevel>;
+
+/**
+ * The criteria to sort results
+ */
+export const SearchJobPostingsSortBy = {
+  MostRecent: "Most Recent",
+  MostRelevant: "Most Relevant",
+} as const;
+/**
+ * The criteria to sort results
+ */
+export type SearchJobPostingsSortBy = ClosedEnum<
+  typeof SearchJobPostingsSortBy
+>;
 
 export type SearchJobPostingsRequestBody = {
   /**
@@ -70,7 +104,7 @@ export type SearchJobPostingsRequestBody = {
   /**
    * Location to filter job postings
    */
-  location: string;
+  location?: string | undefined;
   /**
    * Filter for job postings based on when they were posted
    */
@@ -79,9 +113,26 @@ export type SearchJobPostingsRequestBody = {
    * Salary range to filter job postings
    */
   salary?: Salary | undefined;
-  jobTypes?: Array<JobTypes> | undefined;
-  workTypes?: Array<WorkTypes> | undefined;
+  /**
+   * Job type to filter (e.g., Full-time, Part-time)
+   */
+  jobType?: JobType | undefined;
+  /**
+   * Work type to filter (e.g., Remote, On-site)
+   */
+  workType?: WorkType | undefined;
+  /**
+   * Experience level to filter (e.g., Associate, Executive)
+   */
+  experienceLevel?: ExperienceLevel | undefined;
+  /**
+   * List of company unique identifiers to filter
+   */
   companyUids?: Array<string> | undefined;
+  /**
+   * The criteria to sort results
+   */
+  sortBy?: SearchJobPostingsSortBy | undefined;
   /**
    * Page number for pagination (default is 1)
    */
@@ -161,41 +212,83 @@ export namespace Salary$ {
 }
 
 /** @internal */
-export const JobTypes$inboundSchema: z.ZodNativeEnum<typeof JobTypes> = z
-  .nativeEnum(JobTypes);
+export const JobType$inboundSchema: z.ZodNativeEnum<typeof JobType> = z
+  .nativeEnum(JobType);
 
 /** @internal */
-export const JobTypes$outboundSchema: z.ZodNativeEnum<typeof JobTypes> =
-  JobTypes$inboundSchema;
+export const JobType$outboundSchema: z.ZodNativeEnum<typeof JobType> =
+  JobType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace JobTypes$ {
-  /** @deprecated use `JobTypes$inboundSchema` instead. */
-  export const inboundSchema = JobTypes$inboundSchema;
-  /** @deprecated use `JobTypes$outboundSchema` instead. */
-  export const outboundSchema = JobTypes$outboundSchema;
+export namespace JobType$ {
+  /** @deprecated use `JobType$inboundSchema` instead. */
+  export const inboundSchema = JobType$inboundSchema;
+  /** @deprecated use `JobType$outboundSchema` instead. */
+  export const outboundSchema = JobType$outboundSchema;
 }
 
 /** @internal */
-export const WorkTypes$inboundSchema: z.ZodNativeEnum<typeof WorkTypes> = z
-  .nativeEnum(WorkTypes);
+export const WorkType$inboundSchema: z.ZodNativeEnum<typeof WorkType> = z
+  .nativeEnum(WorkType);
 
 /** @internal */
-export const WorkTypes$outboundSchema: z.ZodNativeEnum<typeof WorkTypes> =
-  WorkTypes$inboundSchema;
+export const WorkType$outboundSchema: z.ZodNativeEnum<typeof WorkType> =
+  WorkType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace WorkTypes$ {
-  /** @deprecated use `WorkTypes$inboundSchema` instead. */
-  export const inboundSchema = WorkTypes$inboundSchema;
-  /** @deprecated use `WorkTypes$outboundSchema` instead. */
-  export const outboundSchema = WorkTypes$outboundSchema;
+export namespace WorkType$ {
+  /** @deprecated use `WorkType$inboundSchema` instead. */
+  export const inboundSchema = WorkType$inboundSchema;
+  /** @deprecated use `WorkType$outboundSchema` instead. */
+  export const outboundSchema = WorkType$outboundSchema;
+}
+
+/** @internal */
+export const ExperienceLevel$inboundSchema: z.ZodNativeEnum<
+  typeof ExperienceLevel
+> = z.nativeEnum(ExperienceLevel);
+
+/** @internal */
+export const ExperienceLevel$outboundSchema: z.ZodNativeEnum<
+  typeof ExperienceLevel
+> = ExperienceLevel$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ExperienceLevel$ {
+  /** @deprecated use `ExperienceLevel$inboundSchema` instead. */
+  export const inboundSchema = ExperienceLevel$inboundSchema;
+  /** @deprecated use `ExperienceLevel$outboundSchema` instead. */
+  export const outboundSchema = ExperienceLevel$outboundSchema;
+}
+
+/** @internal */
+export const SearchJobPostingsSortBy$inboundSchema: z.ZodNativeEnum<
+  typeof SearchJobPostingsSortBy
+> = z.nativeEnum(SearchJobPostingsSortBy);
+
+/** @internal */
+export const SearchJobPostingsSortBy$outboundSchema: z.ZodNativeEnum<
+  typeof SearchJobPostingsSortBy
+> = SearchJobPostingsSortBy$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchJobPostingsSortBy$ {
+  /** @deprecated use `SearchJobPostingsSortBy$inboundSchema` instead. */
+  export const inboundSchema = SearchJobPostingsSortBy$inboundSchema;
+  /** @deprecated use `SearchJobPostingsSortBy$outboundSchema` instead. */
+  export const outboundSchema = SearchJobPostingsSortBy$outboundSchema;
 }
 
 /** @internal */
@@ -205,31 +298,37 @@ export const SearchJobPostingsRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   keywords: z.string(),
-  location: z.string(),
+  location: z.string().optional(),
   date_posted: DatePosted$inboundSchema.optional(),
   salary: Salary$inboundSchema.optional(),
-  job_types: z.array(JobTypes$inboundSchema).optional(),
-  work_types: z.array(WorkTypes$inboundSchema).optional(),
+  job_type: JobType$inboundSchema.optional(),
+  work_type: WorkType$inboundSchema.optional(),
+  experience_level: ExperienceLevel$inboundSchema.optional(),
   company_uids: z.array(z.string()).optional(),
+  sort_by: SearchJobPostingsSortBy$inboundSchema.optional(),
   page: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "date_posted": "datePosted",
-    "job_types": "jobTypes",
-    "work_types": "workTypes",
+    "job_type": "jobType",
+    "work_type": "workType",
+    "experience_level": "experienceLevel",
     "company_uids": "companyUids",
+    "sort_by": "sortBy",
   });
 });
 
 /** @internal */
 export type SearchJobPostingsRequestBody$Outbound = {
   keywords: string;
-  location: string;
+  location?: string | undefined;
   date_posted?: string | undefined;
   salary?: string | undefined;
-  job_types?: Array<string> | undefined;
-  work_types?: Array<string> | undefined;
+  job_type?: string | undefined;
+  work_type?: string | undefined;
+  experience_level?: string | undefined;
   company_uids?: Array<string> | undefined;
+  sort_by?: string | undefined;
   page?: number | undefined;
 };
 
@@ -240,19 +339,23 @@ export const SearchJobPostingsRequestBody$outboundSchema: z.ZodType<
   SearchJobPostingsRequestBody
 > = z.object({
   keywords: z.string(),
-  location: z.string(),
+  location: z.string().optional(),
   datePosted: DatePosted$outboundSchema.optional(),
   salary: Salary$outboundSchema.optional(),
-  jobTypes: z.array(JobTypes$outboundSchema).optional(),
-  workTypes: z.array(WorkTypes$outboundSchema).optional(),
+  jobType: JobType$outboundSchema.optional(),
+  workType: WorkType$outboundSchema.optional(),
+  experienceLevel: ExperienceLevel$outboundSchema.optional(),
   companyUids: z.array(z.string()).optional(),
+  sortBy: SearchJobPostingsSortBy$outboundSchema.optional(),
   page: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     datePosted: "date_posted",
-    jobTypes: "job_types",
-    workTypes: "work_types",
+    jobType: "job_type",
+    workType: "work_type",
+    experienceLevel: "experience_level",
     companyUids: "company_uids",
+    sortBy: "sort_by",
   });
 });
 

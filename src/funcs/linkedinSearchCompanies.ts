@@ -72,6 +72,9 @@ export async function linkedinSearchCompanies(
   const context = {
     operationID: "search-companies",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

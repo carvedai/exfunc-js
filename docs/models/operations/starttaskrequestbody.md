@@ -6,7 +6,7 @@
 import { StartTaskRequestBody } from "exfunc/models/operations";
 
 let value: StartTaskRequestBody = {
-  url: "https://steep-independence.net",
+  url: "https://sparse-cardboard.name/",
   objective: "<value>",
 };
 ```

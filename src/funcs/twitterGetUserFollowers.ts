@@ -72,6 +72,9 @@ export async function twitterGetUserFollowers(
   const context = {
     operationID: "get-user-followers",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

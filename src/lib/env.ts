@@ -13,11 +13,10 @@ export interface Env {
 }
 
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
-  EXFUNC_API_KEY: z.string(),
+  EXFUNC_API_KEY: z.string().optional(),
 
-  EXFUNC_DEBUG: z.coerce.boolean(),
-})
-  .partial();
+  EXFUNC_DEBUG: z.coerce.boolean().optional(),
+});
 
 let envMemo: Env | undefined = undefined;
 /**
