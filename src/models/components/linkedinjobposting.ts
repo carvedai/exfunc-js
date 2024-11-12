@@ -47,14 +47,6 @@ export type LinkedInJobPosting = {
    */
   datePosted?: Date | undefined;
   /**
-   * Name of the person who posted the job
-   */
-  jobPosterName?: string | undefined;
-  /**
-   * URL to the job poster's profile
-   */
-  jobPosterUrl?: string | undefined;
-  /**
    * Name of the company offering the job
    */
   companyName?: string | undefined;
@@ -81,8 +73,6 @@ export const LinkedInJobPosting$inboundSchema: z.ZodType<
   applicants: z.number().optional(),
   date_posted: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  job_poster_name: z.string().optional(),
-  job_poster_url: z.string().optional(),
   company_name: z.string().optional(),
   company_url: z.string().optional(),
 }).transform((v) => {
@@ -91,8 +81,6 @@ export const LinkedInJobPosting$inboundSchema: z.ZodType<
     "job_functions": "jobFunctions",
     "seniority_level": "seniorityLevel",
     "date_posted": "datePosted",
-    "job_poster_name": "jobPosterName",
-    "job_poster_url": "jobPosterUrl",
     "company_name": "companyName",
     "company_url": "companyUrl",
   });
@@ -110,8 +98,6 @@ export type LinkedInJobPosting$Outbound = {
   seniority_level?: string | undefined;
   applicants?: number | undefined;
   date_posted?: string | undefined;
-  job_poster_name?: string | undefined;
-  job_poster_url?: string | undefined;
   company_name?: string | undefined;
   company_url?: string | undefined;
 };
@@ -132,8 +118,6 @@ export const LinkedInJobPosting$outboundSchema: z.ZodType<
   seniorityLevel: z.string().optional(),
   applicants: z.number().optional(),
   datePosted: z.date().transform(v => v.toISOString()).optional(),
-  jobPosterName: z.string().optional(),
-  jobPosterUrl: z.string().optional(),
   companyName: z.string().optional(),
   companyUrl: z.string().optional(),
 }).transform((v) => {
@@ -142,8 +126,6 @@ export const LinkedInJobPosting$outboundSchema: z.ZodType<
     jobFunctions: "job_functions",
     seniorityLevel: "seniority_level",
     datePosted: "date_posted",
-    jobPosterName: "job_poster_name",
-    jobPosterUrl: "job_poster_url",
     companyName: "company_name",
     companyUrl: "company_url",
   });

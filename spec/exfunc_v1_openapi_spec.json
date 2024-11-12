@@ -2523,15 +2523,6 @@
             "format": "date-time",
             "description": "Date when the job was posted"
           },
-          "job_poster_name": {
-            "type": "string",
-            "description": "Name of the person who posted the job"
-          },
-          "job_poster_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "URL to the job poster's profile"
-          },
           "company_name": {
             "type": "string",
             "description": "Name of the company offering the job"
