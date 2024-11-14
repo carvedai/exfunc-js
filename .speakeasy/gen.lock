@@ -1,17 +1,18 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 9c37acdbb9d07efb78666f5d170a1ff8
+  docChecksum: cca0c36dc6dd6cea5d3bd93713fca146
   docVersion: 1.0.0
-  speakeasyVersion: 1.438.1
-  generationVersion: 2.457.2
-  releaseVersion: 0.4.5
-  configChecksum: 909ca75b8c0fd6cc23a21535816f793a
+  speakeasyVersion: 1.439.0
+  generationVersion: 2.457.9
+  releaseVersion: 0.5.3
+  configChecksum: 4db0c300df091f2db94841bb01b2ea4b
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.18.3
+    constsAndDefaults: 0.1.11
+    core: 3.18.4
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -40,6 +41,7 @@ generatedFiles:
   - USAGE.md
   - docs/lib/utils/retryconfig.md
   - docs/models/components/address.md
+  - docs/models/components/carriers.md
   - docs/models/components/categories.md
   - docs/models/components/experiences.md
   - docs/models/components/feedbackcounts.md
@@ -58,6 +60,11 @@ generatedFiles:
   - docs/models/components/request.md
   - docs/models/components/response.md
   - docs/models/components/security.md
+  - docs/models/components/skyscannerairport.md
+  - docs/models/components/skyscannercarrier.md
+  - docs/models/components/skyscanneritinerary.md
+  - docs/models/components/skyscannerleg.md
+  - docs/models/components/skyscannersegment.md
   - docs/models/components/status.md
   - docs/models/components/totalrounds.md
   - docs/models/components/tweet.md
@@ -68,6 +75,7 @@ generatedFiles:
   - docs/models/components/zillowproperty.md
   - docs/models/errors/servererror.md
   - docs/models/errors/usererror.md
+  - docs/models/operations/cabinclass.md
   - docs/models/operations/companies.md
   - docs/models/operations/dateposted.md
   - docs/models/operations/experiencelevel.md
@@ -120,6 +128,8 @@ generatedFiles:
   - docs/models/operations/searchjobpostingssortby.md
   - docs/models/operations/searchnewsrequestbody.md
   - docs/models/operations/searchnewsresponsebody.md
+  - docs/models/operations/searchonewayrequestbody.md
+  - docs/models/operations/searchonewayresponsebody.md
   - docs/models/operations/searchpeoplerequestbody.md
   - docs/models/operations/searchpeopleresponsebody.md
   - docs/models/operations/searchproductsrequestbody.md
@@ -127,6 +137,10 @@ generatedFiles:
   - docs/models/operations/searchpropertiesrequestbody.md
   - docs/models/operations/searchpropertiesresponsebody.md
   - docs/models/operations/searchpropertiessortby.md
+  - docs/models/operations/searchroundtripcabinclass.md
+  - docs/models/operations/searchroundtriprequestbody.md
+  - docs/models/operations/searchroundtripresponsebody.md
+  - docs/models/operations/searchroundtripstops.md
   - docs/models/operations/searchtweetsrequestbody.md
   - docs/models/operations/searchtweetsresponsebody.md
   - docs/models/operations/searchusersrequestbody.md
@@ -137,6 +151,7 @@ generatedFiles:
   - docs/models/operations/sortby.md
   - docs/models/operations/starttaskrequestbody.md
   - docs/models/operations/starttaskresponsebody.md
+  - docs/models/operations/stops.md
   - docs/models/operations/timepublished.md
   - docs/models/operations/type.md
   - docs/models/operations/worktype.md
@@ -144,6 +159,7 @@ generatedFiles:
   - docs/sdks/google/README.md
   - docs/sdks/linkedin/README.md
   - docs/sdks/navigator/README.md
+  - docs/sdks/skyscanner/README.md
   - docs/sdks/twitter/README.md
   - docs/sdks/yelp/README.md
   - docs/sdks/zillow/README.md
@@ -164,6 +180,8 @@ generatedFiles:
   - src/funcs/navigatorGetTask.ts
   - src/funcs/navigatorScrape.ts
   - src/funcs/navigatorStartTask.ts
+  - src/funcs/skyscannerSearchOneWay.ts
+  - src/funcs/skyscannerSearchRoundtrip.ts
   - src/funcs/twitterGetTweet.ts
   - src/funcs/twitterGetUser.ts
   - src/funcs/twitterGetUserFollowers.ts
@@ -207,6 +225,11 @@ generatedFiles:
   - src/models/components/linkedinperson.ts
   - src/models/components/navigatortask.ts
   - src/models/components/security.ts
+  - src/models/components/skyscannerairport.ts
+  - src/models/components/skyscannercarrier.ts
+  - src/models/components/skyscanneritinerary.ts
+  - src/models/components/skyscannerleg.ts
+  - src/models/components/skyscannersegment.ts
   - src/models/components/tweet.ts
   - src/models/components/twitteruser.ts
   - src/models/components/yelpbusiness.ts
@@ -239,9 +262,11 @@ generatedFiles:
   - src/models/operations/searchcompanies.ts
   - src/models/operations/searchjobpostings.ts
   - src/models/operations/searchnews.ts
+  - src/models/operations/searchoneway.ts
   - src/models/operations/searchpeople.ts
   - src/models/operations/searchproducts.ts
   - src/models/operations/searchproperties.ts
+  - src/models/operations/searchroundtrip.ts
   - src/models/operations/searchtweets.ts
   - src/models/operations/searchusers.ts
   - src/models/operations/searchweb.ts
@@ -251,6 +276,7 @@ generatedFiles:
   - src/sdk/linkedin.ts
   - src/sdk/navigator.ts
   - src/sdk/sdk.ts
+  - src/sdk/skyscanner.ts
   - src/sdk/twitter.ts
   - src/sdk/yelp.ts
   - src/sdk/zillow.ts
@@ -362,3 +388,11 @@ examples:
     speakeasy-default-search-properties:
       requestBody:
         application/json: {"location": "<value>", "listing_status": "for_rent"}
+  search-one-way:
+    speakeasy-default-search-one-way:
+      requestBody:
+        application/json: {"origin": "<value>", "destination": "<value>", "depart_date": "<value>"}
+  search-roundtrip:
+    speakeasy-default-search-roundtrip:
+      requestBody:
+        application/json: {"origin": "<value>", "destination": "<value>", "depart_date": "<value>", "return_date": "<value>"}

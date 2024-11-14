@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Google } from "./google.js";
 import { Linkedin } from "./linkedin.js";
 import { Navigator } from "./navigator.js";
+import { Skyscanner } from "./skyscanner.js";
 import { Twitter } from "./twitter.js";
 import { Yelp } from "./yelp.js";
 import { Zillow } from "./zillow.js";
@@ -24,6 +25,11 @@ export class Exfunc extends ClientSDK {
   private _navigator?: Navigator;
   get navigator(): Navigator {
     return (this._navigator ??= new Navigator(this._options));
+  }
+
+  private _skyscanner?: Skyscanner;
+  get skyscanner(): Skyscanner {
+    return (this._skyscanner ??= new Skyscanner(this._options));
   }
 
   private _twitter?: Twitter;

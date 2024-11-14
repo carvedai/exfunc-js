@@ -126,6 +126,11 @@ run();
 * [startTask](docs/sdks/navigator/README.md#starttask) - Start a web navigator task
 * [scrape](docs/sdks/navigator/README.md#scrape) - Scrape a web page
 
+### [skyscanner](docs/sdks/skyscanner/README.md)
+
+* [searchOneWay](docs/sdks/skyscanner/README.md#searchoneway) - Search one-way flights on SkyScanner
+* [searchRoundtrip](docs/sdks/skyscanner/README.md#searchroundtrip) - Search roundtrip flights on SkyScanner
+
 ### [twitter](docs/sdks/twitter/README.md)
 
 * [getTweet](docs/sdks/twitter/README.md#gettweet) - Get a tweet by ID
@@ -179,6 +184,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`navigatorGetTask`](docs/sdks/navigator/README.md#gettask) - Get web navigator task results
 - [`navigatorScrape`](docs/sdks/navigator/README.md#scrape) - Scrape a web page
 - [`navigatorStartTask`](docs/sdks/navigator/README.md#starttask) - Start a web navigator task
+- [`skyscannerSearchOneWay`](docs/sdks/skyscanner/README.md#searchoneway) - Search one-way flights on SkyScanner
+- [`skyscannerSearchRoundtrip`](docs/sdks/skyscanner/README.md#searchroundtrip) - Search roundtrip flights on SkyScanner
 - [`twitterGetTweet`](docs/sdks/twitter/README.md#gettweet) - Get a tweet by ID
 - [`twitterGetUser`](docs/sdks/twitter/README.md#getuser) - Get a Twitter user by either user ID or username
 - [`twitterGetUserFollowers`](docs/sdks/twitter/README.md#getuserfollowers) - Get a Twitter user's followers by username

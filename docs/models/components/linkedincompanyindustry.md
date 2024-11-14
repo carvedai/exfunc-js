@@ -7,7 +7,7 @@ LinkedIn company industry tag used for filtering search
 ```typescript
 import { LinkedInCompanyIndustry } from "exfunc/models/components";
 
-let value: LinkedInCompanyIndustry = "newspapers";
+let value: LinkedInCompanyIndustry = "computer hardware";
 ```
 
 ## Values

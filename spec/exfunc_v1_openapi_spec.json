@@ -31,6 +31,10 @@
       "description": "Navigator APIs"
     },
     {
+      "name": "SkyScanner",
+      "description": "SkyScanner APIs"
+    },
+    {
       "name": "Twitter",
       "description": "Twitter APIs"
     },
@@ -50,6 +54,7 @@
         "Google",
         "LinkedIn",
         "Navigator",
+        "SkyScanner",
         "Twitter",
         "Yelp",
         "Zillow"
@@ -1187,6 +1192,247 @@
                     "markdown": {
                       "type": "string",
                       "description": "The markdown string of the page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/skyscanner/search-one-way": {
+      "post": {
+        "summary": "Search one-way flights on SkyScanner",
+        "description": "Search one-way flights on SkyScanner for given origin, destination, and departure date",
+        "operationId": "search-one-way",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "SkyScanner"
+        ],
+        "x-speakeasy-group": "skyscanner",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "description": "The origin location of the itinerary"
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "The destination location of the itinerary"
+                  },
+                  "depart_date": {
+                    "type": "string",
+                    "description": "The departure date of the itinerary. The format has to be YYYY-MM-DD"
+                  },
+                  "stops": {
+                    "type": "array",
+                    "description": "The list of filter values for number of stops",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "Direct",
+                        "1 Stop",
+                        "2+ Stops"
+                      ]
+                    }
+                  },
+                  "num_adults": {
+                    "type": "number",
+                    "description": "The number of adults for the itinerary",
+                    "default": 1
+                  },
+                  "num_children": {
+                    "type": "number",
+                    "description": "The number of children for the itinerary",
+                    "default": 0
+                  },
+                  "num_infants": {
+                    "type": "number",
+                    "description": "The number of infants for the itinerary",
+                    "default": 0
+                  },
+                  "cabin_class": {
+                    "type": "string",
+                    "description": "The cabin class filter",
+                    "enum": [
+                      "economy",
+                      "premium_economy",
+                      "business",
+                      "first"
+                    ]
+                  },
+                  "include_origin_nearby_airports": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate whether to include nearby origin airports in the results or not",
+                    "default": false
+                  },
+                  "include_destination_nearby_airports": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate whether to include nearby destination airports in the results or not",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "origin",
+                  "destination",
+                  "depart_date"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchOneWay API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "itineraries": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SkyScannerItinerary"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/skyscanner/search-roundtrip": {
+      "post": {
+        "summary": "Search roundtrip flights on SkyScanner",
+        "description": "Search roundtrip flights on SkyScanner for given origin, destination, departure date and return date",
+        "operationId": "search-roundtrip",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "SkyScanner"
+        ],
+        "x-speakeasy-group": "skyscanner",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "description": "The origin location of the itinerary"
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "The destination location of the itinerary"
+                  },
+                  "depart_date": {
+                    "type": "string",
+                    "description": "The departure date of the itinerary. The format has to be YYYY-MM-DD"
+                  },
+                  "return_date": {
+                    "type": "string",
+                    "description": "The return date of the itinerary. The format has to be YYYY-MM-DD"
+                  },
+                  "stops": {
+                    "type": "array",
+                    "description": "The list of filter values for number of stops",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "Direct",
+                        "1 Stop",
+                        "2+ Stops"
+                      ]
+                    }
+                  },
+                  "num_adults": {
+                    "type": "number",
+                    "description": "The number of adults for the itinerary",
+                    "default": 1
+                  },
+                  "num_children": {
+                    "type": "number",
+                    "description": "The number of children for the itinerary",
+                    "default": 0
+                  },
+                  "num_infants": {
+                    "type": "number",
+                    "description": "The number of infants for the itinerary",
+                    "default": 0
+                  },
+                  "cabin_class": {
+                    "type": "string",
+                    "description": "The cabin class filter",
+                    "enum": [
+                      "economy",
+                      "premium_economy",
+                      "business",
+                      "first"
+                    ]
+                  },
+                  "include_origin_nearby_airports": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate whether to include nearby origin airports in the results or not",
+                    "default": false
+                  },
+                  "include_destination_nearby_airports": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate whether to include nearby destination airports in the results or not",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "origin",
+                  "destination",
+                  "depart_date",
+                  "return_date"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchRoundtrip API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "itineraries": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SkyScannerItinerary"
+                      }
                     }
                   }
                 }
@@ -2647,6 +2893,144 @@
           "last_updated_time": {
             "type": "string",
             "description": "The last updated time of the navigator task"
+          }
+        }
+      },
+      "SkyScannerAirport": {
+        "type": "object",
+        "description": "The airport information",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the airport"
+          },
+          "display_code": {
+            "type": "string",
+            "description": "The airport code"
+          }
+        }
+      },
+      "SkyScannerCarrier": {
+        "type": "object",
+        "description": "The carrier details",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the carrier. This is usually an airline code."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the carrier"
+          }
+        }
+      },
+      "SkyScannerItinerary": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "string",
+            "description": "The price for the itinerary"
+          },
+          "legs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkyScannerLeg"
+            }
+          }
+        }
+      },
+      "SkyScannerLeg": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/SkyScannerAirport"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/SkyScannerAirport"
+          },
+          "duration_in_minutes": {
+            "type": "number",
+            "description": "Duration of the leg in minutes"
+          },
+          "stop_count": {
+            "type": "number",
+            "description": "The number of stops for the leg"
+          },
+          "departure_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The departure time of the leg"
+          },
+          "arrival_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The arrival time of the leg"
+          },
+          "time_delta_in_days": {
+            "type": "number",
+            "description": "The time delta in days between the departure and the arrival"
+          },
+          "carriers": {
+            "type": "object",
+            "description": "The carrier information",
+            "properties": {
+              "marketing": {
+                "type": "array",
+                "description": "The list of marketing carriers (airlines)",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "operating": {
+                "type": "array",
+                "description": "The list of operating carriers (airlines)",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "segments": {
+            "type": "array",
+            "description": "The list of segments for the leg",
+            "items": {
+              "$ref": "#/components/schemas/SkyScannerSegment"
+            }
+          }
+        }
+      },
+      "SkyScannerSegment": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/SkyScannerAirport"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/SkyScannerAirport"
+          },
+          "departure_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The departure time of the segment"
+          },
+          "arrival_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The arrival time of the segment"
+          },
+          "duration_in_minutes": {
+            "type": "number",
+            "description": "Duration of the segment in minutes"
+          },
+          "flight_number": {
+            "type": "string",
+            "description": "Flight number for the segment"
+          },
+          "marketing_carrier": {
+            "$ref": "#/components/schemas/SkyScannerCarrier"
+          },
+          "operating_carrier": {
+            "$ref": "#/components/schemas/SkyScannerCarrier"
           }
         }
       },

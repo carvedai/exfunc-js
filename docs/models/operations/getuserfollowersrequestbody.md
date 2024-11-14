@@ -6,7 +6,7 @@
 import { GetUserFollowersRequestBody } from "exfunc/models/operations";
 
 let value: GetUserFollowersRequestBody = {
-  username: "Diego_Klocko",
+  username: "Aiden94",
 };
 ```
 
