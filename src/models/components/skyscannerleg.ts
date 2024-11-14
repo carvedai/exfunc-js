@@ -51,11 +51,11 @@ export type SkyScannerLeg = {
   /**
    * The departure time of the leg
    */
-  departureTime?: Date | undefined;
+  departureTime?: string | undefined;
   /**
    * The arrival time of the leg
    */
-  arrivalTime?: Date | undefined;
+  arrivalTime?: string | undefined;
   /**
    * The time delta in days between the departure and the arrival
    */
@@ -119,12 +119,8 @@ export const SkyScannerLeg$inboundSchema: z.ZodType<
   destination: SkyScannerAirport$inboundSchema.optional(),
   duration_in_minutes: z.number().optional(),
   stop_count: z.number().optional(),
-  departure_time: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  arrival_time: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
+  departure_time: z.string().optional(),
+  arrival_time: z.string().optional(),
   time_delta_in_days: z.number().optional(),
   carriers: z.lazy(() => Carriers$inboundSchema).optional(),
   segments: z.array(SkyScannerSegment$inboundSchema).optional(),
@@ -161,8 +157,8 @@ export const SkyScannerLeg$outboundSchema: z.ZodType<
   destination: SkyScannerAirport$outboundSchema.optional(),
   durationInMinutes: z.number().optional(),
   stopCount: z.number().optional(),
-  departureTime: z.date().transform(v => v.toISOString()).optional(),
-  arrivalTime: z.date().transform(v => v.toISOString()).optional(),
+  departureTime: z.string().optional(),
+  arrivalTime: z.string().optional(),
   timeDeltaInDays: z.number().optional(),
   carriers: z.lazy(() => Carriers$outboundSchema).optional(),
   segments: z.array(SkyScannerSegment$outboundSchema).optional(),

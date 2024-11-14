@@ -29,11 +29,11 @@ export type SkyScannerSegment = {
   /**
    * The departure time of the segment
    */
-  departureTime?: Date | undefined;
+  departureTime?: string | undefined;
   /**
    * The arrival time of the segment
    */
-  arrivalTime?: Date | undefined;
+  arrivalTime?: string | undefined;
   /**
    * Duration of the segment in minutes
    */
@@ -60,12 +60,8 @@ export const SkyScannerSegment$inboundSchema: z.ZodType<
 > = z.object({
   origin: SkyScannerAirport$inboundSchema.optional(),
   destination: SkyScannerAirport$inboundSchema.optional(),
-  departure_time: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  arrival_time: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
+  departure_time: z.string().optional(),
+  arrival_time: z.string().optional(),
   duration_in_minutes: z.number().optional(),
   flight_number: z.string().optional(),
   marketing_carrier: SkyScannerCarrier$inboundSchema.optional(),
@@ -101,8 +97,8 @@ export const SkyScannerSegment$outboundSchema: z.ZodType<
 > = z.object({
   origin: SkyScannerAirport$outboundSchema.optional(),
   destination: SkyScannerAirport$outboundSchema.optional(),
-  departureTime: z.date().transform(v => v.toISOString()).optional(),
-  arrivalTime: z.date().transform(v => v.toISOString()).optional(),
+  departureTime: z.string().optional(),
+  arrivalTime: z.string().optional(),
   durationInMinutes: z.number().optional(),
   flightNumber: z.string().optional(),
   marketingCarrier: SkyScannerCarrier$outboundSchema.optional(),

@@ -2958,12 +2958,10 @@
           },
           "departure_time": {
             "type": "string",
-            "format": "date-time",
             "description": "The departure time of the leg"
           },
           "arrival_time": {
             "type": "string",
-            "format": "date-time",
             "description": "The arrival time of the leg"
           },
           "time_delta_in_days": {
@@ -3010,12 +3008,10 @@
           },
           "departure_time": {
             "type": "string",
-            "format": "date-time",
             "description": "The departure time of the segment"
           },
           "arrival_time": {
             "type": "string",
-            "format": "date-time",
             "description": "The arrival time of the segment"
           },
           "duration_in_minutes": {
