@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ZillowPriceHistoryEvent = {
   /**
@@ -109,4 +112,22 @@ export namespace ZillowPriceHistoryEvent$ {
   export const outboundSchema = ZillowPriceHistoryEvent$outboundSchema;
   /** @deprecated use `ZillowPriceHistoryEvent$Outbound` instead. */
   export type Outbound = ZillowPriceHistoryEvent$Outbound;
+}
+
+export function zillowPriceHistoryEventToJSON(
+  zillowPriceHistoryEvent: ZillowPriceHistoryEvent,
+): string {
+  return JSON.stringify(
+    ZillowPriceHistoryEvent$outboundSchema.parse(zillowPriceHistoryEvent),
+  );
+}
+
+export function zillowPriceHistoryEventFromJSON(
+  jsonString: string,
+): SafeParseResult<ZillowPriceHistoryEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ZillowPriceHistoryEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ZillowPriceHistoryEvent' from JSON`,
+  );
 }

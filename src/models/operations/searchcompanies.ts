@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SearchCompaniesRequestBody = {
   /**
@@ -105,6 +108,24 @@ export namespace SearchCompaniesRequestBody$ {
   export type Outbound = SearchCompaniesRequestBody$Outbound;
 }
 
+export function searchCompaniesRequestBodyToJSON(
+  searchCompaniesRequestBody: SearchCompaniesRequestBody,
+): string {
+  return JSON.stringify(
+    SearchCompaniesRequestBody$outboundSchema.parse(searchCompaniesRequestBody),
+  );
+}
+
+export function searchCompaniesRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchCompaniesRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchCompaniesRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchCompaniesRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const Companies$inboundSchema: z.ZodType<
   Companies,
@@ -158,6 +179,20 @@ export namespace Companies$ {
   export type Outbound = Companies$Outbound;
 }
 
+export function companiesToJSON(companies: Companies): string {
+  return JSON.stringify(Companies$outboundSchema.parse(companies));
+}
+
+export function companiesFromJSON(
+  jsonString: string,
+): SafeParseResult<Companies, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Companies$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Companies' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchCompaniesResponseBody$inboundSchema: z.ZodType<
   SearchCompaniesResponseBody,
@@ -192,4 +227,24 @@ export namespace SearchCompaniesResponseBody$ {
   export const outboundSchema = SearchCompaniesResponseBody$outboundSchema;
   /** @deprecated use `SearchCompaniesResponseBody$Outbound` instead. */
   export type Outbound = SearchCompaniesResponseBody$Outbound;
+}
+
+export function searchCompaniesResponseBodyToJSON(
+  searchCompaniesResponseBody: SearchCompaniesResponseBody,
+): string {
+  return JSON.stringify(
+    SearchCompaniesResponseBody$outboundSchema.parse(
+      searchCompaniesResponseBody,
+    ),
+  );
+}
+
+export function searchCompaniesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchCompaniesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchCompaniesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchCompaniesResponseBody' from JSON`,
+  );
 }

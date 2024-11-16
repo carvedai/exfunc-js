@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Experiences = {
   title?: string | undefined;
@@ -100,6 +103,20 @@ export namespace Experiences$ {
   export type Outbound = Experiences$Outbound;
 }
 
+export function experiencesToJSON(experiences: Experiences): string {
+  return JSON.stringify(Experiences$outboundSchema.parse(experiences));
+}
+
+export function experiencesFromJSON(
+  jsonString: string,
+): SafeParseResult<Experiences, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Experiences$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Experiences' from JSON`,
+  );
+}
+
 /** @internal */
 export const LinkedInPerson$inboundSchema: z.ZodType<
   LinkedInPerson,
@@ -162,4 +179,18 @@ export namespace LinkedInPerson$ {
   export const outboundSchema = LinkedInPerson$outboundSchema;
   /** @deprecated use `LinkedInPerson$Outbound` instead. */
   export type Outbound = LinkedInPerson$Outbound;
+}
+
+export function linkedInPersonToJSON(linkedInPerson: LinkedInPerson): string {
+  return JSON.stringify(LinkedInPerson$outboundSchema.parse(linkedInPerson));
+}
+
+export function linkedInPersonFromJSON(
+  jsonString: string,
+): SafeParseResult<LinkedInPerson, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LinkedInPerson$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LinkedInPerson' from JSON`,
+  );
 }

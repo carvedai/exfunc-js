@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GoogleNews = {
   /**
@@ -104,4 +107,18 @@ export namespace GoogleNews$ {
   export const outboundSchema = GoogleNews$outboundSchema;
   /** @deprecated use `GoogleNews$Outbound` instead. */
   export type Outbound = GoogleNews$Outbound;
+}
+
+export function googleNewsToJSON(googleNews: GoogleNews): string {
+  return JSON.stringify(GoogleNews$outboundSchema.parse(googleNews));
+}
+
+export function googleNewsFromJSON(
+  jsonString: string,
+): SafeParseResult<GoogleNews, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GoogleNews$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GoogleNews' from JSON`,
+  );
 }

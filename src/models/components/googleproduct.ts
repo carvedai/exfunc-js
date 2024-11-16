@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GoogleProduct = {
   /**
@@ -134,4 +137,18 @@ export namespace GoogleProduct$ {
   export const outboundSchema = GoogleProduct$outboundSchema;
   /** @deprecated use `GoogleProduct$Outbound` instead. */
   export type Outbound = GoogleProduct$Outbound;
+}
+
+export function googleProductToJSON(googleProduct: GoogleProduct): string {
+  return JSON.stringify(GoogleProduct$outboundSchema.parse(googleProduct));
+}
+
+export function googleProductFromJSON(
+  jsonString: string,
+): SafeParseResult<GoogleProduct, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GoogleProduct$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GoogleProduct' from JSON`,
+  );
 }

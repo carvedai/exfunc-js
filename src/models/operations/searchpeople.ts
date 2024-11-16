@@ -4,8 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const Seniorities = {
   Owner: "owner",
@@ -156,6 +159,24 @@ export namespace SearchPeopleRequestBody$ {
   export type Outbound = SearchPeopleRequestBody$Outbound;
 }
 
+export function searchPeopleRequestBodyToJSON(
+  searchPeopleRequestBody: SearchPeopleRequestBody,
+): string {
+  return JSON.stringify(
+    SearchPeopleRequestBody$outboundSchema.parse(searchPeopleRequestBody),
+  );
+}
+
+export function searchPeopleRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchPeopleRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchPeopleRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchPeopleRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchPeopleResponseBody$inboundSchema: z.ZodType<
   SearchPeopleResponseBody,
@@ -190,4 +211,22 @@ export namespace SearchPeopleResponseBody$ {
   export const outboundSchema = SearchPeopleResponseBody$outboundSchema;
   /** @deprecated use `SearchPeopleResponseBody$Outbound` instead. */
   export type Outbound = SearchPeopleResponseBody$Outbound;
+}
+
+export function searchPeopleResponseBodyToJSON(
+  searchPeopleResponseBody: SearchPeopleResponseBody,
+): string {
+  return JSON.stringify(
+    SearchPeopleResponseBody$outboundSchema.parse(searchPeopleResponseBody),
+  );
+}
+
+export function searchPeopleResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchPeopleResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchPeopleResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchPeopleResponseBody' from JSON`,
+  );
 }

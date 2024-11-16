@@ -1207,11 +1207,11 @@
         }
       }
     },
-    "/skyscanner/search-one-way": {
+    "/skyscanner/search-flights": {
       "post": {
-        "summary": "Search one-way flights on SkyScanner",
-        "description": "Search one-way flights on SkyScanner for given origin, destination, and departure date",
-        "operationId": "search-one-way",
+        "summary": "Search flights on SkyScanner",
+        "description": "Search flights on SkyScanner for given origin, destination, departure date and return date",
+        "operationId": "search-flights",
         "security": [
           {
             "api_key": []
@@ -1236,9 +1236,21 @@
                     "type": "string",
                     "description": "The destination location of the itinerary"
                   },
+                  "flight_type": {
+                    "type": "string",
+                    "description": "The type of the flight",
+                    "enum": [
+                      "one-way",
+                      "roundtrip"
+                    ]
+                  },
                   "depart_date": {
                     "type": "string",
                     "description": "The departure date of the itinerary. The format has to be YYYY-MM-DD"
+                  },
+                  "return_date": {
+                    "type": "string",
+                    "description": "The return date of the itinerary. The format has to be YYYY-MM-DD. If the flight type is roundtrip, this field is required."
                   },
                   "stops": {
                     "type": "array",
@@ -1291,6 +1303,7 @@
                 "required": [
                   "origin",
                   "destination",
+                  "flight_type",
                   "depart_date"
                 ]
               }
@@ -1299,130 +1312,7 @@
         },
         "responses": {
           "200": {
-            "description": "SearchOneWay API successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "itineraries": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/SkyScannerItinerary"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/UserError"
-          },
-          "500": {
-            "$ref": "#/components/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/skyscanner/search-roundtrip": {
-      "post": {
-        "summary": "Search roundtrip flights on SkyScanner",
-        "description": "Search roundtrip flights on SkyScanner for given origin, destination, departure date and return date",
-        "operationId": "search-roundtrip",
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "tags": [
-          "SkyScanner"
-        ],
-        "x-speakeasy-group": "skyscanner",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "origin": {
-                    "type": "string",
-                    "description": "The origin location of the itinerary"
-                  },
-                  "destination": {
-                    "type": "string",
-                    "description": "The destination location of the itinerary"
-                  },
-                  "depart_date": {
-                    "type": "string",
-                    "description": "The departure date of the itinerary. The format has to be YYYY-MM-DD"
-                  },
-                  "return_date": {
-                    "type": "string",
-                    "description": "The return date of the itinerary. The format has to be YYYY-MM-DD"
-                  },
-                  "stops": {
-                    "type": "array",
-                    "description": "The list of filter values for number of stops",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "Direct",
-                        "1 Stop",
-                        "2+ Stops"
-                      ]
-                    }
-                  },
-                  "num_adults": {
-                    "type": "number",
-                    "description": "The number of adults for the itinerary",
-                    "default": 1
-                  },
-                  "num_children": {
-                    "type": "number",
-                    "description": "The number of children for the itinerary",
-                    "default": 0
-                  },
-                  "num_infants": {
-                    "type": "number",
-                    "description": "The number of infants for the itinerary",
-                    "default": 0
-                  },
-                  "cabin_class": {
-                    "type": "string",
-                    "description": "The cabin class filter",
-                    "enum": [
-                      "economy",
-                      "premium_economy",
-                      "business",
-                      "first"
-                    ]
-                  },
-                  "include_origin_nearby_airports": {
-                    "type": "boolean",
-                    "description": "Boolean to indicate whether to include nearby origin airports in the results or not",
-                    "default": false
-                  },
-                  "include_destination_nearby_airports": {
-                    "type": "boolean",
-                    "description": "Boolean to indicate whether to include nearby destination airports in the results or not",
-                    "default": false
-                  }
-                },
-                "required": [
-                  "origin",
-                  "destination",
-                  "depart_date",
-                  "return_date"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "SearchRoundtrip API successful response",
+            "description": "SearchFlights API successful response",
             "content": {
               "application/json": {
                 "schema": {

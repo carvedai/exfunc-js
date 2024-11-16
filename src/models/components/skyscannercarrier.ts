@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The carrier details
@@ -55,4 +58,22 @@ export namespace SkyScannerCarrier$ {
   export const outboundSchema = SkyScannerCarrier$outboundSchema;
   /** @deprecated use `SkyScannerCarrier$Outbound` instead. */
   export type Outbound = SkyScannerCarrier$Outbound;
+}
+
+export function skyScannerCarrierToJSON(
+  skyScannerCarrier: SkyScannerCarrier,
+): string {
+  return JSON.stringify(
+    SkyScannerCarrier$outboundSchema.parse(skyScannerCarrier),
+  );
+}
+
+export function skyScannerCarrierFromJSON(
+  jsonString: string,
+): SafeParseResult<SkyScannerCarrier, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SkyScannerCarrier$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SkyScannerCarrier' from JSON`,
+  );
 }

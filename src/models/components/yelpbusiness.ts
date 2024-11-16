@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Categories = {
   title?: string | undefined;
@@ -100,6 +103,20 @@ export namespace Categories$ {
   export type Outbound = Categories$Outbound;
 }
 
+export function categoriesToJSON(categories: Categories): string {
+  return JSON.stringify(Categories$outboundSchema.parse(categories));
+}
+
+export function categoriesFromJSON(
+  jsonString: string,
+): SafeParseResult<Categories, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Categories$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Categories' from JSON`,
+  );
+}
+
 /** @internal */
 export const YelpBusiness$inboundSchema: z.ZodType<
   YelpBusiness,
@@ -181,4 +198,18 @@ export namespace YelpBusiness$ {
   export const outboundSchema = YelpBusiness$outboundSchema;
   /** @deprecated use `YelpBusiness$Outbound` instead. */
   export type Outbound = YelpBusiness$Outbound;
+}
+
+export function yelpBusinessToJSON(yelpBusiness: YelpBusiness): string {
+  return JSON.stringify(YelpBusiness$outboundSchema.parse(yelpBusiness));
+}
+
+export function yelpBusinessFromJSON(
+  jsonString: string,
+): SafeParseResult<YelpBusiness, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => YelpBusiness$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'YelpBusiness' from JSON`,
+  );
 }

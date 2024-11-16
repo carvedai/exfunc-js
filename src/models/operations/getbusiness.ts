@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetBusinessRequestBody = {
   /**
@@ -64,6 +67,24 @@ export namespace GetBusinessRequestBody$ {
   export type Outbound = GetBusinessRequestBody$Outbound;
 }
 
+export function getBusinessRequestBodyToJSON(
+  getBusinessRequestBody: GetBusinessRequestBody,
+): string {
+  return JSON.stringify(
+    GetBusinessRequestBody$outboundSchema.parse(getBusinessRequestBody),
+  );
+}
+
+export function getBusinessRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBusinessRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBusinessRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBusinessRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetBusinessResponseBody$inboundSchema: z.ZodType<
   GetBusinessResponseBody,
@@ -98,4 +119,22 @@ export namespace GetBusinessResponseBody$ {
   export const outboundSchema = GetBusinessResponseBody$outboundSchema;
   /** @deprecated use `GetBusinessResponseBody$Outbound` instead. */
   export type Outbound = GetBusinessResponseBody$Outbound;
+}
+
+export function getBusinessResponseBodyToJSON(
+  getBusinessResponseBody: GetBusinessResponseBody,
+): string {
+  return JSON.stringify(
+    GetBusinessResponseBody$outboundSchema.parse(getBusinessResponseBody),
+  );
+}
+
+export function getBusinessResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBusinessResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBusinessResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBusinessResponseBody' from JSON`,
+  );
 }

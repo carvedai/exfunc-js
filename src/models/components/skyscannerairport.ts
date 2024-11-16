@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The airport information
@@ -64,4 +67,22 @@ export namespace SkyScannerAirport$ {
   export const outboundSchema = SkyScannerAirport$outboundSchema;
   /** @deprecated use `SkyScannerAirport$Outbound` instead. */
   export type Outbound = SkyScannerAirport$Outbound;
+}
+
+export function skyScannerAirportToJSON(
+  skyScannerAirport: SkyScannerAirport,
+): string {
+  return JSON.stringify(
+    SkyScannerAirport$outboundSchema.parse(skyScannerAirport),
+  );
+}
+
+export function skyScannerAirportFromJSON(
+  jsonString: string,
+): SafeParseResult<SkyScannerAirport, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SkyScannerAirport$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SkyScannerAirport' from JSON`,
+  );
 }

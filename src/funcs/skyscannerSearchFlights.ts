@@ -23,18 +23,18 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Search one-way flights on SkyScanner
+ * Search flights on SkyScanner
  *
  * @remarks
- * Search one-way flights on SkyScanner for given origin, destination, and departure date
+ * Search flights on SkyScanner for given origin, destination, departure date and return date
  */
-export async function skyscannerSearchOneWay(
+export async function skyscannerSearchFlights(
   client: ExfuncCore,
-  request: operations.SearchOneWayRequestBody,
+  request: operations.SearchFlightsRequestBody,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.SearchOneWayResponseBody,
+    operations.SearchFlightsResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -48,7 +48,7 @@ export async function skyscannerSearchOneWay(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.SearchOneWayRequestBody$outboundSchema.parse(value),
+    (value) => operations.SearchFlightsRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -57,7 +57,7 @@ export async function skyscannerSearchOneWay(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/skyscanner/search-one-way")();
+  const path = pathToFunc("/skyscanner/search-flights")();
 
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export async function skyscannerSearchOneWay(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "search-one-way",
+    operationID: "search-flights",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -110,7 +110,7 @@ export async function skyscannerSearchOneWay(
   };
 
   const [result] = await M.match<
-    operations.SearchOneWayResponseBody,
+    operations.SearchFlightsResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -121,7 +121,7 @@ export async function skyscannerSearchOneWay(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.SearchOneWayResponseBody$inboundSchema),
+    M.json(200, operations.SearchFlightsResponseBody$inboundSchema),
     M.jsonErr(400, errors.UserError$inboundSchema),
     M.jsonErr(500, errors.ServerError$inboundSchema),
     M.fail(["4XX", "5XX"]),

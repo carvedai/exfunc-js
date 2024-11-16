@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetTweetRequestBody = {
   /**
@@ -64,6 +67,24 @@ export namespace GetTweetRequestBody$ {
   export type Outbound = GetTweetRequestBody$Outbound;
 }
 
+export function getTweetRequestBodyToJSON(
+  getTweetRequestBody: GetTweetRequestBody,
+): string {
+  return JSON.stringify(
+    GetTweetRequestBody$outboundSchema.parse(getTweetRequestBody),
+  );
+}
+
+export function getTweetRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTweetRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTweetRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTweetRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetTweetResponseBody$inboundSchema: z.ZodType<
   GetTweetResponseBody,
@@ -98,4 +119,22 @@ export namespace GetTweetResponseBody$ {
   export const outboundSchema = GetTweetResponseBody$outboundSchema;
   /** @deprecated use `GetTweetResponseBody$Outbound` instead. */
   export type Outbound = GetTweetResponseBody$Outbound;
+}
+
+export function getTweetResponseBodyToJSON(
+  getTweetResponseBody: GetTweetResponseBody,
+): string {
+  return JSON.stringify(
+    GetTweetResponseBody$outboundSchema.parse(getTweetResponseBody),
+  );
+}
+
+export function getTweetResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTweetResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTweetResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTweetResponseBody' from JSON`,
+  );
 }

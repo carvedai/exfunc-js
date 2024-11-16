@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GoogleProductReview = {
   /**
@@ -116,4 +119,22 @@ export namespace GoogleProductReview$ {
   export const outboundSchema = GoogleProductReview$outboundSchema;
   /** @deprecated use `GoogleProductReview$Outbound` instead. */
   export type Outbound = GoogleProductReview$Outbound;
+}
+
+export function googleProductReviewToJSON(
+  googleProductReview: GoogleProductReview,
+): string {
+  return JSON.stringify(
+    GoogleProductReview$outboundSchema.parse(googleProductReview),
+  );
+}
+
+export function googleProductReviewFromJSON(
+  jsonString: string,
+): SafeParseResult<GoogleProductReview, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GoogleProductReview$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GoogleProductReview' from JSON`,
+  );
 }

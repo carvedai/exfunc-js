@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Total rounds of funding information
@@ -104,6 +107,20 @@ export namespace TotalRounds$ {
   export type Outbound = TotalRounds$Outbound;
 }
 
+export function totalRoundsToJSON(totalRounds: TotalRounds): string {
+  return JSON.stringify(TotalRounds$outboundSchema.parse(totalRounds));
+}
+
+export function totalRoundsFromJSON(
+  jsonString: string,
+): SafeParseResult<TotalRounds, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TotalRounds$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TotalRounds' from JSON`,
+  );
+}
+
 /** @internal */
 export const LastRound$inboundSchema: z.ZodType<
   LastRound,
@@ -134,6 +151,20 @@ export namespace LastRound$ {
   export type Outbound = LastRound$Outbound;
 }
 
+export function lastRoundToJSON(lastRound: LastRound): string {
+  return JSON.stringify(LastRound$outboundSchema.parse(lastRound));
+}
+
+export function lastRoundFromJSON(
+  jsonString: string,
+): SafeParseResult<LastRound, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LastRound$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LastRound' from JSON`,
+  );
+}
+
 /** @internal */
 export const Investors$inboundSchema: z.ZodType<
   Investors,
@@ -162,6 +193,20 @@ export namespace Investors$ {
   export const outboundSchema = Investors$outboundSchema;
   /** @deprecated use `Investors$Outbound` instead. */
   export type Outbound = Investors$Outbound;
+}
+
+export function investorsToJSON(investors: Investors): string {
+  return JSON.stringify(Investors$outboundSchema.parse(investors));
+}
+
+export function investorsFromJSON(
+  jsonString: string,
+): SafeParseResult<Investors, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Investors$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Investors' from JSON`,
+  );
 }
 
 /** @internal */
@@ -211,6 +256,20 @@ export namespace Funding$ {
   export const outboundSchema = Funding$outboundSchema;
   /** @deprecated use `Funding$Outbound` instead. */
   export type Outbound = Funding$Outbound;
+}
+
+export function fundingToJSON(funding: Funding): string {
+  return JSON.stringify(Funding$outboundSchema.parse(funding));
+}
+
+export function fundingFromJSON(
+  jsonString: string,
+): SafeParseResult<Funding, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Funding$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Funding' from JSON`,
+  );
 }
 
 /** @internal */
@@ -279,4 +338,20 @@ export namespace LinkedInCompany$ {
   export const outboundSchema = LinkedInCompany$outboundSchema;
   /** @deprecated use `LinkedInCompany$Outbound` instead. */
   export type Outbound = LinkedInCompany$Outbound;
+}
+
+export function linkedInCompanyToJSON(
+  linkedInCompany: LinkedInCompany,
+): string {
+  return JSON.stringify(LinkedInCompany$outboundSchema.parse(linkedInCompany));
+}
+
+export function linkedInCompanyFromJSON(
+  jsonString: string,
+): SafeParseResult<LinkedInCompany, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LinkedInCompany$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LinkedInCompany' from JSON`,
+  );
 }

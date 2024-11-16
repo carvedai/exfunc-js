@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Request = {
   /**
@@ -108,6 +111,20 @@ export namespace Request$ {
   export type Outbound = Request$Outbound;
 }
 
+export function requestToJSON(request: Request): string {
+  return JSON.stringify(Request$outboundSchema.parse(request));
+}
+
+export function requestFromJSON(
+  jsonString: string,
+): SafeParseResult<Request, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Request$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Request' from JSON`,
+  );
+}
+
 /** @internal */
 export const Response$inboundSchema: z.ZodType<
   Response,
@@ -148,6 +165,20 @@ export namespace Response$ {
   export const outboundSchema = Response$outboundSchema;
   /** @deprecated use `Response$Outbound` instead. */
   export type Outbound = Response$Outbound;
+}
+
+export function responseToJSON(response: Response): string {
+  return JSON.stringify(Response$outboundSchema.parse(response));
+}
+
+export function responseFromJSON(
+  jsonString: string,
+): SafeParseResult<Response, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Response$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Response' from JSON`,
+  );
 }
 
 /** @internal */
@@ -235,4 +266,18 @@ export namespace NavigatorTask$ {
   export const outboundSchema = NavigatorTask$outboundSchema;
   /** @deprecated use `NavigatorTask$Outbound` instead. */
   export type Outbound = NavigatorTask$Outbound;
+}
+
+export function navigatorTaskToJSON(navigatorTask: NavigatorTask): string {
+  return JSON.stringify(NavigatorTask$outboundSchema.parse(navigatorTask));
+}
+
+export function navigatorTaskFromJSON(
+  jsonString: string,
+): SafeParseResult<NavigatorTask, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => NavigatorTask$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'NavigatorTask' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Tweet = {
   /**
@@ -119,4 +122,18 @@ export namespace Tweet$ {
   export const outboundSchema = Tweet$outboundSchema;
   /** @deprecated use `Tweet$Outbound` instead. */
   export type Outbound = Tweet$Outbound;
+}
+
+export function tweetToJSON(tweet: Tweet): string {
+  return JSON.stringify(Tweet$outboundSchema.parse(tweet));
+}
+
+export function tweetFromJSON(
+  jsonString: string,
+): SafeParseResult<Tweet, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Tweet$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Tweet' from JSON`,
+  );
 }

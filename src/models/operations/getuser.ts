@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetUserRequestBody = {
   /**
@@ -71,6 +74,24 @@ export namespace GetUserRequestBody$ {
   export type Outbound = GetUserRequestBody$Outbound;
 }
 
+export function getUserRequestBodyToJSON(
+  getUserRequestBody: GetUserRequestBody,
+): string {
+  return JSON.stringify(
+    GetUserRequestBody$outboundSchema.parse(getUserRequestBody),
+  );
+}
+
+export function getUserRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetUserResponseBody$inboundSchema: z.ZodType<
   GetUserResponseBody,
@@ -105,4 +126,22 @@ export namespace GetUserResponseBody$ {
   export const outboundSchema = GetUserResponseBody$outboundSchema;
   /** @deprecated use `GetUserResponseBody$Outbound` instead. */
   export type Outbound = GetUserResponseBody$Outbound;
+}
+
+export function getUserResponseBodyToJSON(
+  getUserResponseBody: GetUserResponseBody,
+): string {
+  return JSON.stringify(
+    GetUserResponseBody$outboundSchema.parse(getUserResponseBody),
+  );
+}
+
+export function getUserResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserResponseBody' from JSON`,
+  );
 }

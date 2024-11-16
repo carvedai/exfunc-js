@@ -4,8 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Sort the results by a specific field
@@ -174,6 +177,24 @@ export namespace SearchProductsRequestBody$ {
   export type Outbound = SearchProductsRequestBody$Outbound;
 }
 
+export function searchProductsRequestBodyToJSON(
+  searchProductsRequestBody: SearchProductsRequestBody,
+): string {
+  return JSON.stringify(
+    SearchProductsRequestBody$outboundSchema.parse(searchProductsRequestBody),
+  );
+}
+
+export function searchProductsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchProductsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchProductsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchProductsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchProductsResponseBody$inboundSchema: z.ZodType<
   SearchProductsResponseBody,
@@ -208,4 +229,22 @@ export namespace SearchProductsResponseBody$ {
   export const outboundSchema = SearchProductsResponseBody$outboundSchema;
   /** @deprecated use `SearchProductsResponseBody$Outbound` instead. */
   export type Outbound = SearchProductsResponseBody$Outbound;
+}
+
+export function searchProductsResponseBodyToJSON(
+  searchProductsResponseBody: SearchProductsResponseBody,
+): string {
+  return JSON.stringify(
+    SearchProductsResponseBody$outboundSchema.parse(searchProductsResponseBody),
+  );
+}
+
+export function searchProductsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchProductsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchProductsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchProductsResponseBody' from JSON`,
+  );
 }

@@ -4,8 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The status of the listings (e.g., "for_sale", "for_rent")
@@ -275,6 +278,26 @@ export namespace SearchPropertiesRequestBody$ {
   export type Outbound = SearchPropertiesRequestBody$Outbound;
 }
 
+export function searchPropertiesRequestBodyToJSON(
+  searchPropertiesRequestBody: SearchPropertiesRequestBody,
+): string {
+  return JSON.stringify(
+    SearchPropertiesRequestBody$outboundSchema.parse(
+      searchPropertiesRequestBody,
+    ),
+  );
+}
+
+export function searchPropertiesRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchPropertiesRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchPropertiesRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchPropertiesRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchPropertiesResponseBody$inboundSchema: z.ZodType<
   SearchPropertiesResponseBody,
@@ -309,4 +332,24 @@ export namespace SearchPropertiesResponseBody$ {
   export const outboundSchema = SearchPropertiesResponseBody$outboundSchema;
   /** @deprecated use `SearchPropertiesResponseBody$Outbound` instead. */
   export type Outbound = SearchPropertiesResponseBody$Outbound;
+}
+
+export function searchPropertiesResponseBodyToJSON(
+  searchPropertiesResponseBody: SearchPropertiesResponseBody,
+): string {
+  return JSON.stringify(
+    SearchPropertiesResponseBody$outboundSchema.parse(
+      searchPropertiesResponseBody,
+    ),
+  );
+}
+
+export function searchPropertiesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchPropertiesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchPropertiesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchPropertiesResponseBody' from JSON`,
+  );
 }

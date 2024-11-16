@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetUserFollowersRequestBody = {
   /**
@@ -62,6 +65,26 @@ export namespace GetUserFollowersRequestBody$ {
   export type Outbound = GetUserFollowersRequestBody$Outbound;
 }
 
+export function getUserFollowersRequestBodyToJSON(
+  getUserFollowersRequestBody: GetUserFollowersRequestBody,
+): string {
+  return JSON.stringify(
+    GetUserFollowersRequestBody$outboundSchema.parse(
+      getUserFollowersRequestBody,
+    ),
+  );
+}
+
+export function getUserFollowersRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserFollowersRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserFollowersRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserFollowersRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetUserFollowersResponseBody$inboundSchema: z.ZodType<
   GetUserFollowersResponseBody,
@@ -96,4 +119,24 @@ export namespace GetUserFollowersResponseBody$ {
   export const outboundSchema = GetUserFollowersResponseBody$outboundSchema;
   /** @deprecated use `GetUserFollowersResponseBody$Outbound` instead. */
   export type Outbound = GetUserFollowersResponseBody$Outbound;
+}
+
+export function getUserFollowersResponseBodyToJSON(
+  getUserFollowersResponseBody: GetUserFollowersResponseBody,
+): string {
+  return JSON.stringify(
+    GetUserFollowersResponseBody$outboundSchema.parse(
+      getUserFollowersResponseBody,
+    ),
+  );
+}
+
+export function getUserFollowersResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserFollowersResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserFollowersResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserFollowersResponseBody' from JSON`,
+  );
 }

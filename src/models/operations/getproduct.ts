@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetProductRequestBody = {
   /**
@@ -73,6 +76,24 @@ export namespace GetProductRequestBody$ {
   export type Outbound = GetProductRequestBody$Outbound;
 }
 
+export function getProductRequestBodyToJSON(
+  getProductRequestBody: GetProductRequestBody,
+): string {
+  return JSON.stringify(
+    GetProductRequestBody$outboundSchema.parse(getProductRequestBody),
+  );
+}
+
+export function getProductRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProductRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProductRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProductRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetProductResponseBody$inboundSchema: z.ZodType<
   GetProductResponseBody,
@@ -107,4 +128,22 @@ export namespace GetProductResponseBody$ {
   export const outboundSchema = GetProductResponseBody$outboundSchema;
   /** @deprecated use `GetProductResponseBody$Outbound` instead. */
   export type Outbound = GetProductResponseBody$Outbound;
+}
+
+export function getProductResponseBodyToJSON(
+  getProductResponseBody: GetProductResponseBody,
+): string {
+  return JSON.stringify(
+    GetProductResponseBody$outboundSchema.parse(getProductResponseBody),
+  );
+}
+
+export function getProductResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProductResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProductResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProductResponseBody' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetProductReviewsRequestBody = {
   /**
@@ -82,6 +85,26 @@ export namespace GetProductReviewsRequestBody$ {
   export type Outbound = GetProductReviewsRequestBody$Outbound;
 }
 
+export function getProductReviewsRequestBodyToJSON(
+  getProductReviewsRequestBody: GetProductReviewsRequestBody,
+): string {
+  return JSON.stringify(
+    GetProductReviewsRequestBody$outboundSchema.parse(
+      getProductReviewsRequestBody,
+    ),
+  );
+}
+
+export function getProductReviewsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProductReviewsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProductReviewsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProductReviewsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetProductReviewsResponseBody$inboundSchema: z.ZodType<
   GetProductReviewsResponseBody,
@@ -116,4 +139,24 @@ export namespace GetProductReviewsResponseBody$ {
   export const outboundSchema = GetProductReviewsResponseBody$outboundSchema;
   /** @deprecated use `GetProductReviewsResponseBody$Outbound` instead. */
   export type Outbound = GetProductReviewsResponseBody$Outbound;
+}
+
+export function getProductReviewsResponseBodyToJSON(
+  getProductReviewsResponseBody: GetProductReviewsResponseBody,
+): string {
+  return JSON.stringify(
+    GetProductReviewsResponseBody$outboundSchema.parse(
+      getProductReviewsResponseBody,
+    ),
+  );
+}
+
+export function getProductReviewsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetProductReviewsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetProductReviewsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetProductReviewsResponseBody' from JSON`,
+  );
 }

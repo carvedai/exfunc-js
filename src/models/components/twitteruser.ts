@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TwitterUser = {
   /**
@@ -100,4 +103,18 @@ export namespace TwitterUser$ {
   export const outboundSchema = TwitterUser$outboundSchema;
   /** @deprecated use `TwitterUser$Outbound` instead. */
   export type Outbound = TwitterUser$Outbound;
+}
+
+export function twitterUserToJSON(twitterUser: TwitterUser): string {
+  return JSON.stringify(TwitterUser$outboundSchema.parse(twitterUser));
+}
+
+export function twitterUserFromJSON(
+  jsonString: string,
+): SafeParseResult<TwitterUser, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TwitterUser$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwitterUser' from JSON`,
+  );
 }

@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: bf34de8319ba88d7c9892212110d9789
+  docChecksum: 61ab9bda8531ece421ef12a1249fe655
   docVersion: 1.0.0
-  speakeasyVersion: 1.439.0
-  generationVersion: 2.457.9
-  releaseVersion: 0.5.4
-  configChecksum: 77955cb965912f9882d3ba648b5ea144
+  speakeasyVersion: 1.440.1
+  generationVersion: 2.460.1
+  releaseVersion: 0.5.5
+  configChecksum: 32ceaae8e9ed9be04ba12e0002ea389d
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.4
+    core: 3.18.5
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -79,6 +79,7 @@ generatedFiles:
   - docs/models/operations/companies.md
   - docs/models/operations/dateposted.md
   - docs/models/operations/experiencelevel.md
+  - docs/models/operations/flighttype.md
   - docs/models/operations/getbusinessrequestbody.md
   - docs/models/operations/getbusinessresponsebody.md
   - docs/models/operations/getbusinessreviewsrequestbody.md
@@ -123,13 +124,13 @@ generatedFiles:
   - docs/models/operations/searchbusinessessortby.md
   - docs/models/operations/searchcompaniesrequestbody.md
   - docs/models/operations/searchcompaniesresponsebody.md
+  - docs/models/operations/searchflightsrequestbody.md
+  - docs/models/operations/searchflightsresponsebody.md
   - docs/models/operations/searchjobpostingsrequestbody.md
   - docs/models/operations/searchjobpostingsresponsebody.md
   - docs/models/operations/searchjobpostingssortby.md
   - docs/models/operations/searchnewsrequestbody.md
   - docs/models/operations/searchnewsresponsebody.md
-  - docs/models/operations/searchonewayrequestbody.md
-  - docs/models/operations/searchonewayresponsebody.md
   - docs/models/operations/searchpeoplerequestbody.md
   - docs/models/operations/searchpeopleresponsebody.md
   - docs/models/operations/searchproductsrequestbody.md
@@ -137,10 +138,6 @@ generatedFiles:
   - docs/models/operations/searchpropertiesrequestbody.md
   - docs/models/operations/searchpropertiesresponsebody.md
   - docs/models/operations/searchpropertiessortby.md
-  - docs/models/operations/searchroundtripcabinclass.md
-  - docs/models/operations/searchroundtriprequestbody.md
-  - docs/models/operations/searchroundtripresponsebody.md
-  - docs/models/operations/searchroundtripstops.md
   - docs/models/operations/searchtweetsrequestbody.md
   - docs/models/operations/searchtweetsresponsebody.md
   - docs/models/operations/searchusersrequestbody.md
@@ -180,8 +177,7 @@ generatedFiles:
   - src/funcs/navigatorGetTask.ts
   - src/funcs/navigatorScrape.ts
   - src/funcs/navigatorStartTask.ts
-  - src/funcs/skyscannerSearchOneWay.ts
-  - src/funcs/skyscannerSearchRoundtrip.ts
+  - src/funcs/skyscannerSearchFlights.ts
   - src/funcs/twitterGetTweet.ts
   - src/funcs/twitterGetUser.ts
   - src/funcs/twitterGetUserFollowers.ts
@@ -260,13 +256,12 @@ generatedFiles:
   - src/models/operations/scrape.ts
   - src/models/operations/searchbusinesses.ts
   - src/models/operations/searchcompanies.ts
+  - src/models/operations/searchflights.ts
   - src/models/operations/searchjobpostings.ts
   - src/models/operations/searchnews.ts
-  - src/models/operations/searchoneway.ts
   - src/models/operations/searchpeople.ts
   - src/models/operations/searchproducts.ts
   - src/models/operations/searchproperties.ts
-  - src/models/operations/searchroundtrip.ts
   - src/models/operations/searchtweets.ts
   - src/models/operations/searchusers.ts
   - src/models/operations/searchweb.ts
@@ -396,3 +391,7 @@ examples:
     speakeasy-default-search-roundtrip:
       requestBody:
         application/json: {"origin": "<value>", "destination": "<value>", "depart_date": "<value>", "return_date": "<value>"}
+  search-flights:
+    speakeasy-default-search-flights:
+      requestBody:
+        application/json: {"origin": "<value>", "destination": "<value>", "flight_type": "roundtrip", "depart_date": "<value>"}

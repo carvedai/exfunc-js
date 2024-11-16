@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ZillowPriceHistoryEvent,
   ZillowPriceHistoryEvent$inboundSchema,
@@ -138,6 +141,20 @@ export namespace Address$ {
   export type Outbound = Address$Outbound;
 }
 
+export function addressToJSON(address: Address): string {
+  return JSON.stringify(Address$outboundSchema.parse(address));
+}
+
+export function addressFromJSON(
+  jsonString: string,
+): SafeParseResult<Address, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Address$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Address' from JSON`,
+  );
+}
+
 /** @internal */
 export const ZillowProperty$inboundSchema: z.ZodType<
   ZillowProperty,
@@ -233,4 +250,18 @@ export namespace ZillowProperty$ {
   export const outboundSchema = ZillowProperty$outboundSchema;
   /** @deprecated use `ZillowProperty$Outbound` instead. */
   export type Outbound = ZillowProperty$Outbound;
+}
+
+export function zillowPropertyToJSON(zillowProperty: ZillowProperty): string {
+  return JSON.stringify(ZillowProperty$outboundSchema.parse(zillowProperty));
+}
+
+export function zillowPropertyFromJSON(
+  jsonString: string,
+): SafeParseResult<ZillowProperty, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ZillowProperty$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ZillowProperty' from JSON`,
+  );
 }

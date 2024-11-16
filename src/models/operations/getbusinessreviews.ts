@@ -4,8 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The criteria to sort reviews (e.g., "best_match", "newest", etc.)
@@ -129,6 +132,26 @@ export namespace GetBusinessReviewsRequestBody$ {
   export type Outbound = GetBusinessReviewsRequestBody$Outbound;
 }
 
+export function getBusinessReviewsRequestBodyToJSON(
+  getBusinessReviewsRequestBody: GetBusinessReviewsRequestBody,
+): string {
+  return JSON.stringify(
+    GetBusinessReviewsRequestBody$outboundSchema.parse(
+      getBusinessReviewsRequestBody,
+    ),
+  );
+}
+
+export function getBusinessReviewsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBusinessReviewsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBusinessReviewsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBusinessReviewsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetBusinessReviewsResponseBody$inboundSchema: z.ZodType<
   GetBusinessReviewsResponseBody,
@@ -163,4 +186,24 @@ export namespace GetBusinessReviewsResponseBody$ {
   export const outboundSchema = GetBusinessReviewsResponseBody$outboundSchema;
   /** @deprecated use `GetBusinessReviewsResponseBody$Outbound` instead. */
   export type Outbound = GetBusinessReviewsResponseBody$Outbound;
+}
+
+export function getBusinessReviewsResponseBodyToJSON(
+  getBusinessReviewsResponseBody: GetBusinessReviewsResponseBody,
+): string {
+  return JSON.stringify(
+    GetBusinessReviewsResponseBody$outboundSchema.parse(
+      getBusinessReviewsResponseBody,
+    ),
+  );
+}
+
+export function getBusinessReviewsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBusinessReviewsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBusinessReviewsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBusinessReviewsResponseBody' from JSON`,
+  );
 }

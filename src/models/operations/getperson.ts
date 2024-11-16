@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetPersonRequestBody = {
   /**
@@ -64,6 +67,24 @@ export namespace GetPersonRequestBody$ {
   export type Outbound = GetPersonRequestBody$Outbound;
 }
 
+export function getPersonRequestBodyToJSON(
+  getPersonRequestBody: GetPersonRequestBody,
+): string {
+  return JSON.stringify(
+    GetPersonRequestBody$outboundSchema.parse(getPersonRequestBody),
+  );
+}
+
+export function getPersonRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPersonRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPersonRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPersonRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetPersonResponseBody$inboundSchema: z.ZodType<
   GetPersonResponseBody,
@@ -98,4 +119,22 @@ export namespace GetPersonResponseBody$ {
   export const outboundSchema = GetPersonResponseBody$outboundSchema;
   /** @deprecated use `GetPersonResponseBody$Outbound` instead. */
   export type Outbound = GetPersonResponseBody$Outbound;
+}
+
+export function getPersonResponseBodyToJSON(
+  getPersonResponseBody: GetPersonResponseBody,
+): string {
+  return JSON.stringify(
+    GetPersonResponseBody$outboundSchema.parse(getPersonResponseBody),
+  );
+}
+
+export function getPersonResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPersonResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPersonResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPersonResponseBody' from JSON`,
+  );
 }

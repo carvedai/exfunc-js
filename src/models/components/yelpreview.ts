@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FeedbackCounts = {
   /**
@@ -110,6 +113,20 @@ export namespace FeedbackCounts$ {
   export type Outbound = FeedbackCounts$Outbound;
 }
 
+export function feedbackCountsToJSON(feedbackCounts: FeedbackCounts): string {
+  return JSON.stringify(FeedbackCounts$outboundSchema.parse(feedbackCounts));
+}
+
+export function feedbackCountsFromJSON(
+  jsonString: string,
+): SafeParseResult<FeedbackCounts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FeedbackCounts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FeedbackCounts' from JSON`,
+  );
+}
+
 /** @internal */
 export const YelpReview$inboundSchema: z.ZodType<
   YelpReview,
@@ -203,4 +220,18 @@ export namespace YelpReview$ {
   export const outboundSchema = YelpReview$outboundSchema;
   /** @deprecated use `YelpReview$Outbound` instead. */
   export type Outbound = YelpReview$Outbound;
+}
+
+export function yelpReviewToJSON(yelpReview: YelpReview): string {
+  return JSON.stringify(YelpReview$outboundSchema.parse(yelpReview));
+}
+
+export function yelpReviewFromJSON(
+  jsonString: string,
+): SafeParseResult<YelpReview, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => YelpReview$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'YelpReview' from JSON`,
+  );
 }

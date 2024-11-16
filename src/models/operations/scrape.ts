@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ScrapeRequestBody = {
   /**
@@ -61,6 +64,24 @@ export namespace ScrapeRequestBody$ {
   export type Outbound = ScrapeRequestBody$Outbound;
 }
 
+export function scrapeRequestBodyToJSON(
+  scrapeRequestBody: ScrapeRequestBody,
+): string {
+  return JSON.stringify(
+    ScrapeRequestBody$outboundSchema.parse(scrapeRequestBody),
+  );
+}
+
+export function scrapeRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ScrapeRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ScrapeRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ScrapeRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const ScrapeResponseBody$inboundSchema: z.ZodType<
   ScrapeResponseBody,
@@ -98,4 +119,22 @@ export namespace ScrapeResponseBody$ {
   export const outboundSchema = ScrapeResponseBody$outboundSchema;
   /** @deprecated use `ScrapeResponseBody$Outbound` instead. */
   export type Outbound = ScrapeResponseBody$Outbound;
+}
+
+export function scrapeResponseBodyToJSON(
+  scrapeResponseBody: ScrapeResponseBody,
+): string {
+  return JSON.stringify(
+    ScrapeResponseBody$outboundSchema.parse(scrapeResponseBody),
+  );
+}
+
+export function scrapeResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ScrapeResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ScrapeResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ScrapeResponseBody' from JSON`,
+  );
 }

@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetUserTweetsRequestBody = {
   /**
@@ -62,6 +65,24 @@ export namespace GetUserTweetsRequestBody$ {
   export type Outbound = GetUserTweetsRequestBody$Outbound;
 }
 
+export function getUserTweetsRequestBodyToJSON(
+  getUserTweetsRequestBody: GetUserTweetsRequestBody,
+): string {
+  return JSON.stringify(
+    GetUserTweetsRequestBody$outboundSchema.parse(getUserTweetsRequestBody),
+  );
+}
+
+export function getUserTweetsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserTweetsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserTweetsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserTweetsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetUserTweetsResponseBody$inboundSchema: z.ZodType<
   GetUserTweetsResponseBody,
@@ -96,4 +117,22 @@ export namespace GetUserTweetsResponseBody$ {
   export const outboundSchema = GetUserTweetsResponseBody$outboundSchema;
   /** @deprecated use `GetUserTweetsResponseBody$Outbound` instead. */
   export type Outbound = GetUserTweetsResponseBody$Outbound;
+}
+
+export function getUserTweetsResponseBodyToJSON(
+  getUserTweetsResponseBody: GetUserTweetsResponseBody,
+): string {
+  return JSON.stringify(
+    GetUserTweetsResponseBody$outboundSchema.parse(getUserTweetsResponseBody),
+  );
+}
+
+export function getUserTweetsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserTweetsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserTweetsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserTweetsResponseBody' from JSON`,
+  );
 }

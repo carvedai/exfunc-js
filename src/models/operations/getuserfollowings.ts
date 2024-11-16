@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetUserFollowingsRequestBody = {
   /**
@@ -62,6 +65,26 @@ export namespace GetUserFollowingsRequestBody$ {
   export type Outbound = GetUserFollowingsRequestBody$Outbound;
 }
 
+export function getUserFollowingsRequestBodyToJSON(
+  getUserFollowingsRequestBody: GetUserFollowingsRequestBody,
+): string {
+  return JSON.stringify(
+    GetUserFollowingsRequestBody$outboundSchema.parse(
+      getUserFollowingsRequestBody,
+    ),
+  );
+}
+
+export function getUserFollowingsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserFollowingsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserFollowingsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserFollowingsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetUserFollowingsResponseBody$inboundSchema: z.ZodType<
   GetUserFollowingsResponseBody,
@@ -96,4 +119,24 @@ export namespace GetUserFollowingsResponseBody$ {
   export const outboundSchema = GetUserFollowingsResponseBody$outboundSchema;
   /** @deprecated use `GetUserFollowingsResponseBody$Outbound` instead. */
   export type Outbound = GetUserFollowingsResponseBody$Outbound;
+}
+
+export function getUserFollowingsResponseBodyToJSON(
+  getUserFollowingsResponseBody: GetUserFollowingsResponseBody,
+): string {
+  return JSON.stringify(
+    GetUserFollowingsResponseBody$outboundSchema.parse(
+      getUserFollowingsResponseBody,
+    ),
+  );
+}
+
+export function getUserFollowingsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserFollowingsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserFollowingsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserFollowingsResponseBody' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetJobPostingRequestBody = {
   /**
@@ -64,6 +67,24 @@ export namespace GetJobPostingRequestBody$ {
   export type Outbound = GetJobPostingRequestBody$Outbound;
 }
 
+export function getJobPostingRequestBodyToJSON(
+  getJobPostingRequestBody: GetJobPostingRequestBody,
+): string {
+  return JSON.stringify(
+    GetJobPostingRequestBody$outboundSchema.parse(getJobPostingRequestBody),
+  );
+}
+
+export function getJobPostingRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetJobPostingRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetJobPostingRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetJobPostingRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetJobPostingResponseBody$inboundSchema: z.ZodType<
   GetJobPostingResponseBody,
@@ -106,4 +127,22 @@ export namespace GetJobPostingResponseBody$ {
   export const outboundSchema = GetJobPostingResponseBody$outboundSchema;
   /** @deprecated use `GetJobPostingResponseBody$Outbound` instead. */
   export type Outbound = GetJobPostingResponseBody$Outbound;
+}
+
+export function getJobPostingResponseBodyToJSON(
+  getJobPostingResponseBody: GetJobPostingResponseBody,
+): string {
+  return JSON.stringify(
+    GetJobPostingResponseBody$outboundSchema.parse(getJobPostingResponseBody),
+  );
+}
+
+export function getJobPostingResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetJobPostingResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetJobPostingResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetJobPostingResponseBody' from JSON`,
+  );
 }

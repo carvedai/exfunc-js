@@ -4,8 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Filter news articles published after this date
@@ -126,6 +129,24 @@ export namespace SearchNewsRequestBody$ {
   export type Outbound = SearchNewsRequestBody$Outbound;
 }
 
+export function searchNewsRequestBodyToJSON(
+  searchNewsRequestBody: SearchNewsRequestBody,
+): string {
+  return JSON.stringify(
+    SearchNewsRequestBody$outboundSchema.parse(searchNewsRequestBody),
+  );
+}
+
+export function searchNewsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchNewsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchNewsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchNewsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchNewsResponseBody$inboundSchema: z.ZodType<
   SearchNewsResponseBody,
@@ -160,4 +181,22 @@ export namespace SearchNewsResponseBody$ {
   export const outboundSchema = SearchNewsResponseBody$outboundSchema;
   /** @deprecated use `SearchNewsResponseBody$Outbound` instead. */
   export type Outbound = SearchNewsResponseBody$Outbound;
+}
+
+export function searchNewsResponseBodyToJSON(
+  searchNewsResponseBody: SearchNewsResponseBody,
+): string {
+  return JSON.stringify(
+    SearchNewsResponseBody$outboundSchema.parse(searchNewsResponseBody),
+  );
+}
+
+export function searchNewsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchNewsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchNewsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchNewsResponseBody' from JSON`,
+  );
 }

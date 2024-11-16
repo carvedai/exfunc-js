@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   SkyScannerAirport,
   SkyScannerAirport$inboundSchema,
@@ -109,6 +112,20 @@ export namespace Carriers$ {
   export type Outbound = Carriers$Outbound;
 }
 
+export function carriersToJSON(carriers: Carriers): string {
+  return JSON.stringify(Carriers$outboundSchema.parse(carriers));
+}
+
+export function carriersFromJSON(
+  jsonString: string,
+): SafeParseResult<Carriers, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Carriers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Carriers' from JSON`,
+  );
+}
+
 /** @internal */
 export const SkyScannerLeg$inboundSchema: z.ZodType<
   SkyScannerLeg,
@@ -183,4 +200,18 @@ export namespace SkyScannerLeg$ {
   export const outboundSchema = SkyScannerLeg$outboundSchema;
   /** @deprecated use `SkyScannerLeg$Outbound` instead. */
   export type Outbound = SkyScannerLeg$Outbound;
+}
+
+export function skyScannerLegToJSON(skyScannerLeg: SkyScannerLeg): string {
+  return JSON.stringify(SkyScannerLeg$outboundSchema.parse(skyScannerLeg));
+}
+
+export function skyScannerLegFromJSON(
+  jsonString: string,
+): SafeParseResult<SkyScannerLeg, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SkyScannerLeg$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SkyScannerLeg' from JSON`,
+  );
 }

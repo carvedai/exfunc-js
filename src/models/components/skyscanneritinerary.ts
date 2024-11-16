@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   SkyScannerLeg,
   SkyScannerLeg$inboundSchema,
@@ -55,4 +58,22 @@ export namespace SkyScannerItinerary$ {
   export const outboundSchema = SkyScannerItinerary$outboundSchema;
   /** @deprecated use `SkyScannerItinerary$Outbound` instead. */
   export type Outbound = SkyScannerItinerary$Outbound;
+}
+
+export function skyScannerItineraryToJSON(
+  skyScannerItinerary: SkyScannerItinerary,
+): string {
+  return JSON.stringify(
+    SkyScannerItinerary$outboundSchema.parse(skyScannerItinerary),
+  );
+}
+
+export function skyScannerItineraryFromJSON(
+  jsonString: string,
+): SafeParseResult<SkyScannerItinerary, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SkyScannerItinerary$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SkyScannerItinerary' from JSON`,
+  );
 }

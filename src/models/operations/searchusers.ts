@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SearchUsersRequestBody = {
   /**
@@ -62,6 +65,24 @@ export namespace SearchUsersRequestBody$ {
   export type Outbound = SearchUsersRequestBody$Outbound;
 }
 
+export function searchUsersRequestBodyToJSON(
+  searchUsersRequestBody: SearchUsersRequestBody,
+): string {
+  return JSON.stringify(
+    SearchUsersRequestBody$outboundSchema.parse(searchUsersRequestBody),
+  );
+}
+
+export function searchUsersRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchUsersRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchUsersRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchUsersRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchUsersResponseBody$inboundSchema: z.ZodType<
   SearchUsersResponseBody,
@@ -96,4 +117,22 @@ export namespace SearchUsersResponseBody$ {
   export const outboundSchema = SearchUsersResponseBody$outboundSchema;
   /** @deprecated use `SearchUsersResponseBody$Outbound` instead. */
   export type Outbound = SearchUsersResponseBody$Outbound;
+}
+
+export function searchUsersResponseBodyToJSON(
+  searchUsersResponseBody: SearchUsersResponseBody,
+): string {
+  return JSON.stringify(
+    SearchUsersResponseBody$outboundSchema.parse(searchUsersResponseBody),
+  );
+}
+
+export function searchUsersResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchUsersResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchUsersResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchUsersResponseBody' from JSON`,
+  );
 }

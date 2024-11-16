@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The type of search
@@ -104,6 +107,24 @@ export namespace SearchTweetsRequestBody$ {
   export type Outbound = SearchTweetsRequestBody$Outbound;
 }
 
+export function searchTweetsRequestBodyToJSON(
+  searchTweetsRequestBody: SearchTweetsRequestBody,
+): string {
+  return JSON.stringify(
+    SearchTweetsRequestBody$outboundSchema.parse(searchTweetsRequestBody),
+  );
+}
+
+export function searchTweetsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchTweetsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchTweetsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchTweetsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchTweetsResponseBody$inboundSchema: z.ZodType<
   SearchTweetsResponseBody,
@@ -138,4 +159,22 @@ export namespace SearchTweetsResponseBody$ {
   export const outboundSchema = SearchTweetsResponseBody$outboundSchema;
   /** @deprecated use `SearchTweetsResponseBody$Outbound` instead. */
   export type Outbound = SearchTweetsResponseBody$Outbound;
+}
+
+export function searchTweetsResponseBodyToJSON(
+  searchTweetsResponseBody: SearchTweetsResponseBody,
+): string {
+  return JSON.stringify(
+    SearchTweetsResponseBody$outboundSchema.parse(searchTweetsResponseBody),
+  );
+}
+
+export function searchTweetsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchTweetsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchTweetsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchTweetsResponseBody' from JSON`,
+  );
 }

@@ -5,7 +5,7 @@
 ```typescript
 import { Stops } from "exfunc/models/operations";
 
-let value: Stops = "Direct";
+let value: Stops = "2+ Stops";
 ```
 
 ## Values

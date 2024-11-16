@@ -4,8 +4,23 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of the flight
+ */
+export const FlightType = {
+  OneWay: "one-way",
+  Roundtrip: "roundtrip",
+} as const;
+/**
+ * The type of the flight
+ */
+export type FlightType = ClosedEnum<typeof FlightType>;
 
 export const Stops = {
   Direct: "Direct",
@@ -28,7 +43,7 @@ export const CabinClass = {
  */
 export type CabinClass = ClosedEnum<typeof CabinClass>;
 
-export type SearchOneWayRequestBody = {
+export type SearchFlightsRequestBody = {
   /**
    * The origin location of the itinerary
    */
@@ -38,9 +53,17 @@ export type SearchOneWayRequestBody = {
    */
   destination: string;
   /**
+   * The type of the flight
+   */
+  flightType: FlightType;
+  /**
    * The departure date of the itinerary. The format has to be YYYY-MM-DD
    */
   departDate: string;
+  /**
+   * The return date of the itinerary. The format has to be YYYY-MM-DD. If the flight type is roundtrip, this field is required.
+   */
+  returnDate?: string | undefined;
   /**
    * The list of filter values for number of stops
    */
@@ -72,11 +95,30 @@ export type SearchOneWayRequestBody = {
 };
 
 /**
- * SearchOneWay API successful response
+ * SearchFlights API successful response
  */
-export type SearchOneWayResponseBody = {
+export type SearchFlightsResponseBody = {
   itineraries?: Array<components.SkyScannerItinerary> | undefined;
 };
+
+/** @internal */
+export const FlightType$inboundSchema: z.ZodNativeEnum<typeof FlightType> = z
+  .nativeEnum(FlightType);
+
+/** @internal */
+export const FlightType$outboundSchema: z.ZodNativeEnum<typeof FlightType> =
+  FlightType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FlightType$ {
+  /** @deprecated use `FlightType$inboundSchema` instead. */
+  export const inboundSchema = FlightType$inboundSchema;
+  /** @deprecated use `FlightType$outboundSchema` instead. */
+  export const outboundSchema = FlightType$outboundSchema;
+}
 
 /** @internal */
 export const Stops$inboundSchema: z.ZodNativeEnum<typeof Stops> = z.nativeEnum(
@@ -118,14 +160,16 @@ export namespace CabinClass$ {
 }
 
 /** @internal */
-export const SearchOneWayRequestBody$inboundSchema: z.ZodType<
-  SearchOneWayRequestBody,
+export const SearchFlightsRequestBody$inboundSchema: z.ZodType<
+  SearchFlightsRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   origin: z.string(),
   destination: z.string(),
+  flight_type: FlightType$inboundSchema,
   depart_date: z.string(),
+  return_date: z.string().optional(),
   stops: z.array(Stops$inboundSchema).optional(),
   num_adults: z.number().default(1),
   num_children: z.number().default(0),
@@ -135,7 +179,9 @@ export const SearchOneWayRequestBody$inboundSchema: z.ZodType<
   include_destination_nearby_airports: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
+    "flight_type": "flightType",
     "depart_date": "departDate",
+    "return_date": "returnDate",
     "num_adults": "numAdults",
     "num_children": "numChildren",
     "num_infants": "numInfants",
@@ -146,10 +192,12 @@ export const SearchOneWayRequestBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type SearchOneWayRequestBody$Outbound = {
+export type SearchFlightsRequestBody$Outbound = {
   origin: string;
   destination: string;
+  flight_type: string;
   depart_date: string;
+  return_date?: string | undefined;
   stops?: Array<string> | undefined;
   num_adults: number;
   num_children: number;
@@ -160,14 +208,16 @@ export type SearchOneWayRequestBody$Outbound = {
 };
 
 /** @internal */
-export const SearchOneWayRequestBody$outboundSchema: z.ZodType<
-  SearchOneWayRequestBody$Outbound,
+export const SearchFlightsRequestBody$outboundSchema: z.ZodType<
+  SearchFlightsRequestBody$Outbound,
   z.ZodTypeDef,
-  SearchOneWayRequestBody
+  SearchFlightsRequestBody
 > = z.object({
   origin: z.string(),
   destination: z.string(),
+  flightType: FlightType$outboundSchema,
   departDate: z.string(),
+  returnDate: z.string().optional(),
   stops: z.array(Stops$outboundSchema).optional(),
   numAdults: z.number().default(1),
   numChildren: z.number().default(0),
@@ -177,7 +227,9 @@ export const SearchOneWayRequestBody$outboundSchema: z.ZodType<
   includeDestinationNearbyAirports: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
+    flightType: "flight_type",
     departDate: "depart_date",
+    returnDate: "return_date",
     numAdults: "num_adults",
     numChildren: "num_children",
     numInfants: "num_infants",
@@ -191,18 +243,36 @@ export const SearchOneWayRequestBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchOneWayRequestBody$ {
-  /** @deprecated use `SearchOneWayRequestBody$inboundSchema` instead. */
-  export const inboundSchema = SearchOneWayRequestBody$inboundSchema;
-  /** @deprecated use `SearchOneWayRequestBody$outboundSchema` instead. */
-  export const outboundSchema = SearchOneWayRequestBody$outboundSchema;
-  /** @deprecated use `SearchOneWayRequestBody$Outbound` instead. */
-  export type Outbound = SearchOneWayRequestBody$Outbound;
+export namespace SearchFlightsRequestBody$ {
+  /** @deprecated use `SearchFlightsRequestBody$inboundSchema` instead. */
+  export const inboundSchema = SearchFlightsRequestBody$inboundSchema;
+  /** @deprecated use `SearchFlightsRequestBody$outboundSchema` instead. */
+  export const outboundSchema = SearchFlightsRequestBody$outboundSchema;
+  /** @deprecated use `SearchFlightsRequestBody$Outbound` instead. */
+  export type Outbound = SearchFlightsRequestBody$Outbound;
+}
+
+export function searchFlightsRequestBodyToJSON(
+  searchFlightsRequestBody: SearchFlightsRequestBody,
+): string {
+  return JSON.stringify(
+    SearchFlightsRequestBody$outboundSchema.parse(searchFlightsRequestBody),
+  );
+}
+
+export function searchFlightsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchFlightsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchFlightsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchFlightsRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
-export const SearchOneWayResponseBody$inboundSchema: z.ZodType<
-  SearchOneWayResponseBody,
+export const SearchFlightsResponseBody$inboundSchema: z.ZodType<
+  SearchFlightsResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -210,15 +280,15 @@ export const SearchOneWayResponseBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type SearchOneWayResponseBody$Outbound = {
+export type SearchFlightsResponseBody$Outbound = {
   itineraries?: Array<components.SkyScannerItinerary$Outbound> | undefined;
 };
 
 /** @internal */
-export const SearchOneWayResponseBody$outboundSchema: z.ZodType<
-  SearchOneWayResponseBody$Outbound,
+export const SearchFlightsResponseBody$outboundSchema: z.ZodType<
+  SearchFlightsResponseBody$Outbound,
   z.ZodTypeDef,
-  SearchOneWayResponseBody
+  SearchFlightsResponseBody
 > = z.object({
   itineraries: z.array(components.SkyScannerItinerary$outboundSchema)
     .optional(),
@@ -228,11 +298,29 @@ export const SearchOneWayResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchOneWayResponseBody$ {
-  /** @deprecated use `SearchOneWayResponseBody$inboundSchema` instead. */
-  export const inboundSchema = SearchOneWayResponseBody$inboundSchema;
-  /** @deprecated use `SearchOneWayResponseBody$outboundSchema` instead. */
-  export const outboundSchema = SearchOneWayResponseBody$outboundSchema;
-  /** @deprecated use `SearchOneWayResponseBody$Outbound` instead. */
-  export type Outbound = SearchOneWayResponseBody$Outbound;
+export namespace SearchFlightsResponseBody$ {
+  /** @deprecated use `SearchFlightsResponseBody$inboundSchema` instead. */
+  export const inboundSchema = SearchFlightsResponseBody$inboundSchema;
+  /** @deprecated use `SearchFlightsResponseBody$outboundSchema` instead. */
+  export const outboundSchema = SearchFlightsResponseBody$outboundSchema;
+  /** @deprecated use `SearchFlightsResponseBody$Outbound` instead. */
+  export type Outbound = SearchFlightsResponseBody$Outbound;
+}
+
+export function searchFlightsResponseBodyToJSON(
+  searchFlightsResponseBody: SearchFlightsResponseBody,
+): string {
+  return JSON.stringify(
+    SearchFlightsResponseBody$outboundSchema.parse(searchFlightsResponseBody),
+  );
+}
+
+export function searchFlightsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchFlightsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchFlightsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchFlightsResponseBody' from JSON`,
+  );
 }

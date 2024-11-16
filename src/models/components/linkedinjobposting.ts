@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type LinkedInJobPosting = {
   /**
@@ -142,4 +145,22 @@ export namespace LinkedInJobPosting$ {
   export const outboundSchema = LinkedInJobPosting$outboundSchema;
   /** @deprecated use `LinkedInJobPosting$Outbound` instead. */
   export type Outbound = LinkedInJobPosting$Outbound;
+}
+
+export function linkedInJobPostingToJSON(
+  linkedInJobPosting: LinkedInJobPosting,
+): string {
+  return JSON.stringify(
+    LinkedInJobPosting$outboundSchema.parse(linkedInJobPosting),
+  );
+}
+
+export function linkedInJobPostingFromJSON(
+  jsonString: string,
+): SafeParseResult<LinkedInJobPosting, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LinkedInJobPosting$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LinkedInJobPosting' from JSON`,
+  );
 }

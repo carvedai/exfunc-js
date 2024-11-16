@@ -4,8 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The criteria to sort the results (e.g., "recommended", "highest_rated", etc.)
@@ -120,6 +123,26 @@ export namespace SearchBusinessesRequestBody$ {
   export type Outbound = SearchBusinessesRequestBody$Outbound;
 }
 
+export function searchBusinessesRequestBodyToJSON(
+  searchBusinessesRequestBody: SearchBusinessesRequestBody,
+): string {
+  return JSON.stringify(
+    SearchBusinessesRequestBody$outboundSchema.parse(
+      searchBusinessesRequestBody,
+    ),
+  );
+}
+
+export function searchBusinessesRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchBusinessesRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchBusinessesRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchBusinessesRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchBusinessesResponseBody$inboundSchema: z.ZodType<
   SearchBusinessesResponseBody,
@@ -154,4 +177,24 @@ export namespace SearchBusinessesResponseBody$ {
   export const outboundSchema = SearchBusinessesResponseBody$outboundSchema;
   /** @deprecated use `SearchBusinessesResponseBody$Outbound` instead. */
   export type Outbound = SearchBusinessesResponseBody$Outbound;
+}
+
+export function searchBusinessesResponseBodyToJSON(
+  searchBusinessesResponseBody: SearchBusinessesResponseBody,
+): string {
+  return JSON.stringify(
+    SearchBusinessesResponseBody$outboundSchema.parse(
+      searchBusinessesResponseBody,
+    ),
+  );
+}
+
+export function searchBusinessesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchBusinessesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchBusinessesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchBusinessesResponseBody' from JSON`,
+  );
 }

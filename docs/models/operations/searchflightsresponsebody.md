@@ -1,13 +1,13 @@
-# SearchRoundtripResponseBody
+# SearchFlightsResponseBody
 
-SearchRoundtrip API successful response
+SearchFlights API successful response
 
 ## Example Usage
 
 ```typescript
-import { SearchRoundtripResponseBody } from "exfunc/models/operations";
+import { SearchFlightsResponseBody } from "exfunc/models/operations";
 
-let value: SearchRoundtripResponseBody = {};
+let value: SearchFlightsResponseBody = {};
 ```
 
 ## Fields

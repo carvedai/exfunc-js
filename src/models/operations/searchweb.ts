@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SearchWebRequestBody = {
   /**
@@ -76,6 +79,24 @@ export namespace SearchWebRequestBody$ {
   export type Outbound = SearchWebRequestBody$Outbound;
 }
 
+export function searchWebRequestBodyToJSON(
+  searchWebRequestBody: SearchWebRequestBody,
+): string {
+  return JSON.stringify(
+    SearchWebRequestBody$outboundSchema.parse(searchWebRequestBody),
+  );
+}
+
+export function searchWebRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchWebRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchWebRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchWebRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
   z.object({
@@ -115,6 +136,20 @@ export namespace Results$ {
   export type Outbound = Results$Outbound;
 }
 
+export function resultsToJSON(results: Results): string {
+  return JSON.stringify(Results$outboundSchema.parse(results));
+}
+
+export function resultsFromJSON(
+  jsonString: string,
+): SafeParseResult<Results, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Results$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Results' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchWebResponseBody$inboundSchema: z.ZodType<
   SearchWebResponseBody,
@@ -149,4 +184,22 @@ export namespace SearchWebResponseBody$ {
   export const outboundSchema = SearchWebResponseBody$outboundSchema;
   /** @deprecated use `SearchWebResponseBody$Outbound` instead. */
   export type Outbound = SearchWebResponseBody$Outbound;
+}
+
+export function searchWebResponseBodyToJSON(
+  searchWebResponseBody: SearchWebResponseBody,
+): string {
+  return JSON.stringify(
+    SearchWebResponseBody$outboundSchema.parse(searchWebResponseBody),
+  );
+}
+
+export function searchWebResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchWebResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchWebResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchWebResponseBody' from JSON`,
+  );
 }

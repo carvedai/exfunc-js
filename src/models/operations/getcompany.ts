@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetCompanyRequestBody = {
   /**
@@ -64,6 +67,24 @@ export namespace GetCompanyRequestBody$ {
   export type Outbound = GetCompanyRequestBody$Outbound;
 }
 
+export function getCompanyRequestBodyToJSON(
+  getCompanyRequestBody: GetCompanyRequestBody,
+): string {
+  return JSON.stringify(
+    GetCompanyRequestBody$outboundSchema.parse(getCompanyRequestBody),
+  );
+}
+
+export function getCompanyRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetCompanyRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetCompanyRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetCompanyRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetCompanyResponseBody$inboundSchema: z.ZodType<
   GetCompanyResponseBody,
@@ -98,4 +119,22 @@ export namespace GetCompanyResponseBody$ {
   export const outboundSchema = GetCompanyResponseBody$outboundSchema;
   /** @deprecated use `GetCompanyResponseBody$Outbound` instead. */
   export type Outbound = GetCompanyResponseBody$Outbound;
+}
+
+export function getCompanyResponseBodyToJSON(
+  getCompanyResponseBody: GetCompanyResponseBody,
+): string {
+  return JSON.stringify(
+    GetCompanyResponseBody$outboundSchema.parse(getCompanyResponseBody),
+  );
+}
+
+export function getCompanyResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetCompanyResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetCompanyResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetCompanyResponseBody' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Filter for job postings based on when they were posted
@@ -372,6 +375,26 @@ export namespace SearchJobPostingsRequestBody$ {
   export type Outbound = SearchJobPostingsRequestBody$Outbound;
 }
 
+export function searchJobPostingsRequestBodyToJSON(
+  searchJobPostingsRequestBody: SearchJobPostingsRequestBody,
+): string {
+  return JSON.stringify(
+    SearchJobPostingsRequestBody$outboundSchema.parse(
+      searchJobPostingsRequestBody,
+    ),
+  );
+}
+
+export function searchJobPostingsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchJobPostingsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchJobPostingsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchJobPostingsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const JobPostings$inboundSchema: z.ZodType<
   JobPostings,
@@ -436,6 +459,20 @@ export namespace JobPostings$ {
   export type Outbound = JobPostings$Outbound;
 }
 
+export function jobPostingsToJSON(jobPostings: JobPostings): string {
+  return JSON.stringify(JobPostings$outboundSchema.parse(jobPostings));
+}
+
+export function jobPostingsFromJSON(
+  jsonString: string,
+): SafeParseResult<JobPostings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobPostings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobPostings' from JSON`,
+  );
+}
+
 /** @internal */
 export const SearchJobPostingsResponseBody$inboundSchema: z.ZodType<
   SearchJobPostingsResponseBody,
@@ -478,4 +515,24 @@ export namespace SearchJobPostingsResponseBody$ {
   export const outboundSchema = SearchJobPostingsResponseBody$outboundSchema;
   /** @deprecated use `SearchJobPostingsResponseBody$Outbound` instead. */
   export type Outbound = SearchJobPostingsResponseBody$Outbound;
+}
+
+export function searchJobPostingsResponseBodyToJSON(
+  searchJobPostingsResponseBody: SearchJobPostingsResponseBody,
+): string {
+  return JSON.stringify(
+    SearchJobPostingsResponseBody$outboundSchema.parse(
+      searchJobPostingsResponseBody,
+    ),
+  );
+}
+
+export function searchJobPostingsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchJobPostingsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchJobPostingsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchJobPostingsResponseBody' from JSON`,
+  );
 }

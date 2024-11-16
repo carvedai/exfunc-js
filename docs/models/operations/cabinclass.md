@@ -7,7 +7,7 @@ The cabin class filter
 ```typescript
 import { CabinClass } from "exfunc/models/operations";
 
-let value: CabinClass = "first";
+let value: CabinClass = "premium_economy";
 ```
 
 ## Values
