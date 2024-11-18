@@ -2290,6 +2290,7 @@
           },
           "attributes": {
             "type": "object",
+            "nullable": true,
             "additionalProperties": {
               "type": "string"
             },
@@ -2297,6 +2298,7 @@
           },
           "rating": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "The average rating of the product"
           },

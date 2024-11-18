@@ -28,11 +28,11 @@ export type GoogleProduct = {
   /**
    * A set of attributes for the product, represented as key-value pairs
    */
-  attributes?: { [k: string]: string } | undefined;
+  attributes?: { [k: string]: string } | null | undefined;
   /**
    * The average rating of the product
    */
-  rating?: number | undefined;
+  rating?: number | null | undefined;
   /**
    * The URL link to the product page
    */
@@ -65,8 +65,8 @@ export const GoogleProduct$inboundSchema: z.ZodType<
   title: z.string().optional(),
   description: z.string().optional(),
   photos: z.array(z.string()).optional(),
-  attributes: z.record(z.string()).optional(),
-  rating: z.number().optional(),
+  attributes: z.nullable(z.record(z.string())).optional(),
+  rating: z.nullable(z.number()).optional(),
   page_url: z.string().optional(),
   num_reviews: z.number().int().optional(),
   reviews_per_rating: z.record(z.number().int()).optional(),
@@ -89,8 +89,8 @@ export type GoogleProduct$Outbound = {
   title?: string | undefined;
   description?: string | undefined;
   photos?: Array<string> | undefined;
-  attributes?: { [k: string]: string } | undefined;
-  rating?: number | undefined;
+  attributes?: { [k: string]: string } | null | undefined;
+  rating?: number | null | undefined;
   page_url?: string | undefined;
   num_reviews?: number | undefined;
   reviews_per_rating?: { [k: string]: number } | undefined;
@@ -108,8 +108,8 @@ export const GoogleProduct$outboundSchema: z.ZodType<
   title: z.string().optional(),
   description: z.string().optional(),
   photos: z.array(z.string()).optional(),
-  attributes: z.record(z.string()).optional(),
-  rating: z.number().optional(),
+  attributes: z.nullable(z.record(z.string())).optional(),
+  rating: z.nullable(z.number()).optional(),
   pageUrl: z.string().optional(),
   numReviews: z.number().int().optional(),
   reviewsPerRating: z.record(z.number().int()).optional(),

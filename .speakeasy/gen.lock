@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 61ab9bda8531ece421ef12a1249fe655
+  docChecksum: 3b7a34f8cbe667ae0b4789b7eb3b428d
   docVersion: 1.0.0
-  speakeasyVersion: 1.440.1
+  speakeasyVersion: 1.441.0
   generationVersion: 2.460.1
-  releaseVersion: 0.5.5
-  configChecksum: 32ceaae8e9ed9be04ba12e0002ea389d
+  releaseVersion: 0.6.0
+  configChecksum: 34a61790d70aa8cb992e82a38bdb090b
   published: true
 features:
   typescript:
@@ -27,7 +27,6 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
-    tests: 0.7.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
