@@ -158,7 +158,7 @@ export type JobPostings = {
   /**
    * Date when the job was posted
    */
-  datePosted?: Date | undefined;
+  datePosted?: string | undefined;
   /**
    * Name of the company offering the job
    */
@@ -404,8 +404,7 @@ export const JobPostings$inboundSchema: z.ZodType<
   url: z.string().optional(),
   title: z.string().optional(),
   location: z.string().optional(),
-  date_posted: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  date_posted: z.string().optional(),
   company_name: z.string().optional(),
   company_url: z.string().optional(),
 }).transform((v) => {
@@ -435,7 +434,7 @@ export const JobPostings$outboundSchema: z.ZodType<
   url: z.string().optional(),
   title: z.string().optional(),
   location: z.string().optional(),
-  datePosted: z.date().transform(v => v.toISOString()).optional(),
+  datePosted: z.string().optional(),
   companyName: z.string().optional(),
   companyUrl: z.string().optional(),
 }).transform((v) => {

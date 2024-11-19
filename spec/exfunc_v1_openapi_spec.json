@@ -872,7 +872,6 @@
                           },
                           "date_posted": {
                             "type": "string",
-                            "format": "date-time",
                             "description": "Date when the job was posted"
                           },
                           "company_name": {
