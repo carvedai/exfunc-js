@@ -2689,6 +2689,7 @@
           },
           "title": {
             "type": "string",
+            "nullable": true,
             "description": "Job title of the person"
           },
           "company_name": {
@@ -2706,7 +2707,8 @@
               "type": "object",
               "properties": {
                 "title": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 },
                 "company_name": {
                   "type": "string"

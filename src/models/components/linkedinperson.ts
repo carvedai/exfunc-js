@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Experiences = {
-  title?: string | undefined;
+  title?: string | null | undefined;
   companyName?: string | undefined;
   startDate?: string | null | undefined;
   endDate?: string | null | undefined;
@@ -31,7 +31,7 @@ export type LinkedInPerson = {
   /**
    * Job title of the person
    */
-  title?: string | undefined;
+  title?: string | null | undefined;
   /**
    * Name of the company the person works for
    */
@@ -52,7 +52,7 @@ export const Experiences$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
   company_name: z.string().optional(),
   start_date: z.nullable(z.string()).optional(),
   end_date: z.nullable(z.string()).optional(),
@@ -66,7 +66,7 @@ export const Experiences$inboundSchema: z.ZodType<
 
 /** @internal */
 export type Experiences$Outbound = {
-  title?: string | undefined;
+  title?: string | null | undefined;
   company_name?: string | undefined;
   start_date?: string | null | undefined;
   end_date?: string | null | undefined;
@@ -78,7 +78,7 @@ export const Experiences$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Experiences
 > = z.object({
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
   companyName: z.string().optional(),
   startDate: z.nullable(z.string()).optional(),
   endDate: z.nullable(z.string()).optional(),
@@ -126,7 +126,7 @@ export const LinkedInPerson$inboundSchema: z.ZodType<
   url: z.string().optional(),
   name: z.string().optional(),
   location: z.string().optional(),
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
   company_name: z.string().optional(),
   company_url: z.string().optional(),
   experiences: z.array(z.lazy(() => Experiences$inboundSchema)).optional(),
@@ -142,7 +142,7 @@ export type LinkedInPerson$Outbound = {
   url?: string | undefined;
   name?: string | undefined;
   location?: string | undefined;
-  title?: string | undefined;
+  title?: string | null | undefined;
   company_name?: string | undefined;
   company_url?: string | undefined;
   experiences?: Array<Experiences$Outbound> | undefined;
@@ -157,7 +157,7 @@ export const LinkedInPerson$outboundSchema: z.ZodType<
   url: z.string().optional(),
   name: z.string().optional(),
   location: z.string().optional(),
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
   companyName: z.string().optional(),
   companyUrl: z.string().optional(),
   experiences: z.array(z.lazy(() => Experiences$outboundSchema)).optional(),
