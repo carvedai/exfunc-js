@@ -2277,6 +2277,7 @@
           },
           "description": {
             "type": "string",
+            "nullable": true,
             "description": "A detailed description of the product"
           },
           "photos": {
@@ -2308,6 +2309,7 @@
           },
           "num_reviews": {
             "type": "integer",
+            "nullable": true,
             "description": "The total number of reviews for the product"
           },
           "reviews_per_rating": {

@@ -20,7 +20,7 @@ export type GoogleProduct = {
   /**
    * A detailed description of the product
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * An array of URLs for the product photos
    */
@@ -40,7 +40,7 @@ export type GoogleProduct = {
   /**
    * The total number of reviews for the product
    */
-  numReviews?: number | undefined;
+  numReviews?: number | null | undefined;
   /**
    * The number of reviews for each rating level
    */
@@ -63,12 +63,12 @@ export const GoogleProduct$inboundSchema: z.ZodType<
 > = z.object({
   product_id: z.string().optional(),
   title: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   photos: z.array(z.string()).optional(),
   attributes: z.nullable(z.record(z.string())).optional(),
   rating: z.nullable(z.number()).optional(),
   page_url: z.string().optional(),
-  num_reviews: z.number().int().optional(),
+  num_reviews: z.nullable(z.number().int()).optional(),
   reviews_per_rating: z.record(z.number().int()).optional(),
   product_details: z.record(z.string()).optional(),
   product_specs: z.record(z.string()).optional(),
@@ -87,12 +87,12 @@ export const GoogleProduct$inboundSchema: z.ZodType<
 export type GoogleProduct$Outbound = {
   product_id?: string | undefined;
   title?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   photos?: Array<string> | undefined;
   attributes?: { [k: string]: string } | null | undefined;
   rating?: number | null | undefined;
   page_url?: string | undefined;
-  num_reviews?: number | undefined;
+  num_reviews?: number | null | undefined;
   reviews_per_rating?: { [k: string]: number } | undefined;
   product_details?: { [k: string]: string } | undefined;
   product_specs?: { [k: string]: string } | undefined;
@@ -106,12 +106,12 @@ export const GoogleProduct$outboundSchema: z.ZodType<
 > = z.object({
   productId: z.string().optional(),
   title: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   photos: z.array(z.string()).optional(),
   attributes: z.nullable(z.record(z.string())).optional(),
   rating: z.nullable(z.number()).optional(),
   pageUrl: z.string().optional(),
-  numReviews: z.number().int().optional(),
+  numReviews: z.nullable(z.number().int()).optional(),
   reviewsPerRating: z.record(z.number().int()).optional(),
   productDetails: z.record(z.string()).optional(),
   productSpecs: z.record(z.string()).optional(),
