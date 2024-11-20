@@ -3193,11 +3193,13 @@
           },
           "bathrooms": {
             "type": "number",
+            "nullable": true,
             "format": "float",
             "description": "Number of bathrooms in the property"
           },
           "bedrooms": {
             "type": "integer",
+            "nullable": true,
             "description": "Number of bedrooms in the property"
           },
           "living_area": {

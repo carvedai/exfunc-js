@@ -56,11 +56,11 @@ export type ZillowProperty = {
   /**
    * Number of bathrooms in the property
    */
-  bathrooms?: number | undefined;
+  bathrooms?: number | null | undefined;
   /**
    * Number of bedrooms in the property
    */
-  bedrooms?: number | undefined;
+  bedrooms?: number | null | undefined;
   /**
    * The living area of the property in square feet
    */
@@ -164,8 +164,8 @@ export const ZillowProperty$inboundSchema: z.ZodType<
   property_id: z.number().int().optional(),
   address: z.lazy(() => Address$inboundSchema).optional(),
   photos: z.array(z.string()).optional(),
-  bathrooms: z.number().optional(),
-  bedrooms: z.number().int().optional(),
+  bathrooms: z.nullable(z.number()).optional(),
+  bedrooms: z.nullable(z.number().int()).optional(),
   living_area: z.nullable(z.number()).optional(),
   year_built: z.nullable(z.number().int()).optional(),
   property_type: z.string().optional(),
@@ -193,8 +193,8 @@ export type ZillowProperty$Outbound = {
   property_id?: number | undefined;
   address?: Address$Outbound | undefined;
   photos?: Array<string> | undefined;
-  bathrooms?: number | undefined;
-  bedrooms?: number | undefined;
+  bathrooms?: number | null | undefined;
+  bedrooms?: number | null | undefined;
   living_area?: number | null | undefined;
   year_built?: number | null | undefined;
   property_type?: string | undefined;
@@ -215,8 +215,8 @@ export const ZillowProperty$outboundSchema: z.ZodType<
   propertyId: z.number().int().optional(),
   address: z.lazy(() => Address$outboundSchema).optional(),
   photos: z.array(z.string()).optional(),
-  bathrooms: z.number().optional(),
-  bedrooms: z.number().int().optional(),
+  bathrooms: z.nullable(z.number()).optional(),
+  bedrooms: z.nullable(z.number().int()).optional(),
   livingArea: z.nullable(z.number()).optional(),
   yearBuilt: z.nullable(z.number().int()).optional(),
   propertyType: z.string().optional(),
