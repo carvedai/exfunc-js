@@ -1969,6 +1969,10 @@
                   "start": {
                     "type": "integer",
                     "description": "The starting index for pagination (default is 0)"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "The number of businesses to retrieve"
                   }
                 },
                 "required": [
@@ -1990,7 +1994,17 @@
                     "businesses": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/YelpBusiness"
+                        "type": "object",
+                        "properties": {
+                          "business_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the business"
+                          },
+                          "alias": {
+                            "type": "string",
+                            "description": "A unique identifier used in the URL for the business"
+                          }
+                        }
                       }
                     }
                   }

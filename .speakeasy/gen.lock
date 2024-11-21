@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 76534b46e588833f2ba35b751d299cb9
+  docChecksum: 22b0f9476f4b630cdfc94ebc2c83b2fb
   docVersion: 1.0.0
-  speakeasyVersion: 1.441.0
-  generationVersion: 2.460.1
-  releaseVersion: 0.6.4
-  configChecksum: c0d36b244a2f82af8b7853790beb16cd
+  speakeasyVersion: 1.441.1
+  generationVersion: 2.461.2
+  releaseVersion: 0.6.5
+  configChecksum: 21757602b8b4cea2c541de9fe62f55ec
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.5
+    core: 3.18.6
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -74,6 +74,7 @@ generatedFiles:
   - docs/models/components/zillowproperty.md
   - docs/models/errors/servererror.md
   - docs/models/errors/usererror.md
+  - docs/models/operations/businesses.md
   - docs/models/operations/cabinclass.md
   - docs/models/operations/companies.md
   - docs/models/operations/dateposted.md

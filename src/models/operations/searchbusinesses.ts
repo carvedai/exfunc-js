@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -40,13 +39,28 @@ export type SearchBusinessesRequestBody = {
    * The starting index for pagination (default is 0)
    */
   start?: number | undefined;
+  /**
+   * The number of businesses to retrieve
+   */
+  count?: number | undefined;
+};
+
+export type Businesses = {
+  /**
+   * Unique identifier for the business
+   */
+  businessId?: string | undefined;
+  /**
+   * A unique identifier used in the URL for the business
+   */
+  alias?: string | undefined;
 };
 
 /**
  * SearchBusinesses API successful response
  */
 export type SearchBusinessesResponseBody = {
-  businesses?: Array<components.YelpBusiness> | undefined;
+  businesses?: Array<Businesses> | undefined;
 };
 
 /** @internal */
@@ -80,6 +94,7 @@ export const SearchBusinessesRequestBody$inboundSchema: z.ZodType<
   location: z.string(),
   sort_by: SearchBusinessesSortBy$inboundSchema.optional(),
   start: z.number().int().optional(),
+  count: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "sort_by": "sortBy",
@@ -92,6 +107,7 @@ export type SearchBusinessesRequestBody$Outbound = {
   location: string;
   sort_by?: string | undefined;
   start?: number | undefined;
+  count?: number | undefined;
 };
 
 /** @internal */
@@ -104,6 +120,7 @@ export const SearchBusinessesRequestBody$outboundSchema: z.ZodType<
   location: z.string(),
   sortBy: SearchBusinessesSortBy$outboundSchema.optional(),
   start: z.number().int().optional(),
+  count: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     sortBy: "sort_by",
@@ -144,17 +161,78 @@ export function searchBusinessesRequestBodyFromJSON(
 }
 
 /** @internal */
+export const Businesses$inboundSchema: z.ZodType<
+  Businesses,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  business_id: z.string().optional(),
+  alias: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "business_id": "businessId",
+  });
+});
+
+/** @internal */
+export type Businesses$Outbound = {
+  business_id?: string | undefined;
+  alias?: string | undefined;
+};
+
+/** @internal */
+export const Businesses$outboundSchema: z.ZodType<
+  Businesses$Outbound,
+  z.ZodTypeDef,
+  Businesses
+> = z.object({
+  businessId: z.string().optional(),
+  alias: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    businessId: "business_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Businesses$ {
+  /** @deprecated use `Businesses$inboundSchema` instead. */
+  export const inboundSchema = Businesses$inboundSchema;
+  /** @deprecated use `Businesses$outboundSchema` instead. */
+  export const outboundSchema = Businesses$outboundSchema;
+  /** @deprecated use `Businesses$Outbound` instead. */
+  export type Outbound = Businesses$Outbound;
+}
+
+export function businessesToJSON(businesses: Businesses): string {
+  return JSON.stringify(Businesses$outboundSchema.parse(businesses));
+}
+
+export function businessesFromJSON(
+  jsonString: string,
+): SafeParseResult<Businesses, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Businesses$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Businesses' from JSON`,
+  );
+}
+
+/** @internal */
 export const SearchBusinessesResponseBody$inboundSchema: z.ZodType<
   SearchBusinessesResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  businesses: z.array(components.YelpBusiness$inboundSchema).optional(),
+  businesses: z.array(z.lazy(() => Businesses$inboundSchema)).optional(),
 });
 
 /** @internal */
 export type SearchBusinessesResponseBody$Outbound = {
-  businesses?: Array<components.YelpBusiness$Outbound> | undefined;
+  businesses?: Array<Businesses$Outbound> | undefined;
 };
 
 /** @internal */
@@ -163,7 +241,7 @@ export const SearchBusinessesResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchBusinessesResponseBody
 > = z.object({
-  businesses: z.array(components.YelpBusiness$outboundSchema).optional(),
+  businesses: z.array(z.lazy(() => Businesses$outboundSchema)).optional(),
 });
 
 /**
