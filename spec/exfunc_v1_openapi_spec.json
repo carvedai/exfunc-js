@@ -2255,10 +2255,12 @@
           },
           "snippet": {
             "type": "string",
+            "nullable": true,
             "description": "A brief snippet or summary of the news article"
           },
           "photo_url": {
             "type": "string",
+            "nullable": true,
             "format": "uri",
             "description": "The URL of the photo associated with the news article"
           },

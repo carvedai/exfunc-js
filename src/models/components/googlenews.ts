@@ -20,11 +20,11 @@ export type GoogleNews = {
   /**
    * A brief snippet or summary of the news article
    */
-  snippet?: string | undefined;
+  snippet?: string | null | undefined;
   /**
    * The URL of the photo associated with the news article
    */
-  photoUrl?: string | undefined;
+  photoUrl?: string | null | undefined;
   /**
    * The publication date and time in UTC
    */
@@ -47,8 +47,8 @@ export const GoogleNews$inboundSchema: z.ZodType<
 > = z.object({
   title: z.string().optional(),
   link: z.string().optional(),
-  snippet: z.string().optional(),
-  photo_url: z.string().optional(),
+  snippet: z.nullable(z.string()).optional(),
+  photo_url: z.nullable(z.string()).optional(),
   published_datetime_utc: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
   ).optional(),
@@ -67,8 +67,8 @@ export const GoogleNews$inboundSchema: z.ZodType<
 export type GoogleNews$Outbound = {
   title?: string | undefined;
   link?: string | undefined;
-  snippet?: string | undefined;
-  photo_url?: string | undefined;
+  snippet?: string | null | undefined;
+  photo_url?: string | null | undefined;
   published_datetime_utc?: string | undefined;
   source_url?: string | undefined;
   source_name?: string | undefined;
@@ -82,8 +82,8 @@ export const GoogleNews$outboundSchema: z.ZodType<
 > = z.object({
   title: z.string().optional(),
   link: z.string().optional(),
-  snippet: z.string().optional(),
-  photoUrl: z.string().optional(),
+  snippet: z.nullable(z.string()).optional(),
+  photoUrl: z.nullable(z.string()).optional(),
   publishedDatetimeUtc: z.date().transform(v => v.toISOString()).optional(),
   sourceUrl: z.string().optional(),
   sourceName: z.string().optional(),
