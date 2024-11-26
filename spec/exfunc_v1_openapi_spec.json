@@ -2460,7 +2460,7 @@
                     "description": "Stage of last funding round",
                     "nullable": true
                   },
-                  "date": {
+                  "date_posted": {
                     "type": "string",
                     "description": "Date of last funding round",
                     "nullable": true

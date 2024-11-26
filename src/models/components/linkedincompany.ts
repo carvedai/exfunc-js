@@ -33,7 +33,7 @@ export type LastRound = {
   /**
    * Date of last funding round
    */
-  date?: string | null | undefined;
+  datePosted?: string | null | undefined;
   /**
    * Amount of last funding round
    */
@@ -172,15 +172,19 @@ export const LastRound$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   stage: z.nullable(z.string()).optional(),
-  date: z.nullable(z.string()).optional(),
+  date_posted: z.nullable(z.string()).optional(),
   amount: z.nullable(z.string()).optional(),
   url: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "date_posted": "datePosted",
+  });
 });
 
 /** @internal */
 export type LastRound$Outbound = {
   stage?: string | null | undefined;
-  date?: string | null | undefined;
+  date_posted?: string | null | undefined;
   amount?: string | null | undefined;
   url?: string | null | undefined;
 };
@@ -192,9 +196,13 @@ export const LastRound$outboundSchema: z.ZodType<
   LastRound
 > = z.object({
   stage: z.nullable(z.string()).optional(),
-  date: z.nullable(z.string()).optional(),
+  datePosted: z.nullable(z.string()).optional(),
   amount: z.nullable(z.string()).optional(),
   url: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    datePosted: "date_posted",
+  });
 });
 
 /**
