@@ -103,7 +103,7 @@ export type SearchJobPostingsRequestBody = {
   /**
    * Keywords to search for in job postings
    */
-  keywords: string;
+  keywords?: string | undefined;
   /**
    * Location to filter job postings
    */
@@ -300,7 +300,7 @@ export const SearchJobPostingsRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  keywords: z.string(),
+  keywords: z.string().optional(),
   location: z.string().optional(),
   date_posted: DatePosted$inboundSchema.optional(),
   salary: Salary$inboundSchema.optional(),
@@ -323,7 +323,7 @@ export const SearchJobPostingsRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchJobPostingsRequestBody$Outbound = {
-  keywords: string;
+  keywords?: string | undefined;
   location?: string | undefined;
   date_posted?: string | undefined;
   salary?: string | undefined;
@@ -341,7 +341,7 @@ export const SearchJobPostingsRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchJobPostingsRequestBody
 > = z.object({
-  keywords: z.string(),
+  keywords: z.string().optional(),
   location: z.string().optional(),
   datePosted: DatePosted$outboundSchema.optional(),
   salary: Salary$outboundSchema.optional(),

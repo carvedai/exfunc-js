@@ -5,16 +5,14 @@
 ```typescript
 import { SearchPeopleRequestBody } from "exfunc/models/operations";
 
-let value: SearchPeopleRequestBody = {
-  keywords: "<value>",
-};
+let value: SearchPeopleRequestBody = {};
 ```
 
 ## Fields
 
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `keywords`                                                                                 | *string*                                                                                   | :heavy_check_mark:                                                                         | Keywords to search for in people profiles                                                  |
+| `keywords`                                                                                 | *string*                                                                                   | :heavy_minus_sign:                                                                         | Keywords to search for in people profiles                                                  |
 | `locations`                                                                                | *string*[]                                                                                 | :heavy_minus_sign:                                                                         | List of locations to filter the search                                                     |
 | `titles`                                                                                   | *string*[]                                                                                 | :heavy_minus_sign:                                                                         | List of job titles to filter the search                                                    |
 | `seniorities`                                                                              | [operations.Seniorities](../../models/operations/seniorities.md)[]                         | :heavy_minus_sign:                                                                         | List of seniority levels to filter the search                                              |

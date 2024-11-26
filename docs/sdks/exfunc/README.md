@@ -8,3 +8,6 @@ Exfunc offers one form of authentication:
   - API Key
 
 <SecurityDefinitions />
+
+
+### Available Operations

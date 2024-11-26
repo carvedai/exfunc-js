@@ -12,5 +12,9 @@ let value: LastRound = {};
 
 ## Fields
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| Field                        | Type                         | Required                     | Description                  |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `stage`                      | *string*                     | :heavy_minus_sign:           | Stage of last funding round  |
+| `date`                       | *string*                     | :heavy_minus_sign:           | Date of last funding round   |
+| `amount`                     | *string*                     | :heavy_minus_sign:           | Amount of last funding round |
+| `url`                        | *string*                     | :heavy_minus_sign:           | URL of source                |

@@ -29,7 +29,7 @@ export type SearchPeopleRequestBody = {
   /**
    * Keywords to search for in people profiles
    */
-  keywords: string;
+  keywords?: string | undefined;
   /**
    * List of locations to filter the search
    */
@@ -92,7 +92,7 @@ export const SearchPeopleRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  keywords: z.string(),
+  keywords: z.string().optional(),
   locations: z.array(z.string()).optional(),
   titles: z.array(z.string()).optional(),
   seniorities: z.array(Seniorities$inboundSchema).optional(),
@@ -112,7 +112,7 @@ export const SearchPeopleRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchPeopleRequestBody$Outbound = {
-  keywords: string;
+  keywords?: string | undefined;
   locations?: Array<string> | undefined;
   titles?: Array<string> | undefined;
   seniorities?: Array<string> | undefined;
@@ -128,7 +128,7 @@ export const SearchPeopleRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchPeopleRequestBody
 > = z.object({
-  keywords: z.string(),
+  keywords: z.string().optional(),
   locations: z.array(z.string()).optional(),
   titles: z.array(z.string()).optional(),
   seniorities: z.array(Seniorities$outboundSchema).optional(),

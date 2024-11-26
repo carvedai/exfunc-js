@@ -11,14 +11,49 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Total rounds of funding information
  */
-export type TotalRounds = {};
+export type TotalRounds = {
+  /**
+   * Number of funding rounds
+   */
+  count?: number | null | undefined;
+  /**
+   * URL of source
+   */
+  url?: string | null | undefined;
+};
 
 /**
  * Last round of funding information
  */
-export type LastRound = {};
+export type LastRound = {
+  /**
+   * Stage of last funding round
+   */
+  stage?: string | null | undefined;
+  /**
+   * Date of last funding round
+   */
+  date?: string | null | undefined;
+  /**
+   * Amount of last funding round
+   */
+  amount?: string | null | undefined;
+  /**
+   * URL of source
+   */
+  url?: string | null | undefined;
+};
 
-export type Investors = {};
+export type Investors = {
+  /**
+   * Name of investor
+   */
+  name?: string | null | undefined;
+  /**
+   * URL of source
+   */
+  url?: string | null | undefined;
+};
 
 /**
  * Funding information for the company
@@ -82,17 +117,26 @@ export const TotalRounds$inboundSchema: z.ZodType<
   TotalRounds,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  count: z.nullable(z.number().int()).optional(),
+  url: z.nullable(z.string()).optional(),
+});
 
 /** @internal */
-export type TotalRounds$Outbound = {};
+export type TotalRounds$Outbound = {
+  count?: number | null | undefined;
+  url?: string | null | undefined;
+};
 
 /** @internal */
 export const TotalRounds$outboundSchema: z.ZodType<
   TotalRounds$Outbound,
   z.ZodTypeDef,
   TotalRounds
-> = z.object({});
+> = z.object({
+  count: z.nullable(z.number().int()).optional(),
+  url: z.nullable(z.string()).optional(),
+});
 
 /**
  * @internal
@@ -126,17 +170,32 @@ export const LastRound$inboundSchema: z.ZodType<
   LastRound,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  stage: z.nullable(z.string()).optional(),
+  date: z.nullable(z.string()).optional(),
+  amount: z.nullable(z.string()).optional(),
+  url: z.nullable(z.string()).optional(),
+});
 
 /** @internal */
-export type LastRound$Outbound = {};
+export type LastRound$Outbound = {
+  stage?: string | null | undefined;
+  date?: string | null | undefined;
+  amount?: string | null | undefined;
+  url?: string | null | undefined;
+};
 
 /** @internal */
 export const LastRound$outboundSchema: z.ZodType<
   LastRound$Outbound,
   z.ZodTypeDef,
   LastRound
-> = z.object({});
+> = z.object({
+  stage: z.nullable(z.string()).optional(),
+  date: z.nullable(z.string()).optional(),
+  amount: z.nullable(z.string()).optional(),
+  url: z.nullable(z.string()).optional(),
+});
 
 /**
  * @internal
@@ -170,17 +229,26 @@ export const Investors$inboundSchema: z.ZodType<
   Investors,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  name: z.nullable(z.string()).optional(),
+  url: z.nullable(z.string()).optional(),
+});
 
 /** @internal */
-export type Investors$Outbound = {};
+export type Investors$Outbound = {
+  name?: string | null | undefined;
+  url?: string | null | undefined;
+};
 
 /** @internal */
 export const Investors$outboundSchema: z.ZodType<
   Investors$Outbound,
   z.ZodTypeDef,
   Investors
-> = z.object({});
+> = z.object({
+  name: z.nullable(z.string()).optional(),
+  url: z.nullable(z.string()).optional(),
+});
 
 /**
  * @internal

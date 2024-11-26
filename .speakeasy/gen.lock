@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 839bfd9bf0202793d59d23839cc627f8
+  docChecksum: d0e037bad998bb2401d9047921bbc237
   docVersion: 1.0.0
-  speakeasyVersion: 1.443.0
-  generationVersion: 2.461.4
-  releaseVersion: 0.6.6
-  configChecksum: bdd30c45a3218a87445c2bd6c706ec10
+  speakeasyVersion: 1.446.0
+  generationVersion: 2.462.0
+  releaseVersion: 0.6.7
+  configChecksum: 1554b63127eefdb1e74813c6981530be
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.6
+    core: 3.18.7
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -395,3 +395,4 @@ examples:
     speakeasy-default-search-flights:
       requestBody:
         application/json: {"origin": "<value>", "destination": "<value>", "flight_type": "roundtrip", "depart_date": "<value>"}
+generatedTests: {}

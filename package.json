@@ -1,6 +1,6 @@
 {
   "name": "exfunc",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,

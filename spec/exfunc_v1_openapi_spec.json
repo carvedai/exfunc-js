@@ -836,10 +836,7 @@
                     "minimum": 1,
                     "description": "Page number for pagination (default is 1)"
                   }
-                },
-                "required": [
-                  "keywords"
-                ]
+                }
               }
             }
           }
@@ -985,10 +982,7 @@
                     "minimum": 1,
                     "description": "Page number for pagination (default is 1)"
                   }
-                },
-                "required": [
-                  "keywords"
-                ]
+                }
               }
             }
           }
@@ -2442,16 +2436,64 @@
             "properties": {
               "total_rounds": {
                 "type": "object",
-                "description": "Total rounds of funding information"
+                "description": "Total rounds of funding information",
+                "properties": {
+                  "count": {
+                    "type": "integer",
+                    "description": "Number of funding rounds",
+                    "nullable": true
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of source",
+                    "nullable": true
+                  }
+                }
               },
               "last_round": {
                 "type": "object",
-                "description": "Last round of funding information"
+                "description": "Last round of funding information",
+                "properties": {
+                  "stage": {
+                    "type": "string",
+                    "description": "Stage of last funding round",
+                    "nullable": true
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "Date of last funding round",
+                    "nullable": true
+                  },
+                  "amount": {
+                    "type": "string",
+                    "description": "Amount of last funding round",
+                    "nullable": true
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of source",
+                    "nullable": true
+                  }
+                }
               },
               "investors": {
                 "type": "array",
                 "items": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of investor",
+                      "nullable": true
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "URL of source",
+                      "nullable": true
+                    }
+                  }
                 },
                 "description": "List of investors"
               }

@@ -5,16 +5,14 @@
 ```typescript
 import { SearchJobPostingsRequestBody } from "exfunc/models/operations";
 
-let value: SearchJobPostingsRequestBody = {
-  keywords: "<value>",
-};
+let value: SearchJobPostingsRequestBody = {};
 ```
 
 ## Fields
 
 | Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `keywords`                                                                               | *string*                                                                                 | :heavy_check_mark:                                                                       | Keywords to search for in job postings                                                   |
+| `keywords`                                                                               | *string*                                                                                 | :heavy_minus_sign:                                                                       | Keywords to search for in job postings                                                   |
 | `location`                                                                               | *string*                                                                                 | :heavy_minus_sign:                                                                       | Location to filter job postings                                                          |
 | `datePosted`                                                                             | [operations.DatePosted](../../models/operations/dateposted.md)                           | :heavy_minus_sign:                                                                       | Filter for job postings based on when they were posted                                   |
 | `salary`                                                                                 | [operations.Salary](../../models/operations/salary.md)                                   | :heavy_minus_sign:                                                                       | Salary range to filter job postings                                                      |
