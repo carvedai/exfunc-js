@@ -39,7 +39,11 @@ export type GoogleSearchJobPostingsRequestBody = {
    */
   query: string;
   /**
-   * The country code for filtering job postings
+   * Location to filter job postings
+   */
+  location?: string | undefined;
+  /**
+   * The country code to filter job postings
    */
   countryCode?: string | undefined;
   /**
@@ -112,7 +116,8 @@ export const GoogleSearchJobPostingsRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   query: z.string(),
-  country_code: z.string().optional(),
+  location: z.string().optional(),
+  country_code: z.string().default("us"),
   date_posted: DatePosted$inboundSchema.optional(),
   job_types: z.array(JobTypes$inboundSchema).optional(),
   page: z.number().int().optional(),
@@ -129,7 +134,8 @@ export const GoogleSearchJobPostingsRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GoogleSearchJobPostingsRequestBody$Outbound = {
   query: string;
-  country_code?: string | undefined;
+  location?: string | undefined;
+  country_code: string;
   date_posted?: string | undefined;
   job_types?: Array<string> | undefined;
   page?: number | undefined;
@@ -143,7 +149,8 @@ export const GoogleSearchJobPostingsRequestBody$outboundSchema: z.ZodType<
   GoogleSearchJobPostingsRequestBody
 > = z.object({
   query: z.string(),
-  countryCode: z.string().optional(),
+  location: z.string().optional(),
+  countryCode: z.string().default("us"),
   datePosted: DatePosted$outboundSchema.optional(),
   jobTypes: z.array(JobTypes$outboundSchema).optional(),
   page: z.number().int().optional(),

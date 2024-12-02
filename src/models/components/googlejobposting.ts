@@ -36,7 +36,7 @@ export type GoogleJobPosting = {
   /**
    * Date when the job was posted
    */
-  datePosted?: Date | undefined;
+  datePosted?: Date | null | undefined;
   /**
    * Name of the publisher of the job posting
    */
@@ -67,8 +67,9 @@ export const GoogleJobPosting$inboundSchema: z.ZodType<
   location: z.string().optional(),
   description: z.string().optional(),
   job_type: z.nullable(z.string()).optional(),
-  date_posted: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  date_posted: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   publisher_name: z.string().optional(),
   publisher_url: z.string().optional(),
   company_name: z.string().optional(),
@@ -92,7 +93,7 @@ export type GoogleJobPosting$Outbound = {
   location?: string | undefined;
   description?: string | undefined;
   job_type?: string | null | undefined;
-  date_posted?: string | undefined;
+  date_posted?: string | null | undefined;
   publisher_name?: string | undefined;
   publisher_url?: string | undefined;
   company_name?: string | undefined;
@@ -111,7 +112,7 @@ export const GoogleJobPosting$outboundSchema: z.ZodType<
   location: z.string().optional(),
   description: z.string().optional(),
   jobType: z.nullable(z.string()).optional(),
-  datePosted: z.date().transform(v => v.toISOString()).optional(),
+  datePosted: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   publisherName: z.string().optional(),
   publisherUrl: z.string().optional(),
   companyName: z.string().optional(),

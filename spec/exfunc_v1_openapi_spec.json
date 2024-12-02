@@ -277,9 +277,14 @@
                     "type": "string",
                     "description": "The search query for job postings"
                   },
+                  "location": {
+                    "type": "string",
+                    "description": "Location to filter job postings"
+                  },
                   "country_code": {
                     "type": "string",
-                    "description": "The country code for filtering job postings"
+                    "description": "The country code to filter job postings",
+                    "default": "us"
                   },
                   "date_posted": {
                     "type": "string",
@@ -2425,7 +2430,8 @@
           "date_posted": {
             "type": "string",
             "format": "date-time",
-            "description": "Date when the job was posted"
+            "description": "Date when the job was posted",
+            "nullable": true
           },
           "publisher_name": {
             "type": "string",
