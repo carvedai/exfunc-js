@@ -6,7 +6,7 @@
 import { GetUserTweetsRequestBody } from "exfunc/models/operations";
 
 let value: GetUserTweetsRequestBody = {
-  username: "Corrine.Halvorson",
+  username: "Manuela.Ebert",
 };
 ```
 

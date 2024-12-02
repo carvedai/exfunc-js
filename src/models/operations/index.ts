@@ -16,6 +16,8 @@ export * from "./getuser.js";
 export * from "./getuserfollowers.js";
 export * from "./getuserfollowings.js";
 export * from "./getusertweets.js";
+export * from "./googlegetjobposting.js";
+export * from "./googlesearchjobpostings.js";
 export * from "./scrape.js";
 export * from "./searchbusinesses.js";
 export * from "./searchcompanies.js";

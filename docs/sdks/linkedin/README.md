@@ -14,7 +14,7 @@
 
 ## getCompany
 
-Get LinkedIn company info from a LinkedIn company url
+Get LinkedIn company info from either a LinkedIn company url or company website url. Only one is required.
 
 ### Example Usage
 

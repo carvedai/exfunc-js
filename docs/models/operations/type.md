@@ -7,7 +7,7 @@ The type of search
 ```typescript
 import { Type } from "exfunc/models/operations";
 
-let value: Type = "latest";
+let value: Type = "videos";
 ```
 
 ## Values

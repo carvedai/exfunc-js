@@ -7,8 +7,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
+  const result = await exfunc.google.getJobPosting({
+    jobPostingId: "<id>",
   });
 
   // Handle the result

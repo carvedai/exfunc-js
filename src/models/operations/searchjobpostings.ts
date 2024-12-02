@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter for job postings based on when they were posted
  */
-export const DatePosted = {
+export const SearchJobPostingsDatePosted = {
   AnyTime: "Any time",
   Past24Hours: "Past 24 hours",
   PastWeek: "Past Week",
@@ -21,7 +21,9 @@ export const DatePosted = {
 /**
  * Filter for job postings based on when they were posted
  */
-export type DatePosted = ClosedEnum<typeof DatePosted>;
+export type SearchJobPostingsDatePosted = ClosedEnum<
+  typeof SearchJobPostingsDatePosted
+>;
 
 /**
  * Salary range to filter job postings
@@ -111,7 +113,7 @@ export type SearchJobPostingsRequestBody = {
   /**
    * Filter for job postings based on when they were posted
    */
-  datePosted?: DatePosted | undefined;
+  datePosted?: SearchJobPostingsDatePosted | undefined;
   /**
    * Salary range to filter job postings
    */
@@ -177,22 +179,24 @@ export type SearchJobPostingsResponseBody = {
 };
 
 /** @internal */
-export const DatePosted$inboundSchema: z.ZodNativeEnum<typeof DatePosted> = z
-  .nativeEnum(DatePosted);
+export const SearchJobPostingsDatePosted$inboundSchema: z.ZodNativeEnum<
+  typeof SearchJobPostingsDatePosted
+> = z.nativeEnum(SearchJobPostingsDatePosted);
 
 /** @internal */
-export const DatePosted$outboundSchema: z.ZodNativeEnum<typeof DatePosted> =
-  DatePosted$inboundSchema;
+export const SearchJobPostingsDatePosted$outboundSchema: z.ZodNativeEnum<
+  typeof SearchJobPostingsDatePosted
+> = SearchJobPostingsDatePosted$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DatePosted$ {
-  /** @deprecated use `DatePosted$inboundSchema` instead. */
-  export const inboundSchema = DatePosted$inboundSchema;
-  /** @deprecated use `DatePosted$outboundSchema` instead. */
-  export const outboundSchema = DatePosted$outboundSchema;
+export namespace SearchJobPostingsDatePosted$ {
+  /** @deprecated use `SearchJobPostingsDatePosted$inboundSchema` instead. */
+  export const inboundSchema = SearchJobPostingsDatePosted$inboundSchema;
+  /** @deprecated use `SearchJobPostingsDatePosted$outboundSchema` instead. */
+  export const outboundSchema = SearchJobPostingsDatePosted$outboundSchema;
 }
 
 /** @internal */
@@ -302,7 +306,7 @@ export const SearchJobPostingsRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   keywords: z.string().optional(),
   location: z.string().optional(),
-  date_posted: DatePosted$inboundSchema.optional(),
+  date_posted: SearchJobPostingsDatePosted$inboundSchema.optional(),
   salary: Salary$inboundSchema.optional(),
   job_type: JobType$inboundSchema.optional(),
   work_type: WorkType$inboundSchema.optional(),
@@ -343,7 +347,7 @@ export const SearchJobPostingsRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   keywords: z.string().optional(),
   location: z.string().optional(),
-  datePosted: DatePosted$outboundSchema.optional(),
+  datePosted: SearchJobPostingsDatePosted$outboundSchema.optional(),
   salary: Salary$outboundSchema.optional(),
   jobType: JobType$outboundSchema.optional(),
   workType: WorkType$outboundSchema.optional(),

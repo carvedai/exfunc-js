@@ -13,7 +13,11 @@ export type GetCompanyRequestBody = {
   /**
    * The LinkedIn URL of the company to enrich
    */
-  companyUrl: string;
+  companyUrl?: string | undefined;
+  /**
+   * The website URL of the company to enrich
+   */
+  companyWebsiteUrl?: string | undefined;
 };
 
 /**
@@ -29,16 +33,19 @@ export const GetCompanyRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_url: z.string(),
+  company_url: z.string().optional(),
+  company_website_url: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_url": "companyUrl",
+    "company_website_url": "companyWebsiteUrl",
   });
 });
 
 /** @internal */
 export type GetCompanyRequestBody$Outbound = {
-  company_url: string;
+  company_url?: string | undefined;
+  company_website_url?: string | undefined;
 };
 
 /** @internal */
@@ -47,10 +54,12 @@ export const GetCompanyRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetCompanyRequestBody
 > = z.object({
-  companyUrl: z.string(),
+  companyUrl: z.string().optional(),
+  companyWebsiteUrl: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUrl: "company_url",
+    companyWebsiteUrl: "company_website_url",
   });
 });
 

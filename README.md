@@ -18,17 +18,23 @@ Exfunc Typescript SDK is a library that allows you to easily take web actions on
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [Exfunc Typescript SDK](#exfunc-typescript-sdk)
+  * [SDK Installation](#sdk-installation)
+  * [Requirements](#requirements)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Standalone functions](#standalone-functions)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [Requirements](#requirements)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Standalone functions](#standalone-functions)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -83,8 +89,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
+  const result = await exfunc.google.getJobPosting({
+    jobPostingId: "<id>",
   });
 
   // Handle the result
@@ -105,8 +111,10 @@ run();
 
 ### [google](docs/sdks/google/README.md)
 
+* [getJobPosting](docs/sdks/google/README.md#getjobposting) - Get job posting details from Google
 * [getProduct](docs/sdks/google/README.md#getproduct) - Get product details from Google
 * [getProductReviews](docs/sdks/google/README.md#getproductreviews) - Get product reviews from Google
+* [searchJobPostings](docs/sdks/google/README.md#searchjobpostings) - Search job postings on Google
 * [searchNews](docs/sdks/google/README.md#searchnews) - Search news articles on Google
 * [searchProducts](docs/sdks/google/README.md#searchproducts) - Search products on Google
 * [searchWeb](docs/sdks/google/README.md#searchweb) - Search web on Google
@@ -169,8 +177,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`googleGetJobPosting`](docs/sdks/google/README.md#getjobposting) - Get job posting details from Google
 - [`googleGetProduct`](docs/sdks/google/README.md#getproduct) - Get product details from Google
 - [`googleGetProductReviews`](docs/sdks/google/README.md#getproductreviews) - Get product reviews from Google
+- [`googleSearchJobPostings`](docs/sdks/google/README.md#searchjobpostings) - Search job postings on Google
 - [`googleSearchNews`](docs/sdks/google/README.md#searchnews) - Search news articles on Google
 - [`googleSearchProducts`](docs/sdks/google/README.md#searchproducts) - Search products on Google
 - [`googleSearchWeb`](docs/sdks/google/README.md#searchweb) - Search web on Google
@@ -214,8 +224,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
+  const result = await exfunc.google.getJobPosting({
+    jobPostingId: "<id>",
   }, {
     retries: {
       strategy: "backoff",
@@ -256,8 +266,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
+  const result = await exfunc.google.getJobPosting({
+    jobPostingId: "<id>",
   });
 
   // Handle the result
@@ -284,7 +294,7 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 | InvalidRequestError                                  | Any input used to create a request is invalid        |
 | UnexpectedClientError                                | Unrecognised or unexpected error                     |
 
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `getProduct` method may throw the following errors:
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `getJobPosting` method may throw the following errors:
 
 | Error Type         | Status Code | Content Type     |
 | ------------------ | ----------- | ---------------- |
@@ -307,8 +317,8 @@ const exfunc = new Exfunc({
 async function run() {
   let result;
   try {
-    result = await exfunc.google.getProduct({
-      productId: "<id>",
+    result = await exfunc.google.getJobPosting({
+      jobPostingId: "<id>",
     });
 
     // Handle the result
@@ -345,6 +355,34 @@ run();
 
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 <!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Override Server URL Per-Client
+
+The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
+```typescript
+import { Exfunc } from "exfunc";
+
+const exfunc = new Exfunc({
+  serverURL: "https://api.exfunc.com",
+  apiKey: process.env["EXFUNC_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await exfunc.google.getJobPosting({
+    jobPostingId: "<id>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
@@ -415,8 +453,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getProduct({
-    productId: "<id>",
+  const result = await exfunc.google.getJobPosting({
+    jobPostingId: "<id>",
   });
 
   // Handle the result

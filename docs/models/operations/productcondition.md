@@ -7,7 +7,7 @@ Filter products by condition
 ```typescript
 import { ProductCondition } from "exfunc/models/operations";
 
-let value: ProductCondition = "used";
+let value: ProductCondition = "new";
 ```
 
 ## Values

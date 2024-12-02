@@ -23,18 +23,18 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get LinkedIn company info
+ * Search job postings on Google
  *
  * @remarks
- * Get LinkedIn company info from either a LinkedIn company url or company website url. Only one is required.
+ * Search job postings on Google for a given query
  */
-export async function linkedinGetCompany(
+export async function googleSearchJobPostings(
   client: ExfuncCore,
-  request: operations.GetCompanyRequestBody,
+  request: operations.GoogleSearchJobPostingsRequestBody,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.GetCompanyResponseBody,
+    operations.GoogleSearchJobPostingsResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -48,7 +48,8 @@ export async function linkedinGetCompany(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetCompanyRequestBody$outboundSchema.parse(value),
+    (value) =>
+      operations.GoogleSearchJobPostingsRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -57,7 +58,7 @@ export async function linkedinGetCompany(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/linkedin/get-company")();
+  const path = pathToFunc("/google/search-job-postings")();
 
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -69,7 +70,7 @@ export async function linkedinGetCompany(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-company",
+    operationID: "google-search-job-postings",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -110,7 +111,7 @@ export async function linkedinGetCompany(
   };
 
   const [result] = await M.match<
-    operations.GetCompanyResponseBody,
+    operations.GoogleSearchJobPostingsResponseBody,
     | errors.UserError
     | errors.ServerError
     | SDKError
@@ -121,7 +122,7 @@ export async function linkedinGetCompany(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetCompanyResponseBody$inboundSchema),
+    M.json(200, operations.GoogleSearchJobPostingsResponseBody$inboundSchema),
     M.jsonErr(400, errors.UserError$inboundSchema),
     M.jsonErr(500, errors.ServerError$inboundSchema),
     M.fail(["4XX", "5XX"]),

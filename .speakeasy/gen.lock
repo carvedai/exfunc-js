@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: d07a8f7645f768802ffc1f463b87f65f
+  docChecksum: 03364968c12c8c31bc2643d79818dba8
   docVersion: 1.0.0
-  speakeasyVersion: 1.446.1
-  generationVersion: 2.462.1
-  releaseVersion: 0.6.8
-  configChecksum: 55d6a351e87e2bd0771cd979228e6da4
+  speakeasyVersion: 1.448.2
+  generationVersion: 2.467.4
+  releaseVersion: 0.6.12
+  configChecksum: 5292d99acc4b46ef726c0cfc58bcfbd4
   published: true
 features:
   typescript:
@@ -45,6 +45,7 @@ generatedFiles:
   - docs/models/components/experiences.md
   - docs/models/components/feedbackcounts.md
   - docs/models/components/funding.md
+  - docs/models/components/googlejobposting.md
   - docs/models/components/googlenews.md
   - docs/models/components/googleproduct.md
   - docs/models/components/googleproductreview.md
@@ -109,8 +110,13 @@ generatedFiles:
   - docs/models/operations/getuserresponsebody.md
   - docs/models/operations/getusertweetsrequestbody.md
   - docs/models/operations/getusertweetsresponsebody.md
+  - docs/models/operations/googlegetjobpostingrequestbody.md
+  - docs/models/operations/googlegetjobpostingresponsebody.md
+  - docs/models/operations/googlesearchjobpostingsrequestbody.md
+  - docs/models/operations/googlesearchjobpostingsresponsebody.md
   - docs/models/operations/jobpostings.md
   - docs/models/operations/jobtype.md
+  - docs/models/operations/jobtypes.md
   - docs/models/operations/listingstatus.md
   - docs/models/operations/maxnumbedrooms.md
   - docs/models/operations/minnumbedrooms.md
@@ -126,6 +132,7 @@ generatedFiles:
   - docs/models/operations/searchcompaniesresponsebody.md
   - docs/models/operations/searchflightsrequestbody.md
   - docs/models/operations/searchflightsresponsebody.md
+  - docs/models/operations/searchjobpostingsdateposted.md
   - docs/models/operations/searchjobpostingsrequestbody.md
   - docs/models/operations/searchjobpostingsresponsebody.md
   - docs/models/operations/searchjobpostingssortby.md
@@ -163,8 +170,10 @@ generatedFiles:
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/googleGetJobPosting.ts
   - src/funcs/googleGetProduct.ts
   - src/funcs/googleGetProductReviews.ts
+  - src/funcs/googleSearchJobPostings.ts
   - src/funcs/googleSearchNews.ts
   - src/funcs/googleSearchProducts.ts
   - src/funcs/googleSearchWeb.ts
@@ -210,6 +219,7 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/models/components/googlejobposting.ts
   - src/models/components/googlenews.ts
   - src/models/components/googleproduct.ts
   - src/models/components/googleproductreview.ts
@@ -252,6 +262,8 @@ generatedFiles:
   - src/models/operations/getuserfollowers.ts
   - src/models/operations/getuserfollowings.ts
   - src/models/operations/getusertweets.ts
+  - src/models/operations/googlegetjobposting.ts
+  - src/models/operations/googlesearchjobpostings.ts
   - src/models/operations/index.ts
   - src/models/operations/scrape.ts
   - src/models/operations/searchbusinesses.ts
@@ -395,4 +407,12 @@ examples:
     speakeasy-default-search-flights:
       requestBody:
         application/json: {"origin": "<value>", "destination": "<value>", "flight_type": "roundtrip", "depart_date": "<value>"}
+  google-get-job-posting:
+    speakeasy-default-google-get-job-posting:
+      requestBody:
+        application/json: {"job_posting_id": "<id>"}
+  google-search-job-postings:
+    speakeasy-default-google-search-job-postings:
+      requestBody:
+        application/json: {"query": "<value>"}
 generatedTests: {}

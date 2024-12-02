@@ -62,6 +62,64 @@
     }
   ],
   "paths": {
+    "/google/get-job-posting": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Get job posting details from Google",
+        "description": "Get job posting details from Google given job posting ID",
+        "operationId": "google-get-job-posting",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_posting_id": {
+                    "type": "string",
+                    "description": "The ID of the job posting to retrieve"
+                  }
+                },
+                "required": [
+                  "job_posting_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GetJobPosting API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_posting": {
+                      "$ref": "#/components/schemas/GoogleJobPosting"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
     "/google/get-product": {
       "post": {
         "tags": [
@@ -178,6 +236,105 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/GoogleProductReview"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/google/search-job-postings": {
+      "post": {
+        "tags": [
+          "Google"
+        ],
+        "x-speakeasy-group": "google",
+        "summary": "Search job postings on Google",
+        "description": "Search job postings on Google for a given query",
+        "operationId": "google-search-job-postings",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query for job postings"
+                  },
+                  "country_code": {
+                    "type": "string",
+                    "description": "The country code for filtering job postings"
+                  },
+                  "date_posted": {
+                    "type": "string",
+                    "description": "Filter for job postings based on when they were posted",
+                    "enum": [
+                      "Any time",
+                      "Past 24 hours",
+                      "Past 3 days",
+                      "Past Week",
+                      "Past Month"
+                    ]
+                  },
+                  "job_types": {
+                    "type": "array",
+                    "description": "Job types to filter (e.g., Full-time, Part-time)",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "Contract",
+                        "Full-time",
+                        "Part-time",
+                        "Internship"
+                      ]
+                    }
+                  },
+                  "page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Page number for pagination (default is 1)"
+                  },
+                  "per_page": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Number of news articles to return per page (default is 10)"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchJobPostings API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_postings": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GoogleJobPosting"
                       }
                     }
                   }
@@ -457,7 +614,7 @@
         ],
         "x-speakeasy-group": "linkedin",
         "summary": "Get LinkedIn company info",
-        "description": "Get LinkedIn company info from a LinkedIn company url",
+        "description": "Get LinkedIn company info from either a LinkedIn company url or company website url. Only one is required.",
         "operationId": "get-company",
         "security": [
           {
@@ -474,11 +631,12 @@
                   "company_url": {
                     "type": "string",
                     "description": "The LinkedIn URL of the company to enrich"
+                  },
+                  "company_website_url": {
+                    "type": "string",
+                    "description": "The website URL of the company to enrich"
                   }
-                },
-                "required": [
-                  "company_url"
-                ]
+                }
               }
             }
           }
@@ -2235,6 +2393,61 @@
       }
     },
     "schemas": {
+      "GoogleJobPosting": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the job posting"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL link to the Google job posting"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the job posting"
+          },
+          "location": {
+            "type": "string",
+            "description": "The location of the job posting"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the job posting"
+          },
+          "job_type": {
+            "type": "string",
+            "description": "Type of job (e.g., Full-time, Part-time)",
+            "nullable": true
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the job was posted"
+          },
+          "publisher_name": {
+            "type": "string",
+            "description": "Name of the publisher of the job posting"
+          },
+          "publisher_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the publisher job posting"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Name of the company offering the job"
+          },
+          "company_website_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company's website",
+            "nullable": true
+          }
+        }
+      },
       "GoogleNews": {
         "type": "object",
         "properties": {
@@ -3312,7 +3525,7 @@
       "ZillowPriceHistoryEvent": {
         "type": "object",
         "properties": {
-          "date": {
+          "date_posted": {
             "type": "string",
             "description": "The date of the price change"
           },

@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { ExfuncCore } from "exfunc/core.js";
-import { googleGetProduct } from "exfunc/funcs/googleGetProduct.js";
+import { googleGetJobPosting } from "exfunc/funcs/googleGetJobPosting.js";
 import { SDKValidationError } from "exfunc/models/errors/sdkvalidationerror.js";
 
 // Use `ExfuncCore` for best tree-shaking performance.
@@ -30,8 +30,8 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await googleGetProduct(exfunc, {
-    productId: "<id>",
+  const res = await googleGetJobPosting(exfunc, {
+    jobPostingId: "<id>",
   });
 
   switch (true) {

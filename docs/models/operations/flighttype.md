@@ -7,7 +7,7 @@ The type of the flight
 ```typescript
 import { FlightType } from "exfunc/models/operations";
 
-let value: FlightType = "one-way";
+let value: FlightType = "roundtrip";
 ```
 
 ## Values

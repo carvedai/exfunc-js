@@ -7,11 +7,11 @@ Filter for job postings based on when they were posted
 ```typescript
 import { DatePosted } from "exfunc/models/operations";
 
-let value: DatePosted = "Any time";
+let value: DatePosted = "Past 3 days";
 ```
 
 ## Values
 
 ```typescript
-"Any time" | "Past 24 hours" | "Past Week" | "Past Month"
+"Any time" | "Past 24 hours" | "Past 3 days" | "Past Week" | "Past Month"
 ```

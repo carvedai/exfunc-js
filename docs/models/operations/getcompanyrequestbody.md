@@ -5,13 +5,12 @@
 ```typescript
 import { GetCompanyRequestBody } from "exfunc/models/operations";
 
-let value: GetCompanyRequestBody = {
-  companyUrl: "https://insignificant-parsnip.info",
-};
+let value: GetCompanyRequestBody = {};
 ```
 
 ## Fields
 
 | Field                                     | Type                                      | Required                                  | Description                               |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `companyUrl`                              | *string*                                  | :heavy_check_mark:                        | The LinkedIn URL of the company to enrich |
+| `companyUrl`                              | *string*                                  | :heavy_minus_sign:                        | The LinkedIn URL of the company to enrich |
+| `companyWebsiteUrl`                       | *string*                                  | :heavy_minus_sign:                        | The website URL of the company to enrich  |

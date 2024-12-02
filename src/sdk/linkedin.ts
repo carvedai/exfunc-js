@@ -17,7 +17,7 @@ export class Linkedin extends ClientSDK {
    * Get LinkedIn company info
    *
    * @remarks
-   * Get LinkedIn company info from a LinkedIn company url
+   * Get LinkedIn company info from either a LinkedIn company url or company website url. Only one is required.
    */
   async getCompany(
     request: operations.GetCompanyRequestBody,
