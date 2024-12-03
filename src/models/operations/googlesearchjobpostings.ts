@@ -59,9 +59,9 @@ export type GoogleSearchJobPostingsRequestBody = {
    */
   page?: number | undefined;
   /**
-   * Number of news articles to return per page (default is 10)
+   * Number of pages to return, starting from page (default is 1)
    */
-  perPage?: number | undefined;
+  numPages?: number | undefined;
 };
 
 /**
@@ -121,13 +121,13 @@ export const GoogleSearchJobPostingsRequestBody$inboundSchema: z.ZodType<
   date_posted: DatePosted$inboundSchema.optional(),
   job_types: z.array(JobTypes$inboundSchema).optional(),
   page: z.number().int().optional(),
-  per_page: z.number().int().optional(),
+  num_pages: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "country_code": "countryCode",
     "date_posted": "datePosted",
     "job_types": "jobTypes",
-    "per_page": "perPage",
+    "num_pages": "numPages",
   });
 });
 
@@ -139,7 +139,7 @@ export type GoogleSearchJobPostingsRequestBody$Outbound = {
   date_posted?: string | undefined;
   job_types?: Array<string> | undefined;
   page?: number | undefined;
-  per_page?: number | undefined;
+  num_pages?: number | undefined;
 };
 
 /** @internal */
@@ -154,13 +154,13 @@ export const GoogleSearchJobPostingsRequestBody$outboundSchema: z.ZodType<
   datePosted: DatePosted$outboundSchema.optional(),
   jobTypes: z.array(JobTypes$outboundSchema).optional(),
   page: z.number().int().optional(),
-  perPage: z.number().int().optional(),
+  numPages: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     countryCode: "country_code",
     datePosted: "date_posted",
     jobTypes: "job_types",
-    perPage: "per_page",
+    numPages: "num_pages",
   });
 });
 
