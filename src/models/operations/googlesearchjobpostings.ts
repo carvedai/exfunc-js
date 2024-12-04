@@ -43,6 +43,10 @@ export type GoogleSearchJobPostingsRequestBody = {
    */
   location?: string | undefined;
   /**
+   * Source (publisher) to filter job postings. If not provided, postings from all sources will be retrieved
+   */
+  jobSource?: string | undefined;
+  /**
    * The country code to filter job postings
    */
   countryCode?: string | undefined;
@@ -117,13 +121,15 @@ export const GoogleSearchJobPostingsRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   query: z.string(),
   location: z.string().optional(),
+  job_source: z.string().optional(),
   country_code: z.string().default("us"),
   date_posted: DatePosted$inboundSchema.optional(),
   job_types: z.array(JobTypes$inboundSchema).optional(),
-  page: z.number().int().optional(),
-  num_pages: z.number().int().optional(),
+  page: z.number().int().default(1),
+  num_pages: z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
+    "job_source": "jobSource",
     "country_code": "countryCode",
     "date_posted": "datePosted",
     "job_types": "jobTypes",
@@ -135,11 +141,12 @@ export const GoogleSearchJobPostingsRequestBody$inboundSchema: z.ZodType<
 export type GoogleSearchJobPostingsRequestBody$Outbound = {
   query: string;
   location?: string | undefined;
+  job_source?: string | undefined;
   country_code: string;
   date_posted?: string | undefined;
   job_types?: Array<string> | undefined;
-  page?: number | undefined;
-  num_pages?: number | undefined;
+  page: number;
+  num_pages: number;
 };
 
 /** @internal */
@@ -150,13 +157,15 @@ export const GoogleSearchJobPostingsRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   query: z.string(),
   location: z.string().optional(),
+  jobSource: z.string().optional(),
   countryCode: z.string().default("us"),
   datePosted: DatePosted$outboundSchema.optional(),
   jobTypes: z.array(JobTypes$outboundSchema).optional(),
-  page: z.number().int().optional(),
-  numPages: z.number().int().optional(),
+  page: z.number().int().default(1),
+  numPages: z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
+    jobSource: "job_source",
     countryCode: "country_code",
     datePosted: "date_posted",
     jobTypes: "job_types",

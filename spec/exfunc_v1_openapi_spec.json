@@ -281,6 +281,10 @@
                     "type": "string",
                     "description": "Location to filter job postings"
                   },
+                  "job_source": {
+                    "type": "string",
+                    "description": "Source (publisher) to filter job postings. If not provided, postings from all sources will be retrieved"
+                  },
                   "country_code": {
                     "type": "string",
                     "description": "The country code to filter job postings",
@@ -312,12 +316,14 @@
                   },
                   "page": {
                     "type": "integer",
+                    "default": 1,
                     "minimum": 1,
                     "maximum": 100,
                     "description": "Page number for pagination (default is 1)"
                   },
                   "num_pages": {
                     "type": "integer",
+                    "default": 1,
                     "minimum": 1,
                     "maximum": 10,
                     "description": "Number of pages to return, starting from page (default is 1)"
