@@ -8,13 +8,18 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type IndeedJobPostingPercentiles = {
+  p0?: number | null | undefined;
+  p100?: number | null | undefined;
+};
+
 /**
  * Salary details for the job posting
  */
 export type IndeedJobPostingSalary = {
   currency?: string | null | undefined;
   period?: string | null | undefined;
-  percentiles?: { [k: string]: string } | undefined;
+  percentiles?: IndeedJobPostingPercentiles | undefined;
 };
 
 export type IndeedJobPosting = {
@@ -81,6 +86,65 @@ export type IndeedJobPosting = {
 };
 
 /** @internal */
+export const IndeedJobPostingPercentiles$inboundSchema: z.ZodType<
+  IndeedJobPostingPercentiles,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  p0: z.nullable(z.number()).optional(),
+  p100: z.nullable(z.number()).optional(),
+});
+
+/** @internal */
+export type IndeedJobPostingPercentiles$Outbound = {
+  p0?: number | null | undefined;
+  p100?: number | null | undefined;
+};
+
+/** @internal */
+export const IndeedJobPostingPercentiles$outboundSchema: z.ZodType<
+  IndeedJobPostingPercentiles$Outbound,
+  z.ZodTypeDef,
+  IndeedJobPostingPercentiles
+> = z.object({
+  p0: z.nullable(z.number()).optional(),
+  p100: z.nullable(z.number()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace IndeedJobPostingPercentiles$ {
+  /** @deprecated use `IndeedJobPostingPercentiles$inboundSchema` instead. */
+  export const inboundSchema = IndeedJobPostingPercentiles$inboundSchema;
+  /** @deprecated use `IndeedJobPostingPercentiles$outboundSchema` instead. */
+  export const outboundSchema = IndeedJobPostingPercentiles$outboundSchema;
+  /** @deprecated use `IndeedJobPostingPercentiles$Outbound` instead. */
+  export type Outbound = IndeedJobPostingPercentiles$Outbound;
+}
+
+export function indeedJobPostingPercentilesToJSON(
+  indeedJobPostingPercentiles: IndeedJobPostingPercentiles,
+): string {
+  return JSON.stringify(
+    IndeedJobPostingPercentiles$outboundSchema.parse(
+      indeedJobPostingPercentiles,
+    ),
+  );
+}
+
+export function indeedJobPostingPercentilesFromJSON(
+  jsonString: string,
+): SafeParseResult<IndeedJobPostingPercentiles, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => IndeedJobPostingPercentiles$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IndeedJobPostingPercentiles' from JSON`,
+  );
+}
+
+/** @internal */
 export const IndeedJobPostingSalary$inboundSchema: z.ZodType<
   IndeedJobPostingSalary,
   z.ZodTypeDef,
@@ -88,14 +152,15 @@ export const IndeedJobPostingSalary$inboundSchema: z.ZodType<
 > = z.object({
   currency: z.nullable(z.string()).optional(),
   period: z.nullable(z.string()).optional(),
-  percentiles: z.record(z.string()).optional(),
+  percentiles: z.lazy(() => IndeedJobPostingPercentiles$inboundSchema)
+    .optional(),
 });
 
 /** @internal */
 export type IndeedJobPostingSalary$Outbound = {
   currency?: string | null | undefined;
   period?: string | null | undefined;
-  percentiles?: { [k: string]: string } | undefined;
+  percentiles?: IndeedJobPostingPercentiles$Outbound | undefined;
 };
 
 /** @internal */
@@ -106,7 +171,8 @@ export const IndeedJobPostingSalary$outboundSchema: z.ZodType<
 > = z.object({
   currency: z.nullable(z.string()).optional(),
   period: z.nullable(z.string()).optional(),
-  percentiles: z.record(z.string()).optional(),
+  percentiles: z.lazy(() => IndeedJobPostingPercentiles$outboundSchema)
+    .optional(),
 });
 
 /**

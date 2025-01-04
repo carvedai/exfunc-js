@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 030946e9b7d7f5e5e07701cde542ea87
+  docChecksum: 4cd17c038ced78aa0e57e1709867864d
   docVersion: 1.0.0
-  speakeasyVersion: 1.451.2
-  generationVersion: 2.471.2
-  releaseVersion: 0.6.20
-  configChecksum: 689dc41eead265d6e120d254f5f31811
+  speakeasyVersion: 1.462.2
+  generationVersion: 2.486.1
+  releaseVersion: 0.6.21
+  configChecksum: b2e909d3fe623b2179517e813b20bb66
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.8
+    core: 3.18.12
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
@@ -51,6 +51,7 @@ generatedFiles:
   - docs/models/components/googleproduct.md
   - docs/models/components/googleproductreview.md
   - docs/models/components/indeedjobposting.md
+  - docs/models/components/indeedjobpostingpercentiles.md
   - docs/models/components/indeedjobpostingsalary.md
   - docs/models/components/investors.md
   - docs/models/components/lastround.md

@@ -49,6 +49,10 @@ export type GlassdoorSearchJobPostingsRequestBody = {
  */
 export type GlassdoorSearchJobPostingsResponseBody = {
   jobPostings?: Array<components.GlassdoorJobPosting> | undefined;
+  /**
+   * Next token for pagination
+   */
+  nextToken?: string | undefined;
 };
 
 /** @internal */
@@ -156,15 +160,18 @@ export const GlassdoorSearchJobPostingsResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   job_postings: z.array(components.GlassdoorJobPosting$inboundSchema)
     .optional(),
+  next_token: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_postings": "jobPostings",
+    "next_token": "nextToken",
   });
 });
 
 /** @internal */
 export type GlassdoorSearchJobPostingsResponseBody$Outbound = {
   job_postings?: Array<components.GlassdoorJobPosting$Outbound> | undefined;
+  next_token?: string | undefined;
 };
 
 /** @internal */
@@ -175,9 +182,11 @@ export const GlassdoorSearchJobPostingsResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   jobPostings: z.array(components.GlassdoorJobPosting$outboundSchema)
     .optional(),
+  nextToken: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     jobPostings: "job_postings",
+    nextToken: "next_token",
   });
 });
 

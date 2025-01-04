@@ -53,6 +53,10 @@ export type GlassdoorJobPosting = {
    */
   companyUrl?: string | null | undefined;
   /**
+   * URL to the company's website
+   */
+  companyWebsiteUrl?: string | null | undefined;
+  /**
    * Salary details for the job posting
    */
   salary?: Salary | null | undefined;
@@ -181,12 +185,14 @@ export const GlassdoorJobPosting$inboundSchema: z.ZodType<
     .optional(),
   company_name: z.string().optional(),
   company_url: z.nullable(z.string()).optional(),
+  company_website_url: z.nullable(z.string()).optional(),
   salary: z.nullable(z.lazy(() => Salary$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "date_posted": "datePosted",
     "company_name": "companyName",
     "company_url": "companyUrl",
+    "company_website_url": "companyWebsiteUrl",
   });
 });
 
@@ -199,6 +205,7 @@ export type GlassdoorJobPosting$Outbound = {
   date_posted?: string | undefined;
   company_name?: string | undefined;
   company_url?: string | null | undefined;
+  company_website_url?: string | null | undefined;
   salary?: Salary$Outbound | null | undefined;
 };
 
@@ -215,12 +222,14 @@ export const GlassdoorJobPosting$outboundSchema: z.ZodType<
   datePosted: z.date().transform(v => v.toISOString()).optional(),
   companyName: z.string().optional(),
   companyUrl: z.nullable(z.string()).optional(),
+  companyWebsiteUrl: z.nullable(z.string()).optional(),
   salary: z.nullable(z.lazy(() => Salary$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     datePosted: "date_posted",
     companyName: "company_name",
     companyUrl: "company_url",
+    companyWebsiteUrl: "company_website_url",
   });
 });
 

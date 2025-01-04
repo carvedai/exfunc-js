@@ -59,7 +59,9 @@
     {
       "name": "General",
       "tags": [
+        "Glassdoor",
         "Google",
+        "Indeed",
         "LinkedIn",
         "Navigator",
         "SkyScanner",
@@ -133,6 +135,10 @@
                       "items": {
                         "$ref": "#/components/schemas/GlassdoorJobPosting"
                       }
+                    },
+                    "next_token": {
+                      "type": "string",
+                      "description": "Next token for pagination"
                     }
                   }
                 }
@@ -769,6 +775,10 @@
                       "items": {
                         "$ref": "#/components/schemas/IndeedJobPosting"
                       }
+                    },
+                    "next_token": {
+                      "type": "string",
+                      "description": "Next token for pagination"
                     }
                   }
                 }
@@ -2605,6 +2615,11 @@
             "description": "URL to the company page on Glassdoor",
             "nullable": true
           },
+          "company_website_url": {
+            "type": "string",
+            "description": "URL to the company's website",
+            "nullable": true
+          },
           "salary": {
             "type": "object",
             "description": "Salary details for the job posting",
@@ -2935,8 +2950,15 @@
               },
               "percentiles": {
                 "type": "object",
-                "additionalProperties": {
-                  "type": "string"
+                "properties": {
+                  "p0": {
+                    "type": "number",
+                    "nullable": true
+                  },
+                  "p100": {
+                    "type": "number",
+                    "nullable": true
+                  }
                 }
               }
             }

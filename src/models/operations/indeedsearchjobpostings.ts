@@ -51,6 +51,10 @@ export type IndeedSearchJobPostingsRequestBody = {
  */
 export type IndeedSearchJobPostingsResponseBody = {
   jobPostings?: Array<components.IndeedJobPosting> | undefined;
+  /**
+   * Next token for pagination
+   */
+  nextToken?: string | undefined;
 };
 
 /** @internal */
@@ -159,15 +163,18 @@ export const IndeedSearchJobPostingsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   job_postings: z.array(components.IndeedJobPosting$inboundSchema).optional(),
+  next_token: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_postings": "jobPostings",
+    "next_token": "nextToken",
   });
 });
 
 /** @internal */
 export type IndeedSearchJobPostingsResponseBody$Outbound = {
   job_postings?: Array<components.IndeedJobPosting$Outbound> | undefined;
+  next_token?: string | undefined;
 };
 
 /** @internal */
@@ -177,9 +184,11 @@ export const IndeedSearchJobPostingsResponseBody$outboundSchema: z.ZodType<
   IndeedSearchJobPostingsResponseBody
 > = z.object({
   jobPostings: z.array(components.IndeedJobPosting$outboundSchema).optional(),
+  nextToken: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     jobPostings: "job_postings",
+    nextToken: "next_token",
   });
 });
 

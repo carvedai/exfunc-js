@@ -12,8 +12,8 @@ let value: IndeedJobPostingSalary = {};
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `currency`               | *string*                 | :heavy_minus_sign:       | N/A                      |
-| `period`                 | *string*                 | :heavy_minus_sign:       | N/A                      |
-| `percentiles`            | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `currency`                                                                                       | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `period`                                                                                         | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `percentiles`                                                                                    | [components.IndeedJobPostingPercentiles](../../models/components/indeedjobpostingpercentiles.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
