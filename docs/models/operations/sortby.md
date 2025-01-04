@@ -7,7 +7,7 @@ Sort the results by a specific field
 ```typescript
 import { SortBy } from "exfunc/models/operations";
 
-let value: SortBy = "lowest_price";
+let value: SortBy = "top_rated";
 ```
 
 ## Values

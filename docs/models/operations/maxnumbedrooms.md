@@ -7,7 +7,7 @@ The maximum number of bedrooms
 ```typescript
 import { MaxNumBedrooms } from "exfunc/models/operations";
 
-let value: MaxNumBedrooms = "3";
+let value: MaxNumBedrooms = "2";
 ```
 
 ## Values

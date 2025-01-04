@@ -7,7 +7,7 @@ Work type to filter (e.g., Remote, On-site)
 ```typescript
 import { WorkType } from "exfunc/models/operations";
 
-let value: WorkType = "On-site";
+let value: WorkType = "Hybrid";
 ```
 
 ## Values

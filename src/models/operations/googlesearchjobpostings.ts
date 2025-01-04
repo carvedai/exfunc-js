@@ -13,7 +13,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter for job postings based on when they were posted
  */
-export const DatePosted = {
+export const GoogleSearchJobPostingsDatePosted = {
   AnyTime: "Any time",
   Past24Hours: "Past 24 hours",
   Past3Days: "Past 3 days",
@@ -23,7 +23,9 @@ export const DatePosted = {
 /**
  * Filter for job postings based on when they were posted
  */
-export type DatePosted = ClosedEnum<typeof DatePosted>;
+export type GoogleSearchJobPostingsDatePosted = ClosedEnum<
+  typeof GoogleSearchJobPostingsDatePosted
+>;
 
 export const JobTypes = {
   Contract: "Contract",
@@ -53,7 +55,7 @@ export type GoogleSearchJobPostingsRequestBody = {
   /**
    * Filter for job postings based on when they were posted
    */
-  datePosted?: DatePosted | undefined;
+  datePosted?: GoogleSearchJobPostingsDatePosted | undefined;
   /**
    * Job types to filter (e.g., Full-time, Part-time)
    */
@@ -76,22 +78,25 @@ export type GoogleSearchJobPostingsResponseBody = {
 };
 
 /** @internal */
-export const DatePosted$inboundSchema: z.ZodNativeEnum<typeof DatePosted> = z
-  .nativeEnum(DatePosted);
+export const GoogleSearchJobPostingsDatePosted$inboundSchema: z.ZodNativeEnum<
+  typeof GoogleSearchJobPostingsDatePosted
+> = z.nativeEnum(GoogleSearchJobPostingsDatePosted);
 
 /** @internal */
-export const DatePosted$outboundSchema: z.ZodNativeEnum<typeof DatePosted> =
-  DatePosted$inboundSchema;
+export const GoogleSearchJobPostingsDatePosted$outboundSchema: z.ZodNativeEnum<
+  typeof GoogleSearchJobPostingsDatePosted
+> = GoogleSearchJobPostingsDatePosted$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DatePosted$ {
-  /** @deprecated use `DatePosted$inboundSchema` instead. */
-  export const inboundSchema = DatePosted$inboundSchema;
-  /** @deprecated use `DatePosted$outboundSchema` instead. */
-  export const outboundSchema = DatePosted$outboundSchema;
+export namespace GoogleSearchJobPostingsDatePosted$ {
+  /** @deprecated use `GoogleSearchJobPostingsDatePosted$inboundSchema` instead. */
+  export const inboundSchema = GoogleSearchJobPostingsDatePosted$inboundSchema;
+  /** @deprecated use `GoogleSearchJobPostingsDatePosted$outboundSchema` instead. */
+  export const outboundSchema =
+    GoogleSearchJobPostingsDatePosted$outboundSchema;
 }
 
 /** @internal */
@@ -123,7 +128,7 @@ export const GoogleSearchJobPostingsRequestBody$inboundSchema: z.ZodType<
   location: z.string().optional(),
   job_source: z.string().optional(),
   country_code: z.string().default("us"),
-  date_posted: DatePosted$inboundSchema.optional(),
+  date_posted: GoogleSearchJobPostingsDatePosted$inboundSchema.optional(),
   job_types: z.array(JobTypes$inboundSchema).optional(),
   page: z.number().int().default(1),
   num_pages: z.number().int().default(1),
@@ -159,7 +164,7 @@ export const GoogleSearchJobPostingsRequestBody$outboundSchema: z.ZodType<
   location: z.string().optional(),
   jobSource: z.string().optional(),
   countryCode: z.string().default("us"),
-  datePosted: DatePosted$outboundSchema.optional(),
+  datePosted: GoogleSearchJobPostingsDatePosted$outboundSchema.optional(),
   jobTypes: z.array(JobTypes$outboundSchema).optional(),
   page: z.number().int().default(1),
   numPages: z.number().int().default(1),

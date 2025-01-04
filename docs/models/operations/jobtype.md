@@ -7,7 +7,7 @@ Job type to filter (e.g., Full-time, Part-time)
 ```typescript
 import { JobType } from "exfunc/models/operations";
 
-let value: JobType = "Contract";
+let value: JobType = "Internship";
 ```
 
 ## Values

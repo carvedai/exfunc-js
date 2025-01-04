@@ -1,0 +1,22 @@
+# GlassdoorJobPosting
+
+## Example Usage
+
+```typescript
+import { GlassdoorJobPosting } from "exfunc/models/components";
+
+let value: GlassdoorJobPosting = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `url`                                                                                         | *string*                                                                                      | :heavy_minus_sign:                                                                            | The URL link to the Glassdoor job posting                                                     |
+| `title`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The title of the job posting                                                                  |
+| `location`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The location of the job posting                                                               |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Detailed description of the job posting                                                       |
+| `datePosted`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | Date when the job was posted                                                                  |
+| `companyName`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Name of the company offering the job                                                          |
+| `companyUrl`                                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | URL to the company page on Glassdoor                                                          |
+| `salary`                                                                                      | [components.Salary](../../models/components/salary.md)                                        | :heavy_minus_sign:                                                                            | Salary details for the job posting                                                            |

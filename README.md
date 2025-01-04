@@ -89,9 +89,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getJobPosting({
-    jobPostingId: "<id>",
-  });
+  const result = await exfunc.glassdoor.searchJobPostings({});
 
   // Handle the result
   console.log(result);
@@ -109,6 +107,10 @@ run();
 <summary>Available methods</summary>
 
 
+### [glassdoor](docs/sdks/glassdoor/README.md)
+
+* [searchJobPostings](docs/sdks/glassdoor/README.md#searchjobpostings) - Search job postings on Glassdoor
+
 ### [google](docs/sdks/google/README.md)
 
 * [getJobPosting](docs/sdks/google/README.md#getjobposting) - Get job posting details from Google
@@ -118,6 +120,10 @@ run();
 * [searchNews](docs/sdks/google/README.md#searchnews) - Search news articles on Google
 * [searchProducts](docs/sdks/google/README.md#searchproducts) - Search products on Google
 * [searchWeb](docs/sdks/google/README.md#searchweb) - Search web on Google
+
+### [indeed](docs/sdks/indeed/README.md)
+
+* [searchJobPostings](docs/sdks/indeed/README.md#searchjobpostings) - Search job postings on Indeed
 
 ### [linkedin](docs/sdks/linkedin/README.md)
 
@@ -177,6 +183,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`glassdoorSearchJobPostings`](docs/sdks/glassdoor/README.md#searchjobpostings) - Search job postings on Glassdoor
 - [`googleGetJobPosting`](docs/sdks/google/README.md#getjobposting) - Get job posting details from Google
 - [`googleGetProduct`](docs/sdks/google/README.md#getproduct) - Get product details from Google
 - [`googleGetProductReviews`](docs/sdks/google/README.md#getproductreviews) - Get product reviews from Google
@@ -184,6 +191,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`googleSearchNews`](docs/sdks/google/README.md#searchnews) - Search news articles on Google
 - [`googleSearchProducts`](docs/sdks/google/README.md#searchproducts) - Search products on Google
 - [`googleSearchWeb`](docs/sdks/google/README.md#searchweb) - Search web on Google
+- [`indeedSearchJobPostings`](docs/sdks/indeed/README.md#searchjobpostings) - Search job postings on Indeed
 - [`linkedinGetCompany`](docs/sdks/linkedin/README.md#getcompany) - Get LinkedIn company info
 - [`linkedinGetJobPosting`](docs/sdks/linkedin/README.md#getjobposting) - Get LinkedIn job posting info
 - [`linkedinGetPerson`](docs/sdks/linkedin/README.md#getperson) - Get LinkedIn person profile info
@@ -224,9 +232,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getJobPosting({
-    jobPostingId: "<id>",
-  }, {
+  const result = await exfunc.glassdoor.searchJobPostings({}, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -266,9 +272,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getJobPosting({
-    jobPostingId: "<id>",
-  });
+  const result = await exfunc.glassdoor.searchJobPostings({});
 
   // Handle the result
   console.log(result);
@@ -294,7 +298,7 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 | InvalidRequestError                                  | Any input used to create a request is invalid        |
 | UnexpectedClientError                                | Unrecognised or unexpected error                     |
 
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `getJobPosting` method may throw the following errors:
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `searchJobPostings` method may throw the following errors:
 
 | Error Type         | Status Code | Content Type     |
 | ------------------ | ----------- | ---------------- |
@@ -317,9 +321,7 @@ const exfunc = new Exfunc({
 async function run() {
   let result;
   try {
-    result = await exfunc.google.getJobPosting({
-      jobPostingId: "<id>",
-    });
+    result = await exfunc.glassdoor.searchJobPostings({});
 
     // Handle the result
     console.log(result);
@@ -371,9 +373,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getJobPosting({
-    jobPostingId: "<id>",
-  });
+  const result = await exfunc.glassdoor.searchJobPostings({});
 
   // Handle the result
   console.log(result);
@@ -453,9 +453,7 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.google.getJobPosting({
-    jobPostingId: "<id>",
-  });
+  const result = await exfunc.glassdoor.searchJobPostings({});
 
   // Handle the result
   console.log(result);

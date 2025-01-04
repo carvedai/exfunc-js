@@ -6,7 +6,7 @@
 import { GetJobPostingRequestBody } from "exfunc/models/operations";
 
 let value: GetJobPostingRequestBody = {
-  jobPostingUrl: "https://jealous-tapioca.org",
+  jobPostingUrl: "https://whole-godparent.net",
 };
 ```
 

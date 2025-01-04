@@ -19,8 +19,16 @@
   ],
   "tags": [
     {
+      "name": "Glassdoor",
+      "description": "Glassdoor APIs"
+    },
+    {
       "name": "Google",
       "description": "Google APIs"
+    },
+    {
+      "name": "Indeed",
+      "description": "Indeed APIs"
     },
     {
       "name": "LinkedIn",
@@ -62,6 +70,84 @@
     }
   ],
   "paths": {
+    "/glassdoor/search-job-postings": {
+      "post": {
+        "tags": [
+          "Glassdoor"
+        ],
+        "x-speakeasy-group": "glassdoor",
+        "summary": "Search job postings on Glassdoor",
+        "description": "Search job postings on Glassdoor for a given query",
+        "operationId": "glassdoor-search-job-postings",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query for job postings"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Location to filter job postings"
+                  },
+                  "date_posted": {
+                    "type": "string",
+                    "description": "Filter for job postings based on when they were posted",
+                    "enum": [
+                      "Any time",
+                      "Past 24 hours",
+                      "Past 3 days",
+                      "Past Week",
+                      "Past Month"
+                    ]
+                  },
+                  "next_token": {
+                    "type": "string",
+                    "description": "Next token for pagination",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchJobPostings API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_postings": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GlassdoorJobPosting"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
     "/google/get-job-posting": {
       "post": {
         "tags": [
@@ -604,6 +690,84 @@
                             "description": "The domain of the search result"
                           }
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/UserError"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/indeed/search-job-postings": {
+      "post": {
+        "tags": [
+          "Indeed"
+        ],
+        "x-speakeasy-group": "indeed",
+        "summary": "Search job postings on Indeed",
+        "description": "Search job postings on Indeed for a given query",
+        "operationId": "indeed-search-job-postings",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The search query for job postings"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Location to filter job postings"
+                  },
+                  "date_posted": {
+                    "type": "string",
+                    "description": "Filter for job postings based on when they were posted",
+                    "enum": [
+                      "Any time",
+                      "Past 24 hours",
+                      "Past 3 days",
+                      "Past Week",
+                      "Past Month"
+                    ]
+                  },
+                  "next_token": {
+                    "type": "string",
+                    "description": "Next token for pagination",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SearchJobPostings API successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_postings": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/IndeedJobPosting"
                       }
                     }
                   }
@@ -2406,6 +2570,70 @@
       }
     },
     "schemas": {
+      "GlassdoorJobPosting": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL link to the Glassdoor job posting"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the job posting"
+          },
+          "location": {
+            "type": "string",
+            "description": "The location of the job posting"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the job posting"
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the job was posted"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Name of the company offering the job"
+          },
+          "company_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company page on Glassdoor",
+            "nullable": true
+          },
+          "salary": {
+            "type": "object",
+            "description": "Salary details for the job posting",
+            "nullable": true,
+            "properties": {
+              "currency": {
+                "type": "string"
+              },
+              "period": {
+                "type": "string"
+              },
+              "percentiles": {
+                "type": "object",
+                "properties": {
+                  "p10": {
+                    "type": "number"
+                  },
+                  "p50": {
+                    "type": "number"
+                  },
+                  "p90": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "GoogleJobPosting": {
         "type": "object",
         "properties": {
@@ -2617,6 +2845,101 @@
               "format": "uri"
             },
             "description": "An array of URLs for photos included in the review"
+          }
+        }
+      },
+      "IndeedJobPosting": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL link to the Indeed job posting"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the job posting"
+          },
+          "location": {
+            "type": "string",
+            "description": "The location of the job posting"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the job posting"
+          },
+          "job_type": {
+            "type": "string",
+            "description": "Type of job (e.g., FULL_TIME, PART_TIME, CONTRACT)",
+            "nullable": true
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the job was posted"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Name of the company offering the job",
+            "nullable": true
+          },
+          "company_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company page on Indeed",
+            "nullable": true
+          },
+          "company_website_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the company's website",
+            "nullable": true
+          },
+          "company_location": {
+            "type": "string",
+            "description": "The location of the company",
+            "nullable": true
+          },
+          "company_industry": {
+            "type": "string",
+            "description": "The industry of the company",
+            "nullable": true
+          },
+          "company_size": {
+            "type": "string",
+            "description": "The size range of the company",
+            "nullable": true
+          },
+          "company_revenue": {
+            "type": "string",
+            "description": "The revenue (ARR) of the company",
+            "nullable": true
+          },
+          "company_overview": {
+            "type": "string",
+            "description": "The overview of the company",
+            "nullable": true
+          },
+          "salary": {
+            "type": "object",
+            "description": "Salary details for the job posting",
+            "nullable": true,
+            "properties": {
+              "currency": {
+                "type": "string",
+                "nullable": true
+              },
+              "period": {
+                "type": "string",
+                "nullable": true
+              },
+              "percentiles": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },

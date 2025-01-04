@@ -7,7 +7,7 @@ The criteria to sort the results (e.g., "newest", "lot_size")
 ```typescript
 import { SearchPropertiesSortBy } from "exfunc/models/operations";
 
-let value: SearchPropertiesSortBy = "price_high_to_low";
+let value: SearchPropertiesSortBy = "bathrooms";
 ```
 
 ## Values

@@ -7,7 +7,7 @@ Filter news articles published after this date
 ```typescript
 import { TimePublished } from "exfunc/models/operations";
 
-let value: TimePublished = "7d";
+let value: TimePublished = "1d";
 ```
 
 ## Values

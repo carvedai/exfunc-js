@@ -3,7 +3,9 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Glassdoor } from "./glassdoor.js";
 import { Google } from "./google.js";
+import { Indeed } from "./indeed.js";
 import { Linkedin } from "./linkedin.js";
 import { Navigator } from "./navigator.js";
 import { Skyscanner } from "./skyscanner.js";
@@ -12,9 +14,19 @@ import { Yelp } from "./yelp.js";
 import { Zillow } from "./zillow.js";
 
 export class Exfunc extends ClientSDK {
+  private _glassdoor?: Glassdoor;
+  get glassdoor(): Glassdoor {
+    return (this._glassdoor ??= new Glassdoor(this._options));
+  }
+
   private _google?: Google;
   get google(): Google {
     return (this._google ??= new Google(this._options));
+  }
+
+  private _indeed?: Indeed;
+  get indeed(): Indeed {
+    return (this._indeed ??= new Indeed(this._options));
   }
 
   private _linkedin?: Linkedin;

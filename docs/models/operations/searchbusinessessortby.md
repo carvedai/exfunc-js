@@ -7,7 +7,7 @@ The criteria to sort the results (e.g., "recommended", "highest_rated", etc.)
 ```typescript
 import { SearchBusinessesSortBy } from "exfunc/models/operations";
 
-let value: SearchBusinessesSortBy = "review_count";
+let value: SearchBusinessesSortBy = "recommended";
 ```
 
 ## Values

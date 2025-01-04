@@ -7,7 +7,7 @@ The criteria to sort reviews (e.g., "best_match", "newest", etc.)
 ```typescript
 import { GetBusinessReviewsSortBy } from "exfunc/models/operations";
 
-let value: GetBusinessReviewsSortBy = "oldest";
+let value: GetBusinessReviewsSortBy = "best_match";
 ```
 
 ## Values

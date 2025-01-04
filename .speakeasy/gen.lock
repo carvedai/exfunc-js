@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9842c66d-ebf3-446a-b5d8-65f98bf48352
 management:
-  docChecksum: 82de866a529d372d8bae049cdec62708
+  docChecksum: 030946e9b7d7f5e5e07701cde542ea87
   docVersion: 1.0.0
   speakeasyVersion: 1.451.2
   generationVersion: 2.471.2
-  releaseVersion: 0.6.16
-  configChecksum: 64c66bb5bc436eba4cc2e658a6517c0c
+  releaseVersion: 0.6.20
+  configChecksum: 689dc41eead265d6e120d254f5f31811
   published: true
 features:
   typescript:
@@ -45,10 +45,13 @@ generatedFiles:
   - docs/models/components/experiences.md
   - docs/models/components/feedbackcounts.md
   - docs/models/components/funding.md
+  - docs/models/components/glassdoorjobposting.md
   - docs/models/components/googlejobposting.md
   - docs/models/components/googlenews.md
   - docs/models/components/googleproduct.md
   - docs/models/components/googleproductreview.md
+  - docs/models/components/indeedjobposting.md
+  - docs/models/components/indeedjobpostingsalary.md
   - docs/models/components/investors.md
   - docs/models/components/lastround.md
   - docs/models/components/linkedincompany.md
@@ -57,8 +60,10 @@ generatedFiles:
   - docs/models/components/linkedinjobposting.md
   - docs/models/components/linkedinperson.md
   - docs/models/components/navigatortask.md
+  - docs/models/components/percentiles.md
   - docs/models/components/request.md
   - docs/models/components/response.md
+  - docs/models/components/salary.md
   - docs/models/components/security.md
   - docs/models/components/skyscannerairport.md
   - docs/models/components/skyscannercarrier.md
@@ -110,10 +115,16 @@ generatedFiles:
   - docs/models/operations/getuserresponsebody.md
   - docs/models/operations/getusertweetsrequestbody.md
   - docs/models/operations/getusertweetsresponsebody.md
+  - docs/models/operations/glassdoorsearchjobpostingsrequestbody.md
+  - docs/models/operations/glassdoorsearchjobpostingsresponsebody.md
   - docs/models/operations/googlegetjobpostingrequestbody.md
   - docs/models/operations/googlegetjobpostingresponsebody.md
+  - docs/models/operations/googlesearchjobpostingsdateposted.md
   - docs/models/operations/googlesearchjobpostingsrequestbody.md
   - docs/models/operations/googlesearchjobpostingsresponsebody.md
+  - docs/models/operations/indeedsearchjobpostingsdateposted.md
+  - docs/models/operations/indeedsearchjobpostingsrequestbody.md
+  - docs/models/operations/indeedsearchjobpostingsresponsebody.md
   - docs/models/operations/jobpostings.md
   - docs/models/operations/jobtype.md
   - docs/models/operations/jobtypes.md
@@ -160,7 +171,9 @@ generatedFiles:
   - docs/models/operations/type.md
   - docs/models/operations/worktype.md
   - docs/sdks/exfunc/README.md
+  - docs/sdks/glassdoor/README.md
   - docs/sdks/google/README.md
+  - docs/sdks/indeed/README.md
   - docs/sdks/linkedin/README.md
   - docs/sdks/navigator/README.md
   - docs/sdks/skyscanner/README.md
@@ -170,6 +183,7 @@ generatedFiles:
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/glassdoorSearchJobPostings.ts
   - src/funcs/googleGetJobPosting.ts
   - src/funcs/googleGetProduct.ts
   - src/funcs/googleGetProductReviews.ts
@@ -177,6 +191,7 @@ generatedFiles:
   - src/funcs/googleSearchNews.ts
   - src/funcs/googleSearchProducts.ts
   - src/funcs/googleSearchWeb.ts
+  - src/funcs/indeedSearchJobPostings.ts
   - src/funcs/linkedinGetCompany.ts
   - src/funcs/linkedinGetJobPosting.ts
   - src/funcs/linkedinGetPerson.ts
@@ -219,10 +234,12 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/models/components/glassdoorjobposting.ts
   - src/models/components/googlejobposting.ts
   - src/models/components/googlenews.ts
   - src/models/components/googleproduct.ts
   - src/models/components/googleproductreview.ts
+  - src/models/components/indeedjobposting.ts
   - src/models/components/index.ts
   - src/models/components/linkedincompany.ts
   - src/models/components/linkedincompanyindustry.ts
@@ -262,8 +279,10 @@ generatedFiles:
   - src/models/operations/getuserfollowers.ts
   - src/models/operations/getuserfollowings.ts
   - src/models/operations/getusertweets.ts
+  - src/models/operations/glassdoorsearchjobpostings.ts
   - src/models/operations/googlegetjobposting.ts
   - src/models/operations/googlesearchjobpostings.ts
+  - src/models/operations/indeedsearchjobpostings.ts
   - src/models/operations/index.ts
   - src/models/operations/scrape.ts
   - src/models/operations/searchbusinesses.ts
@@ -278,7 +297,9 @@ generatedFiles:
   - src/models/operations/searchusers.ts
   - src/models/operations/searchweb.ts
   - src/models/operations/starttask.ts
+  - src/sdk/glassdoor.ts
   - src/sdk/google.ts
+  - src/sdk/indeed.ts
   - src/sdk/index.ts
   - src/sdk/linkedin.ts
   - src/sdk/navigator.ts
@@ -301,100 +322,284 @@ examples:
     speakeasy-default-get-product:
       requestBody:
         application/json: {"product_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-product-reviews:
     speakeasy-default-get-product-reviews:
       requestBody:
         application/json: {"product_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-news:
     speakeasy-default-search-news:
       requestBody:
         application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-products:
     speakeasy-default-search-products:
       requestBody:
         application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-web:
     speakeasy-default-search-web:
       requestBody:
         application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-company:
     speakeasy-default-get-company:
       requestBody:
         application/json: {"company_url": "https://minty-adaptation.biz/"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-job-posting:
     speakeasy-default-get-job-posting:
       requestBody:
         application/json: {"job_posting_url": "https://exalted-comestible.info"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-person:
     speakeasy-default-get-person:
       requestBody:
         application/json: {"person_url": "https://silky-spring.biz/"}
-  search-companies: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+  search-companies:
+    speakeasy-default-search-companies:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-job-postings:
     speakeasy-default-search-job-postings:
       requestBody:
         application/json: {"keywords": "<value>", "location": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-people:
     speakeasy-default-search-people:
       requestBody:
         application/json: {"keywords": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-task:
     speakeasy-default-get-task:
       requestBody:
         application/json: {"task_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   start-task:
     speakeasy-default-start-task:
       requestBody:
         application/json: {"url": "https://narrow-jump.net", "objective": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   scrape:
     speakeasy-default-scrape:
       requestBody:
         application/json: {"url": "https://hasty-promise.com"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-tweet:
     speakeasy-default-get-tweet:
       requestBody:
         application/json: {"tweet_id": "<id>"}
-  get-user: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+  get-user:
+    speakeasy-default-get-user:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-user-followers:
     speakeasy-default-get-user-followers:
       requestBody:
         application/json: {"username": "Timmy_Bogan"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   getUserFollowings:
     speakeasy-default-get-user-followings:
       requestBody:
         application/json: {"username": "Nathaniel84"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-user-tweets:
     speakeasy-default-get-user-tweets:
       requestBody:
         application/json: {"username": "Fatima_Mosciski"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-tweets:
     speakeasy-default-search-tweets:
       requestBody:
         application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-users:
     speakeasy-default-search-users:
       requestBody:
         application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-business:
     speakeasy-default-get-business:
       requestBody:
         application/json: {"business_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-business-reviews:
     speakeasy-default-get-business-reviews:
       requestBody:
         application/json: {"business_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-businesses:
     speakeasy-default-search-businesses:
       requestBody:
         application/json: {"query": "<value>", "location": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   get-property:
     speakeasy-default-get-property:
       requestBody:
         application/json: {"property_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-properties:
     speakeasy-default-search-properties:
       requestBody:
         application/json: {"location": "<value>", "listing_status": "for_rent"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   search-one-way:
     speakeasy-default-search-one-way:
       requestBody:
@@ -407,12 +612,51 @@ examples:
     speakeasy-default-search-flights:
       requestBody:
         application/json: {"origin": "<value>", "destination": "<value>", "flight_type": "roundtrip", "depart_date": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   google-get-job-posting:
     speakeasy-default-google-get-job-posting:
       requestBody:
         application/json: {"job_posting_id": "<id>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
   google-search-job-postings:
     speakeasy-default-google-search-job-postings:
       requestBody:
         application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+  glassdoor-search-job-postings:
+    speakeasy-default-glassdoor-search-job-postings:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+  indeed-search-job-postings:
+    speakeasy-default-indeed-search-job-postings:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
 generatedTests: {}
