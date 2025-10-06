@@ -14,7 +14,7 @@ export const ServerList = [
   /**
    * Exfunc API endpoint
    */
-  "https://api.exfunc.com",
+  "https://api.exfunc.dev",
 ] as const;
 
 export type SDKOptions = {

@@ -370,7 +370,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { Exfunc } from "exfunc";
 
 const exfunc = new Exfunc({
-  serverURL: "https://api.exfunc.com",
+  serverURL: "https://api.exfunc.dev",
   apiKey: process.env["EXFUNC_API_KEY"] ?? "",
 });
 
