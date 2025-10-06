@@ -5,10 +5,12 @@
 import { ExfuncCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import { ExfuncError } from "../models/errors/exfuncerror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -17,9 +19,10 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
-import { SDKError } from "../models/errors/sdkerror.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -28,23 +31,53 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Search job postings on Google for a given query
  */
-export async function googleSearchJobPostings(
+export function googleSearchJobPostings(
   client: ExfuncCore,
   request: operations.GoogleSearchJobPostingsRequestBody,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.GoogleSearchJobPostingsResponseBody,
     | errors.UserError
     | errors.ServerError
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | ExfuncError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
+> {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: ExfuncCore,
+  request: operations.GoogleSearchJobPostingsRequestBody,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.GoogleSearchJobPostingsResponseBody,
+      | errors.UserError
+      | errors.ServerError
+      | ExfuncError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    APICall,
+  ]
 > {
   const parsed = safeParse(
     request,
@@ -53,23 +86,25 @@ export async function googleSearchJobPostings(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/google/search-job-postings")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "google-search-job-postings",
     oAuth2Scopes: [],
 
@@ -89,10 +124,11 @@ export async function googleSearchJobPostings(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -103,7 +139,7 @@ export async function googleSearchJobPostings(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -115,22 +151,24 @@ export async function googleSearchJobPostings(
     operations.GoogleSearchJobPostingsResponseBody,
     | errors.UserError
     | errors.ServerError
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | ExfuncError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json(200, operations.GoogleSearchJobPostingsResponseBody$inboundSchema),
     M.jsonErr(400, errors.UserError$inboundSchema),
     M.jsonErr(500, errors.ServerError$inboundSchema),
-    M.fail(["4XX", "5XX"]),
-  )(response, { extraFields: responseFields });
+    M.fail("4XX"),
+    M.fail("5XX"),
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

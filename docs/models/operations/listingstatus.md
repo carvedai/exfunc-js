@@ -7,7 +7,7 @@ The status of the listings (e.g., "for_sale", "for_rent")
 ```typescript
 import { ListingStatus } from "exfunc/models/operations";
 
-let value: ListingStatus = "for_sale";
+let value: ListingStatus = "sold";
 ```
 
 ## Values

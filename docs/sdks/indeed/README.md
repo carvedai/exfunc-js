@@ -13,6 +13,7 @@ Search job postings on Indeed for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="indeed-search-job-postings" method="post" path="/indeed/search-job-postings" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -23,7 +24,6 @@ const exfunc = new Exfunc({
 async function run() {
   const result = await exfunc.indeed.searchJobPostings({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -46,15 +46,12 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await indeedSearchJobPostings(exfunc, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("indeedSearchJobPostings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

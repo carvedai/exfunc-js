@@ -6,7 +6,7 @@
 import { GetPersonRequestBody } from "exfunc/models/operations";
 
 let value: GetPersonRequestBody = {
-  personUrl: "https://oddball-translation.com",
+  personUrl: "https://shady-palate.info",
 };
 ```
 

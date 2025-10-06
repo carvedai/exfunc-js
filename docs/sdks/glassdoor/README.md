@@ -13,6 +13,7 @@ Search job postings on Glassdoor for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="glassdoor-search-job-postings" method="post" path="/glassdoor/search-job-postings" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -23,7 +24,6 @@ const exfunc = new Exfunc({
 async function run() {
   const result = await exfunc.glassdoor.searchJobPostings({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -46,15 +46,12 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await glassdoorSearchJobPostings(exfunc, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("glassdoorSearchJobPostings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -13,6 +13,7 @@ Search flights on SkyScanner for given origin, destination, departure date and r
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-flights" method="post" path="/skyscanner/search-flights" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -28,7 +29,6 @@ async function run() {
     departDate: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,15 +56,12 @@ async function run() {
     flightType: "roundtrip",
     departDate: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("skyscannerSearchFlights failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

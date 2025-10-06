@@ -9,7 +9,6 @@ const exfunc = new Exfunc({
 async function run() {
   const result = await exfunc.glassdoor.searchJobPostings({});
 
-  // Handle the result
   console.log(result);
 }
 

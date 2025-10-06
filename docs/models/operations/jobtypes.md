@@ -5,7 +5,7 @@
 ```typescript
 import { JobTypes } from "exfunc/models/operations";
 
-let value: JobTypes = "Part-time";
+let value: JobTypes = "Full-time";
 ```
 
 ## Values

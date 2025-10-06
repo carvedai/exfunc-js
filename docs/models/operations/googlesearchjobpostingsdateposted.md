@@ -7,7 +7,7 @@ Filter for job postings based on when they were posted
 ```typescript
 import { GoogleSearchJobPostingsDatePosted } from "exfunc/models/operations";
 
-let value: GoogleSearchJobPostingsDatePosted = "Past Week";
+let value: GoogleSearchJobPostingsDatePosted = "Past Month";
 ```
 
 ## Values

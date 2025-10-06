@@ -15,6 +15,7 @@ Get web navigator task results for a given task ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-task" method="post" path="/navigator/get-task" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -27,7 +28,6 @@ async function run() {
     taskId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,15 +52,12 @@ async function run() {
   const res = await navigatorGetTask(exfunc, {
     taskId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("navigatorGetTask failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -93,6 +90,7 @@ Start a web navigator task for a given url and objective
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="start-task" method="post" path="/navigator/start-task" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -102,11 +100,10 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.navigator.startTask({
-    url: "https://narrow-jump.net",
+    url: "https://great-maestro.name/",
     objective: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -129,18 +126,15 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await navigatorStartTask(exfunc, {
-    url: "https://narrow-jump.net",
+    url: "https://great-maestro.name/",
     objective: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("navigatorStartTask failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -173,6 +167,7 @@ Scrape a web page for a given url
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="scrape" method="post" path="/navigator/scrape" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -182,10 +177,9 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.navigator.scrape({
-    url: "https://hasty-promise.com",
+    url: "https://all-grandpa.net/",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -208,17 +202,14 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await navigatorScrape(exfunc, {
-    url: "https://hasty-promise.com",
+    url: "https://all-grandpa.net/",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("navigatorScrape failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

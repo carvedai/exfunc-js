@@ -7,7 +7,7 @@ The criteria to sort results
 ```typescript
 import { SearchJobPostingsSortBy } from "exfunc/models/operations";
 
-let value: SearchJobPostingsSortBy = "Most Relevant";
+let value: SearchJobPostingsSortBy = "Most Recent";
 ```
 
 ## Values

@@ -1,9 +1,9 @@
-speakeasyVersion: 1.462.2
+speakeasyVersion: 1.635.1
 sources:
     exfunc-OAS:
         sourceNamespace: exfunc-oas
-        sourceRevisionDigest: sha256:fdaa7b99deb4dbb12cb66ab6b8b489bc9be2d2779a020f2e64690113a5e26c9e
-        sourceBlobDigest: sha256:7dba026bd436b2c768d1754000a773e9235493547b83f3cb97f3ce3411e9b7a9
+        sourceRevisionDigest: sha256:50c2269edb79db4bb225029d64d6d049babb2401fc26752c77c586d2644905b7
+        sourceBlobDigest: sha256:911b222336cf50b23177360bf0634905cdc9b3272ebfcffb38c3720bc066c4f2
         tags:
             - latest
             - 1.0.0
@@ -11,8 +11,8 @@ targets:
     exfunc:
         source: exfunc-OAS
         sourceNamespace: exfunc-oas
-        sourceRevisionDigest: sha256:fdaa7b99deb4dbb12cb66ab6b8b489bc9be2d2779a020f2e64690113a5e26c9e
-        sourceBlobDigest: sha256:7dba026bd436b2c768d1754000a773e9235493547b83f3cb97f3ce3411e9b7a9
+        sourceRevisionDigest: sha256:50c2269edb79db4bb225029d64d6d049babb2401fc26752c77c586d2644905b7
+        sourceBlobDigest: sha256:911b222336cf50b23177360bf0634905cdc9b3272ebfcffb38c3720bc066c4f2
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,3 +31,9 @@ workflow:
             publish:
                 npm:
                     token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/nunchi-4op/nunchi/exfunc-oas-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

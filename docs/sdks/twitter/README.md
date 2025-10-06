@@ -19,6 +19,7 @@ Get tweet details given a tweet ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-tweet" method="post" path="/twitter/get-tweet" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -31,7 +32,6 @@ async function run() {
     tweetId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,15 +56,12 @@ async function run() {
   const res = await twitterGetTweet(exfunc, {
     tweetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterGetTweet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -97,6 +94,7 @@ Get user details given a Twitter user ID or username (handle)
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-user" method="post" path="/twitter/get-user" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -107,7 +105,6 @@ const exfunc = new Exfunc({
 async function run() {
   const result = await exfunc.twitter.getUser({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -130,15 +127,12 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await twitterGetUser(exfunc, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterGetUser failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -171,6 +165,7 @@ Get a list of followers given a Twitter username (handle)
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-user-followers" method="post" path="/twitter/get-user-followers" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -180,10 +175,9 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.twitter.getUserFollowers({
-    username: "Timmy_Bogan",
+    username: "Angel.OConnell68",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -206,17 +200,14 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await twitterGetUserFollowers(exfunc, {
-    username: "Timmy_Bogan",
+    username: "Angel.OConnell68",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterGetUserFollowers failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -249,6 +240,7 @@ Get a list of followings given a Twitter username (handle)
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getUserFollowings" method="post" path="/twitter/get-user-followings" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -258,10 +250,9 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.twitter.getUserFollowings({
-    username: "Nathaniel84",
+    username: "Juvenal26",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -284,17 +275,14 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await twitterGetUserFollowings(exfunc, {
-    username: "Nathaniel84",
+    username: "Juvenal26",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterGetUserFollowings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -327,6 +315,7 @@ Get a list of tweets given a Twitter username (handle)
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-user-tweets" method="post" path="/twitter/get-user-tweets" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -336,10 +325,9 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.twitter.getUserTweets({
-    username: "Fatima_Mosciski",
+    username: "Norberto_Cassin29",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -362,17 +350,14 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await twitterGetUserTweets(exfunc, {
-    username: "Fatima_Mosciski",
+    username: "Norberto_Cassin29",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterGetUserTweets failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -405,6 +390,7 @@ Search tweets on Twitter for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-tweets" method="post" path="/twitter/search-tweets" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -417,7 +403,6 @@ async function run() {
     query: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -442,15 +427,12 @@ async function run() {
   const res = await twitterSearchTweets(exfunc, {
     query: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterSearchTweets failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -483,6 +465,7 @@ Search users on Twitter for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-users" method="post" path="/twitter/search-users" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -495,7 +478,6 @@ async function run() {
     query: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -520,15 +502,12 @@ async function run() {
   const res = await twitterSearchUsers(exfunc, {
     query: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("twitterSearchUsers failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

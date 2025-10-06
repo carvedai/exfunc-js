@@ -8,7 +8,7 @@ import { SearchFlightsRequestBody } from "exfunc/models/operations";
 let value: SearchFlightsRequestBody = {
   origin: "<value>",
   destination: "<value>",
-  flightType: "roundtrip",
+  flightType: "one-way",
   departDate: "<value>",
 };
 ```

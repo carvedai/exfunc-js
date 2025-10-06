@@ -19,6 +19,7 @@ Get job posting details from Google given job posting ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="google-get-job-posting" method="post" path="/google/get-job-posting" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -31,7 +32,6 @@ async function run() {
     jobPostingId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,15 +56,12 @@ async function run() {
   const res = await googleGetJobPosting(exfunc, {
     jobPostingId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleGetJobPosting failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -97,6 +94,7 @@ Get product details (title, description, rating, etc.) from Google given product
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-product" method="post" path="/google/get-product" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -109,7 +107,6 @@ async function run() {
     productId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -134,15 +131,12 @@ async function run() {
   const res = await googleGetProduct(exfunc, {
     productId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleGetProduct failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -175,6 +169,7 @@ Get product reviews (title, author, source, rating, etc.) from Google given prod
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-product-reviews" method="post" path="/google/get-product-reviews" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -187,7 +182,6 @@ async function run() {
     productId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -212,15 +206,12 @@ async function run() {
   const res = await googleGetProductReviews(exfunc, {
     productId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleGetProductReviews failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -253,6 +244,7 @@ Search job postings on Google for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="google-search-job-postings" method="post" path="/google/search-job-postings" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -265,7 +257,6 @@ async function run() {
     query: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -290,15 +281,12 @@ async function run() {
   const res = await googleSearchJobPostings(exfunc, {
     query: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleSearchJobPostings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -331,6 +319,7 @@ Search news articles on Google for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-news" method="post" path="/google/search-news" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -343,7 +332,6 @@ async function run() {
     query: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -368,15 +356,12 @@ async function run() {
   const res = await googleSearchNews(exfunc, {
     query: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleSearchNews failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -409,6 +394,7 @@ Search products on Google for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-products" method="post" path="/google/search-products" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -421,7 +407,6 @@ async function run() {
     query: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -446,15 +431,12 @@ async function run() {
   const res = await googleSearchProducts(exfunc, {
     query: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleSearchProducts failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -487,6 +469,7 @@ Search web on Google for a given query
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-web" method="post" path="/google/search-web" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -499,7 +482,6 @@ async function run() {
     query: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -524,15 +506,12 @@ async function run() {
   const res = await googleSearchWeb(exfunc, {
     query: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("googleSearchWeb failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

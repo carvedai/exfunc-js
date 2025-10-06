@@ -9,7 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Request = {
+export type RequestT = {
   /**
    * The URL to start navigating from
    */
@@ -20,7 +20,7 @@ export type Request = {
   objective?: string | undefined;
 };
 
-export type Response = {
+export type ResponseT = {
   /**
    * The HTML string of the page that the navigator reached
    */
@@ -55,8 +55,8 @@ export type NavigatorTask = {
    * The ID of the navigator task
    */
   taskId?: string | undefined;
-  request?: Request | undefined;
-  response?: Response | undefined;
+  request?: RequestT | undefined;
+  response?: ResponseT | undefined;
   /**
    * The status of the navigator task
    */
@@ -76,23 +76,26 @@ export type NavigatorTask = {
 };
 
 /** @internal */
-export const Request$inboundSchema: z.ZodType<Request, z.ZodTypeDef, unknown> =
-  z.object({
-    url: z.string().optional(),
-    objective: z.string().optional(),
-  });
+export const RequestT$inboundSchema: z.ZodType<
+  RequestT,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  url: z.string().optional(),
+  objective: z.string().optional(),
+});
 
 /** @internal */
-export type Request$Outbound = {
+export type RequestT$Outbound = {
   url?: string | undefined;
   objective?: string | undefined;
 };
 
 /** @internal */
-export const Request$outboundSchema: z.ZodType<
-  Request$Outbound,
+export const RequestT$outboundSchema: z.ZodType<
+  RequestT$Outbound,
   z.ZodTypeDef,
-  Request
+  RequestT
 > = z.object({
   url: z.string().optional(),
   objective: z.string().optional(),
@@ -102,32 +105,32 @@ export const Request$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Request$ {
-  /** @deprecated use `Request$inboundSchema` instead. */
-  export const inboundSchema = Request$inboundSchema;
-  /** @deprecated use `Request$outboundSchema` instead. */
-  export const outboundSchema = Request$outboundSchema;
-  /** @deprecated use `Request$Outbound` instead. */
-  export type Outbound = Request$Outbound;
+export namespace RequestT$ {
+  /** @deprecated use `RequestT$inboundSchema` instead. */
+  export const inboundSchema = RequestT$inboundSchema;
+  /** @deprecated use `RequestT$outboundSchema` instead. */
+  export const outboundSchema = RequestT$outboundSchema;
+  /** @deprecated use `RequestT$Outbound` instead. */
+  export type Outbound = RequestT$Outbound;
 }
 
-export function requestToJSON(request: Request): string {
-  return JSON.stringify(Request$outboundSchema.parse(request));
+export function requestToJSON(requestT: RequestT): string {
+  return JSON.stringify(RequestT$outboundSchema.parse(requestT));
 }
 
 export function requestFromJSON(
   jsonString: string,
-): SafeParseResult<Request, SDKValidationError> {
+): SafeParseResult<RequestT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Request$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Request' from JSON`,
+    (x) => RequestT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestT' from JSON`,
   );
 }
 
 /** @internal */
-export const Response$inboundSchema: z.ZodType<
-  Response,
+export const ResponseT$inboundSchema: z.ZodType<
+  ResponseT,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -137,17 +140,17 @@ export const Response$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Response$Outbound = {
+export type ResponseT$Outbound = {
   html?: string | undefined;
   img?: string | undefined;
   markdown?: string | undefined;
 };
 
 /** @internal */
-export const Response$outboundSchema: z.ZodType<
-  Response$Outbound,
+export const ResponseT$outboundSchema: z.ZodType<
+  ResponseT$Outbound,
   z.ZodTypeDef,
-  Response
+  ResponseT
 > = z.object({
   html: z.string().optional(),
   img: z.string().optional(),
@@ -158,26 +161,26 @@ export const Response$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Response$ {
-  /** @deprecated use `Response$inboundSchema` instead. */
-  export const inboundSchema = Response$inboundSchema;
-  /** @deprecated use `Response$outboundSchema` instead. */
-  export const outboundSchema = Response$outboundSchema;
-  /** @deprecated use `Response$Outbound` instead. */
-  export type Outbound = Response$Outbound;
+export namespace ResponseT$ {
+  /** @deprecated use `ResponseT$inboundSchema` instead. */
+  export const inboundSchema = ResponseT$inboundSchema;
+  /** @deprecated use `ResponseT$outboundSchema` instead. */
+  export const outboundSchema = ResponseT$outboundSchema;
+  /** @deprecated use `ResponseT$Outbound` instead. */
+  export type Outbound = ResponseT$Outbound;
 }
 
-export function responseToJSON(response: Response): string {
-  return JSON.stringify(Response$outboundSchema.parse(response));
+export function responseToJSON(responseT: ResponseT): string {
+  return JSON.stringify(ResponseT$outboundSchema.parse(responseT));
 }
 
 export function responseFromJSON(
   jsonString: string,
-): SafeParseResult<Response, SDKValidationError> {
+): SafeParseResult<ResponseT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Response$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Response' from JSON`,
+    (x) => ResponseT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseT' from JSON`,
   );
 }
 
@@ -207,8 +210,8 @@ export const NavigatorTask$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   task_id: z.string().optional(),
-  request: z.lazy(() => Request$inboundSchema).optional(),
-  response: z.lazy(() => Response$inboundSchema).optional(),
+  request: z.lazy(() => RequestT$inboundSchema).optional(),
+  response: z.lazy(() => ResponseT$inboundSchema).optional(),
   status: Status$inboundSchema.optional(),
   start_time: z.string().optional(),
   end_time: z.string().optional(),
@@ -225,8 +228,8 @@ export const NavigatorTask$inboundSchema: z.ZodType<
 /** @internal */
 export type NavigatorTask$Outbound = {
   task_id?: string | undefined;
-  request?: Request$Outbound | undefined;
-  response?: Response$Outbound | undefined;
+  request?: RequestT$Outbound | undefined;
+  response?: ResponseT$Outbound | undefined;
   status?: string | undefined;
   start_time?: string | undefined;
   end_time?: string | undefined;
@@ -240,8 +243,8 @@ export const NavigatorTask$outboundSchema: z.ZodType<
   NavigatorTask
 > = z.object({
   taskId: z.string().optional(),
-  request: z.lazy(() => Request$outboundSchema).optional(),
-  response: z.lazy(() => Response$outboundSchema).optional(),
+  request: z.lazy(() => RequestT$outboundSchema).optional(),
+  response: z.lazy(() => ResponseT$outboundSchema).optional(),
   status: Status$outboundSchema.optional(),
   startTime: z.string().optional(),
   endTime: z.string().optional(),

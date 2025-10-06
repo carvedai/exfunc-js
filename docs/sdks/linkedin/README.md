@@ -18,6 +18,7 @@ Get LinkedIn company info from either a LinkedIn company url or company website 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-company" method="post" path="/linkedin/get-company" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -26,11 +27,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.linkedin.getCompany({
-    companyUrl: "https://minty-adaptation.biz/",
-  });
+  const result = await exfunc.linkedin.getCompany({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,18 +50,13 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await linkedinGetCompany(exfunc, {
-    companyUrl: "https://minty-adaptation.biz/",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await linkedinGetCompany(exfunc, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("linkedinGetCompany failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -96,6 +89,7 @@ Get LinkedIn job posting info from a LinkedIn job posting url
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-job-posting" method="post" path="/linkedin/get-job-posting" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -105,10 +99,9 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.linkedin.getJobPosting({
-    jobPostingUrl: "https://exalted-comestible.info",
+    jobPostingUrl: "https://second-hand-printer.org",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -131,17 +124,14 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await linkedinGetJobPosting(exfunc, {
-    jobPostingUrl: "https://exalted-comestible.info",
+    jobPostingUrl: "https://second-hand-printer.org",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("linkedinGetJobPosting failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -174,6 +164,7 @@ Get LinkedIn person profile info from a LinkedIn person profile url
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-person" method="post" path="/linkedin/get-person" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -183,10 +174,9 @@ const exfunc = new Exfunc({
 
 async function run() {
   const result = await exfunc.linkedin.getPerson({
-    personUrl: "https://silky-spring.biz/",
+    personUrl: "https://unsteady-suitcase.net/",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -209,17 +199,14 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await linkedinGetPerson(exfunc, {
-    personUrl: "https://silky-spring.biz/",
+    personUrl: "https://unsteady-suitcase.net/",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("linkedinGetPerson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -252,6 +239,7 @@ Search for companies on LinkedIn for a given name, locations, and other criteria
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-companies" method="post" path="/linkedin/search-companies" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -262,7 +250,6 @@ const exfunc = new Exfunc({
 async function run() {
   const result = await exfunc.linkedin.searchCompanies({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -285,15 +272,12 @@ const exfunc = new ExfuncCore({
 
 async function run() {
   const res = await linkedinSearchCompanies(exfunc, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("linkedinSearchCompanies failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -326,6 +310,7 @@ Search for job postings on LinkedIn for a given keywords, location, and other cr
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-job-postings" method="post" path="/linkedin/search-job-postings" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -334,12 +319,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.linkedin.searchJobPostings({
-    keywords: "<value>",
-    location: "<value>",
-  });
+  const result = await exfunc.linkedin.searchJobPostings({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -361,19 +342,13 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await linkedinSearchJobPostings(exfunc, {
-    keywords: "<value>",
-    location: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await linkedinSearchJobPostings(exfunc, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("linkedinSearchJobPostings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -406,6 +381,7 @@ Search for people on LinkedIn for a given keywords, locations, and other criteri
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-people" method="post" path="/linkedin/search-people" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -414,11 +390,8 @@ const exfunc = new Exfunc({
 });
 
 async function run() {
-  const result = await exfunc.linkedin.searchPeople({
-    keywords: "<value>",
-  });
+  const result = await exfunc.linkedin.searchPeople({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -440,18 +413,13 @@ const exfunc = new ExfuncCore({
 });
 
 async function run() {
-  const res = await linkedinSearchPeople(exfunc, {
-    keywords: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await linkedinSearchPeople(exfunc, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("linkedinSearchPeople failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -5,7 +5,7 @@
 ```typescript
 import { Seniorities } from "exfunc/models/operations";
 
-let value: Seniorities = "senior";
+let value: Seniorities = "vp";
 ```
 
 ## Values

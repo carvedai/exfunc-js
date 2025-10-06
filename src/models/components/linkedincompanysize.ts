@@ -9,13 +9,13 @@ import { ClosedEnum } from "../../types/enums.js";
  * LinkedIn company size range used for filtering search
  */
 export const LinkedInCompanySize = {
-  One10: "1-10",
-  Eleven50: "11-50",
-  FiftyOne200: "51-200",
-  TwoHundredAndOne500: "201-500",
-  FiveHundredAndOne1000: "501-1000",
-  OneThousandAndOne5000: "1001-5000",
-  FiveThousandAndOne10000: "5001-10000",
+  OneMinus10: "1-10",
+  ElevenMinus50: "11-50",
+  FiftyOneMinus200: "51-200",
+  TwoHundredAndOneMinus500: "201-500",
+  FiveHundredAndOneMinus1000: "501-1000",
+  OneThousandAndOneMinus5000: "1001-5000",
+  FiveThousandAndOneMinus10000: "5001-10000",
   TenThousandAndOnePlus: "10001+",
 } as const;
 /**

@@ -1,11 +1,11 @@
-# Request
+# RequestT
 
 ## Example Usage
 
 ```typescript
-import { Request } from "exfunc/models/components";
+import { RequestT } from "exfunc/models/components";
 
-let value: Request = {};
+let value: RequestT = {};
 ```
 
 ## Fields

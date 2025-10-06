@@ -15,6 +15,7 @@ Get business details from Yelp for a given business ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-business" method="post" path="/yelp/get-business" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -27,7 +28,6 @@ async function run() {
     businessId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,15 +52,12 @@ async function run() {
   const res = await yelpGetBusiness(exfunc, {
     businessId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("yelpGetBusiness failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -93,6 +90,7 @@ Get a list of reviews on Yelp for a given business ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-business-reviews" method="post" path="/yelp/get-business-reviews" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -105,7 +103,6 @@ async function run() {
     businessId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -130,15 +127,12 @@ async function run() {
   const res = await yelpGetBusinessReviews(exfunc, {
     businessId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("yelpGetBusinessReviews failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -171,6 +165,7 @@ Search for businesses on Yelp given a query, location, and other criteria
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-businesses" method="post" path="/yelp/search-businesses" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -184,7 +179,6 @@ async function run() {
     location: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -210,15 +204,12 @@ async function run() {
     query: "<value>",
     location: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("yelpSearchBusinesses failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

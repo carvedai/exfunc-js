@@ -7,7 +7,7 @@ import { SearchPropertiesRequestBody } from "exfunc/models/operations";
 
 let value: SearchPropertiesRequestBody = {
   location: "<value>",
-  listingStatus: "for_sale",
+  listingStatus: "sold",
 };
 ```
 

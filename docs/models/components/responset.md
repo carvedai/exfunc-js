@@ -1,11 +1,11 @@
-# Response
+# ResponseT
 
 ## Example Usage
 
 ```typescript
-import { Response } from "exfunc/models/components";
+import { ResponseT } from "exfunc/models/components";
 
-let value: Response = {};
+let value: ResponseT = {};
 ```
 
 ## Fields

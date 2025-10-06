@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ExfuncError } from "./exfuncerror.js";
 
 /**
  * Server error response
@@ -17,15 +18,16 @@ export type ServerErrorData = {
 /**
  * Server error response
  */
-export class ServerError extends Error {
+export class ServerError extends ExfuncError {
   /** The original data that was passed to this error instance. */
   data$: ServerErrorData;
 
-  constructor(err: ServerErrorData) {
-    const message = "message" in err && typeof err.message === "string"
-      ? err.message
-      : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+  constructor(
+    err: ServerErrorData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "ServerError";
@@ -39,9 +41,16 @@ export const ServerError$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string().optional(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new ServerError(v);
+    return new ServerError(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

@@ -7,7 +7,7 @@ Filter for job postings based on when they were posted
 ```typescript
 import { SearchJobPostingsDatePosted } from "exfunc/models/operations";
 
-let value: SearchJobPostingsDatePosted = "Any time";
+let value: SearchJobPostingsDatePosted = "Past Week";
 ```
 
 ## Values

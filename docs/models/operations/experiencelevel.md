@@ -7,7 +7,7 @@ Experience level to filter (e.g., Associate, Executive)
 ```typescript
 import { ExperienceLevel } from "exfunc/models/operations";
 
-let value: ExperienceLevel = "Mid-Senior Level";
+let value: ExperienceLevel = "Associate";
 ```
 
 ## Values

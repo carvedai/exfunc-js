@@ -14,6 +14,7 @@ Get property details on Zillow for a given property ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-property" method="post" path="/zillow/get-property" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -26,7 +27,6 @@ async function run() {
     propertyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -51,15 +51,12 @@ async function run() {
   const res = await zillowGetProperty(exfunc, {
     propertyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("zillowGetProperty failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -92,6 +89,7 @@ Search for properties on Zillow for a given location, listing status, and other 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search-properties" method="post" path="/zillow/search-properties" -->
 ```typescript
 import { Exfunc } from "exfunc";
 
@@ -102,10 +100,9 @@ const exfunc = new Exfunc({
 async function run() {
   const result = await exfunc.zillow.searchProperties({
     location: "<value>",
-    listingStatus: "for_rent",
+    listingStatus: "sold",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -129,17 +126,14 @@ const exfunc = new ExfuncCore({
 async function run() {
   const res = await zillowSearchProperties(exfunc, {
     location: "<value>",
-    listingStatus: "for_rent",
+    listingStatus: "sold",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("zillowSearchProperties failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

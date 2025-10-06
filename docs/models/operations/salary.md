@@ -7,7 +7,7 @@ Salary range to filter job postings
 ```typescript
 import { Salary } from "exfunc/models/operations";
 
-let value: Salary = "$40,000+";
+let value: Salary = "$200,000+";
 ```
 
 ## Values
